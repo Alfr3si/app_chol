@@ -46,3 +46,12 @@ app.*.map.json
 
 # Widget Preview related
 .widget_preview/
+
+
+## yo agregue esto ##
+# Archivos generados automáticamente por Drift y build_runner
+*.g.dart
+*.freezed.dart
+
+# Archivos del sistema operativo
+Thumbs.db
