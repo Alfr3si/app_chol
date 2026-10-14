@@ -24,39 +24,28 @@ class _SplashScreenState extends State<SplashScreen> {
     @override
     Widget build(BuildContext context) {
         return Scaffold(
-        backgroundColor: Colors.orangeAccent,
-        body: Center(
-        child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        body: Stack(
+        fit: StackFit.expand,
         children: [
-
-        const SizedBox(height: 24),
-        const Text(
-        "Cho'lApp",
-        style: TextStyle(
-        fontSize: 36,
-        fontWeight: FontWeight.bold,
-        color: Colors.white70,
-        letterSpacing: 1.2,
+        Image.asset('assets/images/fondos/img_splash.webp', fit: BoxFit.cover,),
+        const Positioned(
+        bottom: 40,
+        left: 0,
+        right: 0,
+        child: Center(child: SizedBox(
+        width: 160,
+        child: ClipRRect(
+        borderRadius: BorderRadius.all(Radius.circular(10)),
+        child: LinearProgressIndicator(
+        backgroundColor: Colors.white30,
+        valueColor: AlwaysStoppedAnimation(Colors.white),
+        minHeight: 6,
         ),
         ),
-        const SizedBox(height: 8),
-        const Text(
-        'Aprende, preserva y revitaliza',
-        style: TextStyle(
-        fontSize: 14,
-        color: Colors.white10,
         ),
         ),
-        const SizedBox(height: 48),
-        const SizedBox(
-        width: 32,
-        height: 32,
-        child: CircularProgressIndicator(
-        valueColor: AlwaysStoppedAnimation(Colors.white70),
-        strokeWidth: 3,),)
-
-        ],),)
+        ),
+        ]),
         );
-        }
+    }
 }
