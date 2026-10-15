@@ -1,6 +1,8 @@
-# app_chol
+# Cho'lApp
 Apliacion movil para la enseñanza, preservacion y revitalizacion del chol en el
 estad de tabasco.
+
+![image](assets/images/fondos/img_splash.webp)
 
 ### Patron de arquitectura MVVM (estructura propuesta)
 
