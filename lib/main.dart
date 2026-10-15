@@ -11,6 +11,8 @@ void main() {
     DeviceOrientation.landscapeRight,
     ]);
 
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+
   runApp(const AppChol());
 }
 

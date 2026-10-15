@@ -16,9 +16,11 @@ lib/
 ├── ui/                     # Interfaz de usuario organizada por características
 │   ├── core/               # Widgets compartidos (botones con tu estilo de diseño)
 │   ├── themes/             # Estilos y colores
+│   ├── themes/             # Estilos y colores
 │   ├── modules/            # Módulo de aprendizaje (Familia, Escuela, etc.)
 │   │   ├── view_models/    # Providers de Riverpod para este módulo
 │   │   └── screens/        # Pantalla de selección de palabras
+    │── screens/            # vistas de pantallas
 │   └── game_canvas/        # [Flame] El motor de juegos 2D y el pixel art
 ├── main.dart               # Punto de entrada principal
 ├── main_test.dart          # Punto de entrada para pruebas locales/desarrollo
