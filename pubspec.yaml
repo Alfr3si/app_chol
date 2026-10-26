@@ -87,6 +87,7 @@ flutter:
      - assets/images/
      - assets/images/background/
      - assets/images/elements/
+     - assets/images/learning/
      - assets/audio/
      - assets/fonts/
      - assets/videos/

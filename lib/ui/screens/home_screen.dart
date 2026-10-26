@@ -5,6 +5,7 @@ import '../game_canvas/menu_game.dart';
 import '../core/widgets/animated_floating_button.dart';
 import './chat_ai/floating_chat_bubble.dart';
 import './chat_ai/chatbot_content.dart';
+import './modulos/module_selection_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -23,7 +24,11 @@ class HomeScreen extends StatelessWidget {
             child: Align(
               alignment: Alignment.bottomCenter,
               child: Padding(
-                padding: const EdgeInsets.only(bottom: 20.0, left: 20.0, right: 20.0),
+                padding: const EdgeInsets.only(
+                  bottom: 20.0,
+                  left: 20.0,
+                  right: 20.0,
+                ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween, // <--- Esto distribuye y separa uniformemente
                   children: [
@@ -51,6 +56,13 @@ class HomeScreen extends StatelessWidget {
                       size: 140, // Destacado
                       onTap: () {
                         debugPrint('Comenzar presionado');
+
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const ModuleSelectionScreen(),
+                          ),
+                        );
                       },
                     ),
 
@@ -63,7 +75,7 @@ class HomeScreen extends StatelessWidget {
                       },
                     ),
 
-// --- 5. Chatbot (Aquí conectamos la ventana flotante) ---
+                    // --- 5. Chatbot (Aquí conectamos la ventana flotante) ---
                     AnimatedFloatingButton(
                       assetPath: 'assets/images/elements/button_chatbot.webp',
                       size: 120,
