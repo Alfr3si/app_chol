@@ -1,0 +1,297 @@
+{
+  "modulo_id": 4,
+  "nombre_modulo": "Mis gustos y pasatiempo",
+  "region": "Tacotalpa, Tabasco",
+  "muestras_lexicas": [
+    {
+      "espanol": "Fruta",
+      "chol": "Wuty tye'"
+    },
+    {
+      "espanol": "Naranja",
+      "chol": "Alaxax"
+    },
+    {
+      "espanol": "Limón",
+      "chol": "Ilmoñix"
+    },
+    {
+      "espanol": "Pitaya",
+      "chol": "Nijin"
+    },
+    {
+      "espanol": "Mango",
+      "chol": "Manko"
+    },
+    {
+      "espanol": "Nance",
+      "chol": "Chi'"
+    },
+    {
+      "espanol": "Plátano",
+      "chol": "Ja'as"
+    },
+    {
+      "espanol": "Zapote",
+      "chol": "Wayja'as"
+    },
+    {
+      "espanol": "Guaya",
+      "chol": "Mojtyoy"
+    },
+    {
+      "espanol": "Guayaba",
+      "chol": "Pätya"
+    },
+    {
+      "espanol": "Ciruela",
+      "chol": "Po'om"
+    },
+    {
+      "espanol": "Chelele",
+      "chol": "Bits'"
+    },
+    {
+      "espanol": "Caña",
+      "chol": "Sik'ä'"
+    },
+    {
+      "espanol": "Yuca",
+      "chol": "Ts'ijň"
+    },
+    {
+      "espanol": "Camote",
+      "chol": "Ajkum"
+    },
+    {
+      "espanol": "Yerbamora",
+      "chol": "Ch'ajuk'"
+    },
+    {
+      "espanol": "Quelite",
+      "chol": "K'äñ-ej"
+    },
+    {
+      "espanol": "Chaya",
+      "chol": "Ek'"
+    },
+    {
+      "espanol": "Chapaya",
+      "chol": "Ch'ib"
+    },
+    {
+      "espanol": "Chayote",
+      "chol": "Ch'ijch'um"
+    },
+    {
+      "espanol": "Calabaza",
+      "chol": "Ch'ujm"
+    },
+    {
+      "espanol": "Macal",
+      "chol": "Juk'"
+    },
+    {
+      "espanol": "Comida",
+      "chol": "Bäñik'"
+    },
+    {
+      "espanol": "Frijol",
+      "chol": "Bu'ul"
+    },
+    {
+      "espanol": "Tortilla",
+      "chol": "Waj"
+    },
+    {
+      "espanol": "Huevo",
+      "chol": "Tyumuty"
+    },
+    {
+      "espanol": "Pozol",
+      "chol": "Sa'"
+    },
+    {
+      "espanol": "Pozol con cacao",
+      "chol": "Xä'bä"
+    },
+    {
+      "espanol": "Café",
+      "chol": "Kajpe"
+    },
+    {
+      "espanol": "Atol",
+      "chol": "Ul"
+    },
+    {
+      "espanol": "Jugar",
+      "chol": "Nak"
+    },
+    {
+      "espanol": "Caminar",
+      "chol": "Xämbal"
+    },
+    {
+      "espanol": "Correr",
+      "chol": "Ajñe"
+    },
+    {
+      "espanol": "Nadar",
+      "chol": "Nuxejel"
+    },
+    {
+      "espanol": "Visitar",
+      "chol": "Jula' al"
+    },
+    {
+      "espanol": "Trepar",
+      "chol": "Letsel"
+    },
+    {
+      "espanol": "Círculo",
+      "chol": "Selekña"
+    },
+    {
+      "espanol": "Cuadrado",
+      "chol": "Lakal"
+    },
+    {
+      "espanol": "Triángulo",
+      "chol": "Ts'ujki'bal"
+    },
+    {
+      "espanol": "6",
+      "chol": "Wäkp'ej"
+    },
+    {
+      "espanol": "7",
+      "chol": "Wukp'ej"
+    },
+    {
+      "espanol": "8",
+      "chol": "Waxäkp'ej"
+    },
+    {
+      "espanol": "9",
+      "chol": "Bolomp'ej"
+    },
+    {
+      "espanol": "10",
+      "chol": "Lujump'ej"
+    },
+    {
+      "espanol": "11",
+      "chol": "Junlujump'ej"
+    },
+    {
+      "espanol": "12",
+      "chol": "Cha'lujump'ej"
+    },
+    {
+      "espanol": "13",
+      "chol": "Uxlujump'ej"
+    },
+    {
+      "espanol": "14",
+      "chol": "Chänlujump'ej"
+    },
+    {
+      "espanol": "15",
+      "chol": "Jo'lujump'ej"
+    },
+    {
+      "espanol": "16",
+      "chol": "wäklujump'ej"
+    },
+    {
+      "espanol": "17",
+      "chol": "wuklujump'ej"
+    },
+    {
+      "espanol": "18",
+      "chol": "waxäklujump'ej"
+    },
+    {
+      "espanol": "19",
+      "chol": "Bolomlujump'ej"
+    },
+    {
+      "espanol": "20",
+      "chol": "Junk'al"
+    },
+    {
+      "espanol": "Días",
+      "chol": "K'in"
+    },
+    {
+      "espanol": "Escribir",
+      "chol": "Ts'ijb"
+    },
+    {
+      "espanol": "Oír",
+      "chol": "Näch'tyan"
+    },
+    {
+      "espanol": "Ver",
+      "chol": "K'el"
+    },
+    {
+      "espanol": "Hablar",
+      "chol": "Ty'aň"
+    }
+  ],
+  "muestras_sintacticas": [
+    {
+      "espanol": "Me gusta el pozol",
+      "chol": "Kmulañ li sa'"
+    },
+    {
+      "espanol": "Me encanta la yuca",
+      "chol": "Kmulaň li ts'ijň"
+    },
+    {
+      "espanol": "No me gusta el chayote",
+      "chol": "Ma'aîñ kmulañ li ch'ijch'um"
+    },
+    {
+      "espanol": "¿Te gusta el mole?",
+      "chol": "¿a mulaň li mole?"
+    },
+    {
+      "espanol": "¿Cuál es tu comida favorita?",
+      "chol": "¿ba'kibä bäñäk' a weñ mulaň?"
+    },
+    {
+      "espanol": "¿Cuántos círculos hay?",
+      "chol": "¿jayp'eki selekňabä añ?"
+    },
+    {
+      "espanol": "Hay seis círculos",
+      "chol": "Añ wäkp'ej selekñabä"
+    },
+    {
+      "espanol": "Hay once naranjas",
+      "chol": "Añ junlujump'ej alaxax"
+    },
+    {
+      "espanol": "¿Qué día es hoy?",
+      "chol": "¿chuki tyi k'in wäleli?"
+    },
+    {
+      "espanol": "Hoy es 20 de noviembre",
+      "chol": "Junk'al k'in wäleli"
+    },
+    {
+      "espanol": "Yo camino a la milpa",
+      "chol": "Joñoň muk'oň tyi xämbal tyi cholel"
+    },
+    {
+      "espanol": "Los niños nadan en el río",
+      "chol": "Jiñi alp'eñalo' muk'o' tyi ñuxejel tyi kolem ja'"
+    },
+    {
+      "espanol": "Mis hermanos corren por el campo",
+      "chol": "Jiñi kermañujo' muk'o' tyi ajñel tyi jami"
+    }
+  ]
+}

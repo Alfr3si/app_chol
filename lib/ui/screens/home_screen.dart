@@ -34,7 +34,7 @@ class HomeScreen extends StatelessWidget {
                   children: [
                     // --- 1. Perfil ---
                     AnimatedFloatingButton(
-                      assetPath: 'assets/images/elements/button_perfil.webp',
+                      assetPath: 'assets/image/elements/button_perfil.webp',
                       size: 140,
                       onTap: () {
                         debugPrint('Perfil presionado');
@@ -43,7 +43,7 @@ class HomeScreen extends StatelessWidget {
 
                     // --- 2. Ajustes ---
                     AnimatedFloatingButton(
-                      assetPath: 'assets/images/elements/button_ajustes.webp',
+                      assetPath: 'assets/image/elements/button_ajustes.webp',
                       size: 140,
                       onTap: () {
                         debugPrint('Ajustes presionado');
@@ -52,7 +52,7 @@ class HomeScreen extends StatelessWidget {
 
                     // --- 3. Comenzar (Centro) ---
                     AnimatedFloatingButton(
-                      assetPath: 'assets/images/elements/button_comenzar.webp',
+                      assetPath: 'assets/image/elements/button_comenzar.webp',
                       size: 140, // Destacado
                       onTap: () {
                         debugPrint('Comenzar presionado');
@@ -68,7 +68,7 @@ class HomeScreen extends StatelessWidget {
 
                     // --- 4. Explora ---
                     AnimatedFloatingButton(
-                      assetPath: 'assets/images/elements/button_explora.webp',
+                      assetPath: 'assets/image/elements/button_explora.webp',
                       size: 140,
                       onTap: () {
                         debugPrint('Explora presionado');
@@ -77,13 +77,13 @@ class HomeScreen extends StatelessWidget {
 
                     // --- 5. Chatbot (Aquí conectamos la ventana flotante) ---
                     AnimatedFloatingButton(
-                      assetPath: 'assets/images/elements/button_chatbot.webp',
+                      assetPath: 'assets/image/elements/button_chatbot.webp',
                       size: 120,
                       onTap: () {
                         // Al tocar el botón, abrimos el teléfono flotante con el chat adentro
                         FloatingChatBubble.show(
                           context,
-                          backgroundAsset: 'assets/images/background/fondo_telefono.webp', // Tu imagen base del teléfono
+                          backgroundAsset: 'assets/image/background/fondo_telefono.webp', // Tu imagen base del teléfono
                           child: const ChatbotContent(), // La lógica y los mensajes del chat
                         );
                       },

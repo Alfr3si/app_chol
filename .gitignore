@@ -55,3 +55,6 @@ app.*.map.json
 
 # Archivos del sistema operativo
 Thumbs.db
+
+# variables de entorno
+.env

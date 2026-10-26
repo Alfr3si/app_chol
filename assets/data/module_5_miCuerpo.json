@@ -1,0 +1,222 @@
+{
+  "modulo_id": 5,
+  "nombre_modulo": "Mi cuerpo",
+  "region": "Tacotalpa, Tabasco",
+  "elicitador": "Amelia Escobar Potenciano",
+  "muestras_lexicas": [
+    {
+      "espanol": "Cuerpo",
+      "chol": "Kotyilel"
+    },
+    {
+      "espanol": "Cabeza",
+      "chol": "Jol"
+    },
+    {
+      "espanol": "Ojos",
+      "chol": "Wuty"
+    },
+    {
+      "espanol": "Nariz",
+      "chol": "Ni'"
+    },
+    {
+      "espanol": "Boca",
+      "chol": "Tyi'"
+    },
+    {
+      "espanol": "Orejas",
+      "chol": "Chikin"
+    },
+    {
+      "espanol": "Manos",
+      "chol": "K'ä'"
+    },
+    {
+      "espanol": "Dedos",
+      "chol": "Yalo' k'ä'"
+    },
+    {
+      "espanol": "Piernas",
+      "chol": "Ya'"
+    },
+    {
+      "espanol": "Pie",
+      "chol": "Ok"
+    },
+    {
+      "espanol": "Feo",
+      "chol": "Bi'bi'"
+    },
+    {
+      "espanol": "Bonito / Guapo",
+      "chol": "Lekax"
+    },
+    {
+      "espanol": "Feliz",
+      "chol": "Tyijikňa"
+    },
+    {
+      "espanol": "Triste",
+      "chol": "Ch'äjyem"
+    },
+    {
+      "espanol": "Cansado",
+      "chol": "Bo'yem"
+    },
+    {
+      "espanol": "Con hambre",
+      "chol": "Wi'ñal"
+    },
+    {
+      "espanol": "Con sed",
+      "chol": "Tyäkin tyi'"
+    },
+    {
+      "espanol": "Enojado",
+      "chol": "Mich'"
+    },
+    {
+      "espanol": "Enfermedad",
+      "chol": "K'am-añ"
+    },
+    {
+      "espanol": "Gripa",
+      "chol": "Tya'ni'"
+    },
+    {
+      "espanol": "Diarrea",
+      "chol": "Ja'ñäk' tya'"
+    },
+    {
+      "espanol": "Tos",
+      "chol": "Ojba"
+    },
+    {
+      "espanol": "Fiebre",
+      "chol": "K'ajk"
+    },
+    {
+      "espanol": "Fractura / quebradura",
+      "chol": "Xujlem"
+    },
+    {
+      "espanol": "Dolor de cabeza",
+      "chol": "K'ux jol"
+    },
+    {
+      "espanol": "Dolor de panza",
+      "chol": "K'ax ñäk'"
+    },
+    {
+      "espanol": "Dolor de diente",
+      "chol": "K'ux ej"
+    },
+    {
+      "espanol": "Dolor de rodillas",
+      "chol": "K'ux pix"
+    },
+    {
+      "espanol": "Medicina",
+      "chol": "Ts'ak"
+    },
+    {
+      "espanol": "Inyección",
+      "chol": "Joch'"
+    },
+    {
+      "espanol": "Ropa",
+      "chol": "Pislel"
+    },
+    {
+      "espanol": "Playera / Camisa",
+      "chol": "Bujk"
+    },
+    {
+      "espanol": "Vestido",
+      "chol": "P'o'"
+    },
+    {
+      "espanol": "Zapatos",
+      "chol": "Xäñä'"
+    }
+  ],
+  "muestras_sintacticas": [
+    {
+      "espanol": "¿Cómo estás?",
+      "chol": "¿bajche' awila?"
+    },
+    {
+      "espanol": "¿Cómo está él/ella?",
+      "chol": "¿Bajche' yila iba jiñi?"
+    },
+    {
+      "espanol": "Él está cansado",
+      "chol": "Bo'yemix iba li"
+    },
+    {
+      "espanol": "Ella está feliz",
+      "chol": "Ixi tyijikña iyu'bin"
+    },
+    {
+      "espanol": "El bebé tiene hambre",
+      "chol": "Wi'îña ili aläl"
+    },
+    {
+      "espanol": "Mi hermano tiene sed",
+      "chol": "Tyäkin ityi' li kermaňu"
+    },
+    {
+      "espanol": "Mamá está triste",
+      "chol": "Ch'äjyem yu'biň mam"
+    },
+    {
+      "espanol": "Octavio tiene fiebre",
+      "chol": "Aj Octavio k'ajk muk'"
+    },
+    {
+      "espanol": "Damián tiene diarrea",
+      "chol": "Aj Damián ja'ñäk' tya' muk'"
+    },
+    {
+      "espanol": "Rosa tiene gripa",
+      "chol": "Xrosa tya' ni' muk'"
+    },
+    {
+      "espanol": "Mi abuela preparó un té",
+      "chol": "Jiñi jko' tyi ch'äxä its'ak"
+    },
+    {
+      "espanol": "Mi papá tomó una pastilla",
+      "chol": "Jiñi kpap tyi buk'u"
+    },
+    {
+      "espanol": "¿Cómo te sientes?",
+      "chol": "¿bajche' yu'bi awu'bin?"
+    },
+    {
+      "espanol": "Me siento bien",
+      "chol": "Yomäch ku'bin"
+    },
+    {
+      "espanol": "Me siento mal",
+      "chol": "Mach yom ku'bin"
+    },
+    {
+      "espanol": "¿Qué estás vistiendo?",
+      "chol": "¿chuki yes chonkol a xoje'?"
+    },
+    {
+      "espanol": "¿Qué está vistiendo él/ella?",
+      "chol": "¿chuki yes chonkol ixoje' jiñi?"
+    },
+    {
+      "espanol": "Ella viste un vestido amarillo",
+      "chol": "Ixä xojol icha'añ jump'ojch p'o' xk'änk'äñbä"
+    },
+    {
+      "espanol": "Mis zapatos son negros",
+      "chol": "I-ik li kxäñä'"
+    }
+  ]
+}

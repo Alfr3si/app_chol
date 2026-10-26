@@ -1,0 +1,233 @@
+{
+  "modulo_id": 3,
+  "nombre_modulo": "Mi escuela",
+  "region": "Tacotalpa, Tabasco",
+  "muestras_lexicas": [
+    {
+      "espanol": "Trabajo",
+      "chol": "Toñel"
+    },
+    {
+      "espanol": "Maestro",
+      "chol": "Xpäsjun"
+    },
+    {
+      "espanol": "Campesino",
+      "chol": "Aj cholejel"
+    },
+    {
+      "espanol": "Albañil",
+      "chol": "Xpäty otyoty"
+    },
+    {
+      "espanol": "Pescador",
+      "chol": "Aj lukbäl"
+    },
+    {
+      "espanol": "Curandero",
+      "chol": "Xts'ak"
+    },
+    {
+      "espanol": "Escuela",
+      "chol": "Yotyle aj k'ejuño'"
+    },
+    {
+      "espanol": "Cuaderno",
+      "chol": "Jun"
+    },
+    {
+      "espanol": "Tijera",
+      "chol": "Tyexelex"
+    },
+    {
+      "espanol": "Libro",
+      "chol": "Dubru"
+    },
+    {
+      "espanol": "Silla",
+      "chol": "Buchli bäl"
+    },
+    {
+      "espanol": "Puerta",
+      "chol": "Tyi'otyoty"
+    },
+    {
+      "espanol": "Cocinar",
+      "chol": "Päty bäñäkäl"
+    },
+    {
+      "espanol": "Lavar",
+      "chol": "Pokoñel"
+    },
+    {
+      "espanol": "Limpiar",
+      "chol": "Sujkun"
+    },
+    {
+      "espanol": "Barrer",
+      "chol": "Misujel"
+    },
+    {
+      "espanol": "Sembrar",
+      "chol": "Päk´oñel"
+    },
+    {
+      "espanol": "Trabajar",
+      "chol": "Toñel"
+    },
+    {
+      "espanol": "Pescar",
+      "chol": "lukbäl"
+    },
+    {
+      "espanol": "Construir",
+      "chol": "Meloñel"
+    },
+    {
+      "espanol": "Cazar",
+      "chol": "Xäñtye'el"
+    },
+    {
+      "espanol": "Festividades",
+      "chol": "K'iñejel"
+    },
+    {
+      "espanol": "Verde",
+      "chol": "Xäjxäx"
+    },
+    {
+      "espanol": "Rojo",
+      "chol": "Chächäk"
+    },
+    {
+      "espanol": "Negro",
+      "chol": "L'ik'"
+    },
+    {
+      "espanol": "Blanco",
+      "chol": "Säsäk"
+    },
+    {
+      "espanol": "Amarillo",
+      "chol": "K'änk'än"
+    },
+    {
+      "espanol": "Pintar",
+      "chol": "Bon"
+    },
+    {
+      "espanol": "Escribir",
+      "chol": "Ts'ijbuň"
+    },
+    {
+      "espanol": "Cortar",
+      "chol": "Sety"
+    },
+    {
+      "espanol": "Jugar",
+      "chol": "Nak"
+    },
+    {
+      "espanol": "Bailar",
+      "chol": "Soñ"
+    },
+    {
+      "espanol": "Cantar",
+      "chol": "Ka'y"
+    },
+    {
+      "espanol": "Contar",
+      "chol": "Tsik"
+    },
+    {
+      "espanol": "Desayunar",
+      "chol": "Uch'el"
+    },
+    {
+      "espanol": "Aprender",
+      "chol": "Käñe"
+    },
+    {
+      "espanol": "Escuchar",
+      "chol": "Näch"
+    },
+    {
+      "espanol": "Estudiar",
+      "chol": "K'ejuñ"
+    }
+  ],
+  "muestras_sintacticas": [
+    {
+      "espanol": "Yo soy pescador",
+      "chol": "Joñon xlukbäloň"
+    },
+    {
+      "espanol": "Ella es maestra",
+      "chol": "Ili xpäsjuň"
+    },
+    {
+      "espanol": "Nosotros somos campesinos",
+      "chol": "Joñoñlon xcholejeloñloň"
+    },
+    {
+      "espanol": "Ellos son curanderos",
+      "chol": "Ixä xts'ako'"
+    },
+    {
+      "espanol": "Hay muchas sillas",
+      "chol": "ka bä añ buchli bäl"
+    },
+    {
+      "espanol": "Las sillas son amarillas",
+      "chol": "K'änk'äîn li buchli bäl"
+    },
+    {
+      "espanol": "Los maestros enseñan",
+      "chol": "Li xpäsjuño muk'o' tyi käntyisaj"
+    },
+    {
+      "espanol": "Mi mamá cocina en el fogón",
+      "chol": "Jiñi kmam ipäty ibäñik' tyi k'ajk"
+    },
+    {
+      "espanol": "Mi papá trabaja en la milpa",
+      "chol": "Jiñi kpap muk tyi toñel tyi cholel"
+    },
+    {
+      "espanol": "Esas niñas son bonitas",
+      "chol": "Ixä saj xk'alälo' ñoj ilekaxo'"
+    },
+    {
+      "espanol": "Mis hermanas barren la casa",
+      "chol": "Jiñi kchicho' imisuño' li otyoty"
+    },
+    {
+      "espanol": "Mi hermano sale a cazar en la noche",
+      "chol": "Jiñi kermañu' ilok'el majlel tyi xäñtye'el tyi ik'añ"
+    },
+    {
+      "espanol": "El perro caza tepezcuintle",
+      "chol": "Ili ts'i' ichuke' jalaw"
+    },
+    {
+      "espanol": "El libro está debajo de la silla",
+      "chol": "Li dibru ya'añ tyi iye bal li buchli bäl"
+    },
+    {
+      "espanol": "El cuaderno está al lado de las tijeras",
+      "chol": "Jiñi jun ya'an tyi ity'ej tyi tyexelex"
+    },
+    {
+      "espanol": "¿Dónde están los niños?",
+      "chol": "¿Ba'ki año li alp'eñalo'?"
+    },
+    {
+      "espanol": "Los niños juegan en el patio",
+      "chol": "Jiñi alp'eñalo' muk'o' tyi tyi Paty otyoty"
+    },
+    {
+      "espanol": "Los niños están jugando en la hora del recreo",
+      "chol": "Li alpeñalo' chonkolo' tyi ñak tyi yorojlel uch'el"
+    }
+  ]
+}

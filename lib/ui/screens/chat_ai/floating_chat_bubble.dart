@@ -55,10 +55,10 @@ class FloatingChatBubble extends StatelessWidget {
           children: [
             // --- PANTALLA INTERNA DEL TELÉFONO (Exactamente 353 x 209) ---
             Positioned(
-              left: 173, // (700 - 353) / 2 si está centrada
-              top: 95, // (400 - 209) / 2 si está centrada
-              width: 353,
-              height: 209,
+              left: 100, // (700 - 353) / 2 si está centrada
+              top: 45, // (400 - 209) / 2 si está centrada
+              width: 500,
+              height: 285,
               child: child,
             ),
 

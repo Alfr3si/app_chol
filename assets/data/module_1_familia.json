@@ -1,0 +1,286 @@
+{
+  "modulo_id": 1,
+  "nombre_modulo": "Mi familia y yo",
+  "region": "Tacotalpa, Tabasco",
+  "elicitador": "Amelia Escobar Potenciano",
+  "muestras_lexicas": [
+    {
+      "espanol": "Adiós",
+      "chol": "Kmajle / koñix"
+    },
+    {
+      "espanol": "Bueno (respuesta al adiós)",
+      "chol": "Yom / yomäch"
+    },
+    {
+      "espanol": "Buenas (cuando llegas a un lugar)",
+      "chol": "Paseli"
+    },
+    {
+      "espanol": "Ahí vengo",
+      "chol": "Ya' ktyile"
+    },
+    {
+      "espanol": "Voy llegando",
+      "chol": "Ya' kpase"
+    },
+    {
+      "espanol": "Pásale (respuesta al buenas)",
+      "chol": "Tyalety"
+    },
+    {
+      "espanol": "Ven (respuesta al buenas)",
+      "chol": "La'me"
+    },
+    {
+      "espanol": "Adiós (colectivo)",
+      "chol": "(mux) Kmajle / koñix / Lu' kmajle / lu' koñix"
+    },
+    {
+      "espanol": "Mañana",
+      "chol": "K'iñ / säk´añ"
+    },
+    {
+      "espanol": "Medio día",
+      "chol": "Xink'ini"
+    },
+    {
+      "espanol": "Tarde",
+      "chol": "Och'an k'in / chañe k'in"
+    },
+    {
+      "espanol": "Noche",
+      "chol": "Ik´añ"
+    },
+    {
+      "espanol": "Madrugada",
+      "chol": "A'bile"
+    },
+    {
+      "espanol": "Familia (parientes)",
+      "chol": "Majchilo'"
+    },
+    {
+      "espanol": "Padre / papá",
+      "chol": "Pap / Tyaty"
+    },
+    {
+      "espanol": "Madre / mamá",
+      "chol": "Mam / ña'"
+    },
+    {
+      "espanol": "Hermano (mayor)",
+      "chol": "K'ermañu / kuskuñ"
+    },
+    {
+      "espanol": "Hermana",
+      "chol": "Chich"
+    },
+    {
+      "espanol": "Abuelo",
+      "chol": "Yum"
+    },
+    {
+      "espanol": "Abuela",
+      "chol": "Ko'"
+    },
+    {
+      "espanol": "Niño",
+      "chol": "Chuty alo' / chuty wiñik"
+    },
+    {
+      "espanol": "Niña",
+      "chol": "Chuty k'alil / chuty ixik"
+    },
+    {
+      "espanol": "Hijo",
+      "chol": "Alo bil'"
+    },
+    {
+      "espanol": "Hija",
+      "chol": "Ixik'alil"
+    },
+    {
+      "espanol": "Tío (paterno y materno)",
+      "chol": "Yujmel / kichan"
+    },
+    {
+      "espanol": "Tía",
+      "chol": "Na'je"
+    },
+    {
+      "espanol": "Bebé",
+      "chol": "Aläl"
+    },
+    {
+      "espanol": "1",
+      "chol": "Jump'ej"
+    },
+    {
+      "espanol": "2",
+      "chol": "Chap'ej"
+    },
+    {
+      "espanol": "3",
+      "chol": "Uxp'ej"
+    },
+    {
+      "espanol": "4",
+      "chol": "Chämp'ej"
+    },
+    {
+      "espanol": "5",
+      "chol": "Jop'ej"
+    },
+    {
+      "espanol": "6",
+      "chol": "Wäkp'ej"
+    },
+    {
+      "espanol": "7",
+      "chol": "Wukp'ej"
+    },
+    {
+      "espanol": "8",
+      "chol": "Waxäkp'ej"
+    },
+    {
+      "espanol": "9",
+      "chol": "Bolomp'ej"
+    },
+    {
+      "espanol": "10",
+      "chol": "Lujump éj"
+    },
+    {
+      "espanol": "Nombre",
+      "chol": "Ka'ba'"
+    },
+    {
+      "espanol": "Apellido",
+      "chol": "Jol Ka'ba'"
+    },
+    {
+      "espanol": "Edad",
+      "chol": "Ja 'bilel"
+    },
+    {
+      "espanol": "Ciudad",
+      "chol": "Kolem lum / kaxlan lum"
+    },
+    {
+      "espanol": "Él / ella",
+      "chol": "Jini"
+    }
+  ],
+  "muestras_sintacticas": [
+    {
+      "espanol": "Yo soy Octavio",
+      "chol": "Joñoň aj Octavio"
+    },
+    {
+      "espanol": "Mi nombre es Octavio",
+      "chol": "Jk'aba aj Octavio"
+    },
+    {
+      "espanol": "Yo soy un niño",
+      "chol": "Joñoň chuty (alo'on) / Joñon chuty (wiñikon)"
+    },
+    {
+      "espanol": "Yo soy una niña",
+      "chol": "Joñoñ xchuty (k´aläloñ) / Joñoñ xchuty (ixikoň)"
+    },
+    {
+      "espanol": "Él es un niño",
+      "chol": "Jiñi ili xchuty alo' / Jini ili chuty wiñik"
+    },
+    {
+      "espanol": "Él es mi papá",
+      "chol": "Jiñi ili kpap / Jiñi ili ktyaty"
+    },
+    {
+      "espanol": "Él es mi abuelo",
+      "chol": "Jini ili kyum"
+    },
+    {
+      "espanol": "Él es mi hermano",
+      "chol": "Jiñi ili kermañu / Jiñi ili kuskuň"
+    },
+    {
+      "espanol": "Él es mi tío",
+      "chol": "Jiñi ili kyujme / Jini ili kichan"
+    },
+    {
+      "espanol": "Ella es una niña",
+      "chol": "Jiñi ili xchuty k'aläl / Jiñi ili xchuty ixik"
+    },
+    {
+      "espanol": "Ella es mi mamá",
+      "chol": "Jini ili kmam / Jini ili kña"
+    },
+    {
+      "espanol": "Ella es mi abuela",
+      "chol": "Jiñi ili jko"
+    },
+    {
+      "espanol": "Ella es mi hermana",
+      "chol": "Jiñi ili kchich"
+    },
+    {
+      "espanol": "Esta es mi familia",
+      "chol": "Jiñi ili kmajchilo'"
+    },
+    {
+      "espanol": "Yo vivo en Tacotalpa",
+      "chol": "Joñoň chumuloň tyi Ts'ul"
+    },
+    {
+      "espanol": "Yo tengo 7 años",
+      "chol": "Joñoň wukp'ej ka'bilel"
+    },
+    {
+      "espanol": "¿Cómo te llamas?",
+      "chol": "¿Bajche' ak'aba'?"
+    },
+    {
+      "espanol": "¿Dónde vives? / ¿De dónde eres?",
+      "chol": "¿Ba'ki chumulety? / ¿Ba'ki ch'oyolety?"
+    },
+    {
+      "espanol": "¿De dónde vienes?",
+      "chol": "¿Ba'ki tyälemety?"
+    },
+    {
+      "espanol": "¿Cuántos años tienes?",
+      "chol": "¿Bajche'aja'bilel?"
+    },
+    {
+      "espanol": "Mi nombre es María",
+      "chol": "Jkaba' aj María / Jkaba x-María"
+    },
+    {
+      "espanol": "Mi casa es amarilla",
+      "chol": "Jiñi kotyoty xk'änk'än"
+    },
+    {
+      "espanol": "Mi perro es pequeño",
+      "chol": "Jiñi kts'i' chutyjach"
+    },
+    {
+      "espanol": "Mi mamá es alta",
+      "chol": "Jiñi chañ li kmam"
+    },
+    {
+      "espanol": "Su sombrero es blanco",
+      "chol": "Jiñi säsäk ipixol"
+    },
+    {
+      "espanol": "Él vive con su hijo",
+      "chol": "Jiñi ili chumul yik'oty iyalo 'bil"
+    },
+    {
+      "espanol": "Su gallina está grande",
+      "chol": "Jiñi kolemix imuty"
+    }
+  ]
+}

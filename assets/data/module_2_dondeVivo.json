@@ -1,0 +1,252 @@
+{
+  "modulo_id": 2,
+  "nombre_modulo": "El lugar donde vivo",
+  "region": "Tacotalpa, Tabasco (Variante Guayal)",
+  "fecha": "21 de octubre de 2025",
+  "colaborador": "Carlos Andrés Hernández Pérez",
+  "elicitador": "Amelia Escobar Potenciano",
+  "muestras_lexicas": [
+    {
+      "espanol": "Yo",
+      "chol": "Joñoñ"
+    },
+    {
+      "espanol": "Tu",
+      "chol": "Jatyety"
+    },
+    {
+      "espanol": "Él",
+      "chol": "Jiñi"
+    },
+    {
+      "espanol": "Ella",
+      "chol": "Ixä"
+    },
+    {
+      "espanol": "Nosotros",
+      "chol": "Joñoñla (incluyente) / Joñoñloň (no incluyente)"
+    },
+    {
+      "espanol": "Ustedes",
+      "chol": "Jatyetyla"
+    },
+    {
+      "espanol": "Ellos",
+      "chol": "Jiño"
+    },
+    {
+      "espanol": "Casa",
+      "chol": "Otyoty"
+    },
+    {
+      "espanol": "Sala",
+      "chol": "Mal"
+    },
+    {
+      "espanol": "Cocina",
+      "chol": "No tiene traducción"
+    },
+    {
+      "espanol": "Cuarto",
+      "chol": "Wätyi bäl"
+    },
+    {
+      "espanol": "Patio",
+      "chol": "Paty otyoty"
+    },
+    {
+      "espanol": "Alto",
+      "chol": "Chan"
+    },
+    {
+      "espanol": "Chaparro",
+      "chol": "Pek"
+    },
+    {
+      "espanol": "Flaco",
+      "chol": "Tyäkin"
+    },
+    {
+      "espanol": "Gordo",
+      "chol": "Jujp'eñ"
+    },
+    {
+      "espanol": "Pequeño",
+      "chol": "Chuty"
+    },
+    {
+      "espanol": "Grande",
+      "chol": "Kolem"
+    },
+    {
+      "espanol": "Corto",
+      "chol": "Kom"
+    },
+    {
+      "espanol": "Largo",
+      "chol": "Tyam / päl"
+    },
+    {
+      "espanol": "Escuela",
+      "chol": "Yotyle ak'ejuño"
+    },
+    {
+      "espanol": "Iglesia",
+      "chol": "Klesia"
+    },
+    {
+      "espanol": "Río",
+      "chol": "Kolem ja'"
+    },
+    {
+      "espanol": "Cerros",
+      "chol": "Wits"
+    },
+    {
+      "espanol": "Cuevas",
+      "chol": "Ch'en"
+    },
+    {
+      "espanol": "Arroyo",
+      "chol": "Pa'"
+    },
+    {
+      "espanol": "Perro",
+      "chol": "Ts'i'"
+    },
+    {
+      "espanol": "Pollito",
+      "chol": "Yal Muty"
+    },
+    {
+      "espanol": "Gallina",
+      "chol": "Na' muty"
+    },
+    {
+      "espanol": "Gallo",
+      "chol": "Tyaty muty"
+    },
+    {
+      "espanol": "Pavo",
+      "chol": "Ajtso'"
+    },
+    {
+      "espanol": "Pava",
+      "chol": "Ña' ak'ach"
+    },
+    {
+      "espanol": "Vaca",
+      "chol": "Wakax"
+    },
+    {
+      "espanol": "Caballo",
+      "chol": "Kawayu'"
+    },
+    {
+      "espanol": "Pato",
+      "chol": "Pech"
+    },
+    {
+      "espanol": "Pez",
+      "chol": "Chäy"
+    },
+    {
+      "espanol": "Mariposa",
+      "chol": "Pejpem"
+    },
+    {
+      "espanol": "Dueño del cerro",
+      "chol": "Yum wits"
+    },
+    {
+      "espanol": "Dueño de la cueva",
+      "chol": "Yum ch'en"
+    },
+    {
+      "espanol": "Dueño del río",
+      "chol": "Yum ja'"
+    }
+  ],
+  "muestras_sintacticas": [
+    {
+      "espanol": "Este es mi perro",
+      "chol": "Kcha'an ili ts'i'"
+    },
+    {
+      "espanol": "Estos son mis hermanos",
+      "chol": "Jiño ili jkermaňujo'"
+    },
+    {
+      "espanol": "Estas naranjas son mías",
+      "chol": "Kcha'an ili alaxax"
+    },
+    {
+      "espanol": "Nosotros somos campesinos",
+      "chol": "Joñoñloň aj cholejoñloň"
+    },
+    {
+      "espanol": "Mi casa es pequeña",
+      "chol": "Jiñi li kotyoty chuty"
+    },
+    {
+      "espanol": "Mi casa no es grande",
+      "chol": "Jiñi li kotyoty kolem"
+    },
+    {
+      "espanol": "Mi papá es alto",
+      "chol": "Jiñi li ktyaty chan"
+    },
+    {
+      "espanol": "Hay cuatro escuelas en Guayal",
+      "chol": "Añ tyämp'ej ityoty ajk'ejuño' tyi Guayal"
+    },
+    {
+      "espanol": "¿Qué es esto?",
+      "chol": "¿chuki yes ili?"
+    },
+    {
+      "espanol": "¿Es este un río?",
+      "chol": "¿kolem ja' ili?"
+    },
+    {
+      "espanol": "¿Es esta una iglesia?",
+      "chol": "¿klesia ili?"
+    },
+    {
+      "espanol": "¿Es este tu padre?",
+      "chol": "A tyaty ili"
+    },
+    {
+      "espanol": "¿Este es tu pollo?",
+      "chol": "¿A muty ili?"
+    },
+    {
+      "espanol": "¿Son estos tus hijos?",
+      "chol": "¿Awalo bilo ili?"
+    },
+    {
+      "espanol": "¿Estas gallinas son tuyas?",
+      "chol": "¿Aña'mutyo' ili?"
+    },
+    {
+      "espanol": "Esta no es una iglesia",
+      "chol": "Mach klesiajik ili"
+    },
+    {
+      "espanol": "Esta pelota no es mía",
+      "chol": "Mach kpelotajik ili"
+    },
+    {
+      "espanol": "Este no es mi tío",
+      "chol": "Mach kyujmelik ili"
+    },
+    {
+      "espanol": "Estos no son mis abuelos",
+      "chol": "Mach kyumo' ibanli"
+    },
+    {
+      "espanol": "Estas vacas no son tuyas",
+      "chol": "Mach kwakaxoik ili"
+    }
+  ]
+}

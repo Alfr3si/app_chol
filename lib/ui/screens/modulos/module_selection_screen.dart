@@ -20,32 +20,32 @@ class _ModuleSelectionScreenState extends State<ModuleSelectionScreen> {
     {
       'id': 'modulo_1',
       'titulo': 'Módulo 1: Saludos',
-      'tarjeta': 'assets/images/elements/marco_modulo1.webp',
-      'imagen_modulo': 'assets/images/learning/grupo.webp',
+      'tarjeta': 'assets/image/elements/marco_modulo1.webp',
+      'imagen_modulo': 'assets/image/learning/grupo.webp',
     },
     {
       'id': 'modulo_2',
       'titulo': 'Módulo 2: Familia',
-      'tarjeta': 'assets/images/elements/marco_modulos.webp',
-      'imagen_modulo': 'assets/images/learning/grupo.webp',
+      'tarjeta': 'assets/image/elements/marco_modulos.webp',
+      'imagen_modulo': 'assets/image/learning/grupo.webp',
     },
     {
       'id': 'modulo_3',
       'titulo': 'Módulo 3: Animales',
-      'tarjeta': 'assets/images/elements/marco_modulos.webp',
-      'imagen_modulo': 'assets/images/learning/grupo.webp',
+      'tarjeta': 'assets/image/elements/marco_modulos.webp',
+      'imagen_modulo': 'assets/image/learning/grupo.webp',
     },
     {
       'id': 'modulo_4',
       'titulo': 'Módulo 4: Números',
-      'tarjeta': 'assets/images/elements/marco_modulos.webp',
-      'imagen_modulo': 'assets/images/learning/grupo.webp',
+      'tarjeta': 'assets/image/elements/marco_modulos.webp',
+      'imagen_modulo': 'assets/image/learning/grupo.webp',
     },
     {
       'id': 'modulo_5',
       'titulo': 'Módulo 5: Objetos',
-      'tarjeta': 'assets/images/elements/marco_modulos.webp',
-      'imagen_modulo': 'assets/images/learning/grupo.webp',
+      'tarjeta': 'assets/image/elements/marco_modulos.webp',
+      'imagen_modulo': 'assets/image/learning/grupo.webp',
     },
   ];
 
@@ -163,8 +163,8 @@ class _ModuleSelectionScreenState extends State<ModuleSelectionScreen> {
                                               }
                                             },
                                             child: Container(
-                                              width: 380,
-                                              height: 300,
+                                              width: 446,
+                                              height: 252,
                                               decoration: BoxDecoration(
                                               ),
                                               child: ClipRRect(
