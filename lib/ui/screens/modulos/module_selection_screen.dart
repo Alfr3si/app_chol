@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flame/game.dart';
 
 import '../../game_canvas/menu_game.dart'; // Ajusta la ruta si es necesario
+import './familia/mapa_modulo1.dart';
 
 class ModuleSelectionScreen extends StatefulWidget {
   const ModuleSelectionScreen({super.key});
@@ -15,37 +16,32 @@ class _ModuleSelectionScreenState extends State<ModuleSelectionScreen> {
   // Controlador para el PageView
   late final PageController _pageController;
 
-  // Lista de módulos
+  // Lista de módulos (Cada uno usa su marco limpio como única imagen de fondo de tarjeta)
   final List<Map<String, String>> _modulos = [
     {
       'id': 'modulo_1',
       'titulo': 'Módulo 1: Saludos',
-      'tarjeta': 'assets/image/elements/marco_modulo1.webp',
-      'imagen_modulo': 'assets/image/learning/grupo.webp',
+      'tarjeta': 'assets/image/learning/modulo1.webp',
     },
     {
       'id': 'modulo_2',
       'titulo': 'Módulo 2: Familia',
-      'tarjeta': 'assets/image/elements/marco_modulos.webp',
-      'imagen_modulo': 'assets/image/learning/grupo.webp',
+      'tarjeta': 'assets/image/learning/modulo2.webp',
     },
     {
       'id': 'modulo_3',
       'titulo': 'Módulo 3: Animales',
-      'tarjeta': 'assets/image/elements/marco_modulos.webp',
-      'imagen_modulo': 'assets/image/learning/grupo.webp',
+      'tarjeta': 'assets/image/learning/modulo3.webp',
     },
     {
       'id': 'modulo_4',
       'titulo': 'Módulo 4: Números',
-      'tarjeta': 'assets/image/elements/marco_modulos.webp',
-      'imagen_modulo': 'assets/image/learning/grupo.webp',
+      'tarjeta': 'assets/image/learning/modulo4.webp',
     },
     {
       'id': 'modulo_5',
       'titulo': 'Módulo 5: Objetos',
-      'tarjeta': 'assets/image/elements/marco_modulos.webp',
-      'imagen_modulo': 'assets/image/learning/grupo.webp',
+      'tarjeta': 'assets/image/learning/modulo5.webp',
     },
   ];
 
@@ -61,9 +57,19 @@ class _ModuleSelectionScreenState extends State<ModuleSelectionScreen> {
     super.dispose();
   }
 
-  void _seleccionarModulo(String idModulo, String titulo) {
+void _seleccionarModulo(String idModulo, String titulo) {
     debugPrint('Módulo seleccionado y abierto: $idModulo');
-    // TODO: Navegar a la actividad específica del módulo
+    
+    if (idModulo == 'modulo_1') {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const MapaModulo1Screen()),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Próximamente: $titulo')),
+      );
+    }
   }
 
   @override
@@ -72,30 +78,69 @@ class _ModuleSelectionScreenState extends State<ModuleSelectionScreen> {
       body: Stack(
         fit: StackFit.expand,
         children: [
-          // 1. FONDO ANIMADO DE FLAME (Estático y fluido sin parpadeos)
-          GameWidget(game: MenuGame()),
+          // 1. FONDO ANIMADO DE FLAME
+          GameWidget(game: MenuGame(backgroundAsset: 'background/fondo_modulos.webp')),
 
           // 2. CONTENIDO PRINCIPAL
           SafeArea(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const SizedBox(height: 25),
+                const SizedBox(height: 10),
 
-                // Título principal
-                const Text(
-                  'SELECCIONA UN MÓDULO',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 1.5,
-                    shadows: [
-                      Shadow(
-                        offset: Offset(2, 2),
-                        blurRadius: 6,
-                        color: Colors.black87,
+                // Cabecera con Título y Botón de Regreso a la derecha
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      // Título principal centrado de forma absoluta
+                      const Text(
+                        'SELECCIONA UN MÓDULO',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                          letterSpacing: 1.5,
+                          shadows: [
+                            Shadow(
+                              offset: Offset(2, 2),
+                              blurRadius: 6,
+                              color: Colors.black87,
+                            ),
+                          ],
+                        ),
+                      ),
+                      
+                      // Botón de Regreso alineado a la derecha
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.pop(context); // Regresa a la pantalla anterior (HomeScreen)
+                          },
+                          child: Container(
+                            width: 80,
+                            height: 80,
+                            decoration: const BoxDecoration(
+                              shape: BoxShape.circle,
+                            ),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(25),
+                              child: Image.asset(
+                                'assets/image/elements/button_x.webp',
+                                fit: BoxFit.cover,
+                                errorBuilder: (context, error, stack) {
+                                  return Container(
+                                    color: Colors.orange,
+                                    child: const Icon(Icons.arrow_back, color: Colors.white),
+                                  );
+                                },
+                              ),
+                            ),
+                          ),
+                        ),
                       ),
                     ],
                   ),
@@ -126,7 +171,7 @@ class _ModuleSelectionScreenState extends State<ModuleSelectionScreen> {
                                   itemBuilder: (context, index) {
                                     // Cálculo de escala para la tarjeta central y laterales
                                     double scale = max(
-                                      0.75,
+                                      0.85,
                                       (1.0 -
                                           (currentPageValue - index).abs() *
                                               0.25),
@@ -166,101 +211,14 @@ class _ModuleSelectionScreenState extends State<ModuleSelectionScreen> {
                                               width: 446,
                                               height: 252,
                                               decoration: BoxDecoration(
-                                              ),
-                                              child: ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(20),
-                                                child: Stack(
-                                                  children: [
-                                                    // 1. MARCO / TARJETA BASE (.webp principal en el fondo de la card)
-                                                    Positioned.fill(
-                                                      child: Image.asset(
-                                                        modulo['tarjeta']!,
-                                                        fit: BoxFit.fill,
-                                                        errorBuilder: (
-                                                          context,
-                                                          error,
-                                                          stack,
-                                                        ) {
-                                                          return Container(
-                                                            color: Colors
-                                                                .orangeAccent,
-                                                            child: const Icon(
-                                                              Icons.folder,
-                                                              size: 60,
-                                                              color: Colors
-                                                                  .white,
-                                                            ),
-                                                          );
-                                                        },
-                                                      ),
-                                                    ),
-
-                                                    // 2. ILUSTRACIÓN TEMÁTICA INTERIOR (Reducida y adaptada al hueco)
-                                                    Positioned(
-                                                      top: 60,   // Margen superior ampliado para hacerla más chica
-                                                      left: 10,  // Margen izquierdo ampliado
-                                                      right:0, // Margen derecho ampliado
-                                                      bottom: 28, // Margen inferior ampliado para dejar espacio al título
-                                                      child: ClipRRect(
-                                                        borderRadius:
-                                                            BorderRadius.circular(
-                                                          10,
-                                                        ),
-                                                        child: Image.asset(
-                                                          modulo[
-                                                              'imagen_modulo']!,
-                                                          fit: BoxFit.contain, // Escala la imagen para que encaje completa sin recortarse
-                                                          errorBuilder: (
-                                                            context,
-                                                            error,
-                                                            stack,
-                                                          ) {
-                                                            return Container(
-                                                              color: Colors
-                                                                  .white10,
-                                                              child:
-                                                                  const Icon(
-                                                                Icons.image,
-                                                                size: 40,
-                                                                color: Colors
-                                                                    .white54,
-                                                              ),
-                                                            );
-                                                          },
-                                                        ),
-                                                      ),
-                                                    ),
-
-                                                    // 3. TÍTULO DEL MÓDULO EN LA PARTE INFERIOR
-                                                    Positioned(
-                                                      bottom: 12,
-                                                      left: 10,
-                                                      right: 10,
-                                                      child: Text(
-                                                        modulo['titulo']!,
-                                                        textAlign:
-                                                            TextAlign.center,
-                                                        style: const TextStyle(
-                                                          color: Colors.white,
-                                                          fontSize: 14,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          shadows: [
-                                                            Shadow(
-                                                              offset:
-                                                                  Offset(1, 1),
-                                                              blurRadius: 3,
-                                                              color:
-                                                                  Colors.black,
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ],
+                                                borderRadius: BorderRadius.circular(20),
+                                                // Única imagen de fondo para la tarjeta del módulo
+                                                image: DecorationImage(
+                                                  image: AssetImage(modulo['tarjeta']!),
+                                                  fit: BoxFit.fill,
                                                 ),
                                               ),
+                                              // Aquí puedes poner opcionalmente un texto o icono centrado si lo requieres dentro de la tarjeta
                                             ),
                                           ),
                                         ),

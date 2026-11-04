@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'chatbot_viewmodel.dart';
 
 class ChatbotContent extends StatefulWidget {
@@ -30,13 +31,13 @@ class _ChatbotContentState extends State<ChatbotContent> {
 
   void _enviarMensaje() {
     if (_controller.text.trim().isEmpty) return;
-    
+
     final texto = _controller.text;
     _controller.clear();
 
     // Enviamos el mensaje a través del ViewModel
     _viewModel.sendMessage(texto).then((_) {
-      // Opcional: auto-scroll hacia abajo al recibir la respuesta
+      // Auto-scroll hacia abajo al recibir la respuesta
       if (_scrollController.hasClients) {
         _scrollController.animateTo(
           _scrollController.position.maxScrollExtent,
@@ -49,6 +50,9 @@ class _ChatbotContentState extends State<ChatbotContent> {
 
   @override
   Widget build(BuildContext context) {
+    // Obtenemos la altura exacta del teclado virtual para que el input suba y no quede tapado
+    final keyboardHeight = MediaQuery.of(context).viewInsets.bottom;
+
     return Material(
       color: Colors.transparent,
       child: ListenableBuilder(
@@ -61,7 +65,10 @@ class _ChatbotContentState extends State<ChatbotContent> {
               Expanded(
                 child: ListView.builder(
                   controller: _scrollController,
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 8,
+                    vertical: 8,
+                  ),
                   itemCount: _viewModel.messages.length,
                   itemBuilder: (context, index) {
                     final msg = _viewModel.messages[index];
@@ -91,7 +98,9 @@ class _ChatbotContentState extends State<ChatbotContent> {
                                 topLeft: const Radius.circular(16),
                                 topRight: const Radius.circular(16),
                                 bottomLeft: Radius.circular(esUsuario ? 16 : 4),
-                                bottomRight: Radius.circular(esUsuario ? 4 : 16),
+                                bottomRight: Radius.circular(
+                                  esUsuario ? 4 : 16,
+                                ),
                               ),
                             ),
                             child: Text(
@@ -111,15 +120,15 @@ class _ChatbotContentState extends State<ChatbotContent> {
                 ),
               ),
 
-              // Indicador visual opcional si la IA está redactando
+              // Indicador visual si la IA está procesando
               if (_viewModel.isLoading)
                 const Padding(
-                  padding: EdgeInsets.all(8.0),
+                  padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
                   child: Row(
                     children: [
                       SizedBox(
-                        width: 16,
-                        height: 16,
+                        width: 14,
+                        height: 14,
                         child: CircularProgressIndicator(
                           strokeWidth: 2,
                           color: Colors.orange,
@@ -134,48 +143,65 @@ class _ChatbotContentState extends State<ChatbotContent> {
                   ),
                 ),
 
-              const SizedBox(height: 8),
+              const SizedBox(height: 6),
 
               // --- Campo de Texto e Input ---
-              Row(
-                children: [
-                  Expanded(
-                    child: TextField(
-                      controller: _controller,
-                      enabled: !_viewModel.isLoading,
-                      decoration: InputDecoration(
-                        hintText: _viewModel.isLoading
-                            ? 'Esperando respuesta...'
-                            : 'Escribe un mensaje...',
-                        hintStyle: const TextStyle(
-                          color: Colors.white60,
+              Padding(
+                padding: EdgeInsets.fromLTRB(
+                  8,
+                  0,
+                  8,
+                  // Si el teclado está abierto, sube justo lo necesario con un margen mínimo de 4px. Si está cerrado, se queda a 8px del fondo.
+                  keyboardHeight > 0 ? keyboardHeight + 4 : 8,
+                ),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: TextField(
+                        controller: _controller,
+                        enabled: !_viewModel.isLoading,
+                        cursorColor: Colors.orange,
+                        style: const TextStyle(
+                          color: Colors.white,
                           fontSize: 13,
                         ),
-                        filled: true,
-                        fillColor: Colors.black45,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20),
-                          borderSide: BorderSide.none,
+                        decoration: InputDecoration(
+                          hintText: _viewModel.isLoading
+                              ? 'Esperando respuesta...'
+                              : 'Escribe un mensaje...',
+                          hintStyle: const TextStyle(
+                            color: Colors.white60,
+                            fontSize: 13,
+                          ),
+                          filled: true,
+                          fillColor: Colors.black45,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20),
+                            borderSide: BorderSide.none,
+                          ),
+                          contentPadding: const EdgeInsets.symmetric(
+                            horizontal: 14,
+                            vertical: 8,
+                          ),
                         ),
-                        contentPadding: const EdgeInsets.symmetric(
-                          horizontal: 14,
-                          vertical: 8,
-                        ),
+                        onSubmitted: (_) => _enviarMensaje(),
                       ),
-                      style: const TextStyle(color: Colors.white, fontSize: 13),
-                      onSubmitted: (_) => _enviarMensaje(),
                     ),
-                  ),
-                  const SizedBox(width: 8),
-                  IconButton(
-                    onPressed: _viewModel.isLoading ? null : _enviarMensaje,
-                    icon: const Icon(Icons.send, color: Colors.white, size: 18),
-                    style: IconButton.styleFrom(
-                      backgroundColor: Colors.orange,
-                      padding: const EdgeInsets.all(10),
+                    const SizedBox(width: 8),
+                    IconButton(
+                      onPressed: _viewModel.isLoading ? null : _enviarMensaje,
+                      icon: const Icon(
+                        Icons.send,
+                        color: Colors.white,
+                        size: 18,
+                      ),
+                      style: IconButton.styleFrom(
+                        backgroundColor: Colors.orange,
+                        padding: const EdgeInsets.all(10),
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ],
           );

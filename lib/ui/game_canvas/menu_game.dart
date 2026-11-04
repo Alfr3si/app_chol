@@ -3,27 +3,32 @@ import 'package:flame/components.dart';
 import 'package:flame/parallax.dart';
 
 class MenuGame extends FlameGame {
-    @override
-    Future<void> onLoad() async {
-        super.onLoad();
+  // Declaramos la variable para la ruta del fondo
+  final String backgroundAsset;
 
-        final bgFondo1 = await loadSprite('background/fondo1.webp');
-        final bgComponent = SpriteComponent(
-        sprite: bgFondo1,
-        size: size,
-        );
-        add(bgComponent);
+  // Constructor que recibe la imagen (por defecto usa 'background/fondo1.webp')
+  MenuGame({this.backgroundAsset = 'background/fondo1.webp'});
 
-        final nubesComponent = await ParallaxComponent.load([
-        //NOTE:esto se ve bien para alguna funcion
-        // que quiero implementar despues
-        // ParallaxImageData('fondos/fondo1.webp'),
+  @override
+  Future<void> onLoad() async {
+    super.onLoad();
+
+    // Usamos la variable en lugar de un texto fijo
+    final bgFondo = await loadSprite(backgroundAsset);
+    final bgComponent = SpriteComponent(
+      sprite: bgFondo,
+      size: size,
+    );
+    add(bgComponent);
+
+    final nubesComponent = await ParallaxComponent.load(
+      [
         ParallaxImageData('elements/nubes_tira.webp'),
-        ],
-        baseVelocity: Vector2(10, 0),
-        velocityMultiplierDelta: Vector2(1, 1),
-        );
+      ],
+      baseVelocity: Vector2(10, 0),
+      velocityMultiplierDelta: Vector2(1, 1),
+    );
 
-        add(nubesComponent);
-        }
-    }
+    add(nubesComponent);
+  }
+}
