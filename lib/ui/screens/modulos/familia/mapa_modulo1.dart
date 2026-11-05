@@ -4,7 +4,7 @@ import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-// --- 1. COMPONENTE DEL JUGADOR ---
+// --- 1. COMPONENTE DEL JUGADOR CON NUEVAS COLISIONES ---
 class PlayerComponent extends SpriteAnimationComponent
     with HasGameReference<MapaModulo1World> {
   late final SpriteAnimation idleAnimation;
@@ -15,9 +15,26 @@ class PlayerComponent extends SpriteAnimationComponent
 
   Vector2 velocity = Vector2.zero();
   final double speed = 120.0;
-
   String _lastState = '';
 
+  // 🧱 Lista actualizada con tus nuevas coordenadas de colisión (Mapa 960x640)
+  final List<Rect> obstacles = [
+    const Rect.fromLTWH(2.16155, 2.16155, 219.398, 125.37),
+    const Rect.fromLTWH(224.802, 2.16155, 731.686, 58.3619),
+    const Rect.fromLTWH(483.107, 47.5542, 123.209, 48.635),
+    const Rect.fromLTWH(706.828, 39.9887, 249.659, 87.5429),
+    const Rect.fromLTWH(897.045, 155.632, 56.2004, 446.361),
+    const Rect.fromLTWH(769.513, 244.256, 137.259, 109.158),
+    const Rect.fromLTWH(798.694, 469.057, 111.32, 103.755),
+    const Rect.fromLTWH(2.16155, 469.057, 156.713, 105.916),
+    const Rect.fromLTWH(2.16155, 565.246, 954.326, 73.4928),
+    const Rect.fromLTWH(3.24233, 128.612, 58.3619, 350.172),
+    const Rect.fromLTWH(65.9274, 212.913, 127.532, 109.158),
+    const Rect.fromLTWH(392.322, 246.417, 109.158, 105.916),
+    const Rect.fromLTWH(768.432, 470.138, 29.181, 38.908),
+  ];
+
+  // 🟢 Personaje configurado a su tamaño real de 32x32 píxeles
   PlayerComponent() : super(size: Vector2(64, 64), anchor: Anchor.center);
 
   @override
@@ -27,7 +44,6 @@ class PlayerComponent extends SpriteAnimationComponent
     final image = await game.images.load('elements/spritesheet1.webp');
     final textureSize = Vector2(32, 32);
 
-    // Animación Idle explícita con loop continuo
     idleAnimation = SpriteAnimation.fromFrameData(
       image,
       SpriteAnimationData.sequenced(
@@ -91,11 +107,30 @@ class PlayerComponent extends SpriteAnimationComponent
   void update(double dt) {
     super.update(dt);
     if (!velocity.isZero()) {
-      position += velocity * dt;
+      Vector2 nextPosition = position + velocity * dt;
 
-      // 🛑 LÍMITES DEL MAPA (1280x720): Mantiene al jugador dentro del fondo
-      position.x = position.x.clamp(32.0, 1280.0 - 32.0);
-      position.y = position.y.clamp(32.0, 720.0 - 32.0);
+      // 🔲 Hitbox proporcional a los 32x32
+      Rect playerRect = Rect.fromCenter(
+        center: Offset(nextPosition.x, nextPosition.y),
+        width: size.x * 0.7,
+        height: size.y * 0.7,
+      );
+
+      bool hasCollision = false;
+      for (final obstacle in obstacles) {
+        if (obstacle.overlaps(playerRect)) {
+          hasCollision = true;
+          break;
+        }
+      }
+
+      if (!hasCollision) {
+        position = nextPosition;
+      }
+
+      // 🛑 Límites del mapa de 960x640 para el personaje de 32x32
+      position.x = position.x.clamp(16.0, 960.0 - 16.0);
+      position.y = position.y.clamp(16.0, 640.0 - 16.0);
     }
   }
 
@@ -155,7 +190,7 @@ class PlayerComponent extends SpriteAnimationComponent
   }
 }
 
-// --- 2. EL MUNDO DE FLAME CON CÁMARA ACTIVA Y WORLD ---
+// --- 2. EL MUNDO DE FLAME ---
 class MapaModulo1World extends FlameGame with KeyboardEvents {
   late PlayerComponent player;
 
@@ -163,21 +198,19 @@ class MapaModulo1World extends FlameGame with KeyboardEvents {
   Future<void> onLoad() async {
     super.onLoad();
 
-    // 1. Cargamos el fondo y lo agregamos al WORLD (indispensable para que la cámara lo mueva)
+    // 1. Fondo de 960x640
     final background = SpriteComponent()
       ..sprite = await loadSprite('elements/mapa1.webp')
-      ..size = Vector2(1280, 720);
+      ..size = Vector2(960, 640);
     world.add(background);
 
-    // 2. Agregamos al jugador también al WORLD
-    player = PlayerComponent()..position = Vector2(1280 / 2, 720 / 2);
+    // 2. Jugador ubicado en una zona libre fuera de las colisiones
+    player = PlayerComponent()..position = Vector2(300, 420);
     world.add(player);
 
-    // 3. Configuración de la cámara con zoom para seccionar y explorar el fondo
+    // 3. Configuración de la cámara
     camera.viewfinder.anchor = Anchor.center;
-    camera.viewfinder.zoom = 1.2; // Ajusta este valor si quieres ver más cerca o más lejos
-    
-    // 🎥 La cámara sigue al jugador por todo el mundo
+    camera.viewfinder.zoom = 1.2;
     camera.follow(player);
   }
 
