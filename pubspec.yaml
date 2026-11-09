@@ -43,6 +43,7 @@ dependencies:
   # sqlite3_flutter_libs -> Gestion de estado reactiva
   
   flame: ^1.18.0
+  flame_audio: ^2.12.2
   drift: ^2.18.0
   sqlite3_flutter_libs: ^0.5.2
   flutter_riverpod: ^2.6.1

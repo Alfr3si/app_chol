@@ -1,3 +1,4 @@
+import 'package:app_chol/core/audio_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart'; // 1. Importa dotenv
@@ -8,6 +9,9 @@ Future<void> main() async { // 2. Vuelve la función main asíncrona
 
     // 3. Carga el archivo .env antes de iniciar la app y configurar la pantalla
     await dotenv.load(fileName: ".env");
+
+    // monitoreo de bloqueo de pantalla para el audio
+    AudioManager.instance.init();
 
     // Orientacion de la pantalla
     SystemChrome.setPreferredOrientations([
