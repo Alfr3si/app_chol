@@ -99,6 +99,7 @@ flutter:
      - assets/image/background/
      - assets/image/elements/
      - assets/image/learning/
+     - assets/image/explora/
      - assets/audio/
      - assets/font/
      - assets/video/

@@ -1,0 +1,182 @@
+[
+  {
+    "id": "gastronomia_001",
+    "titleEsp": "Tamales Ch'oles",
+    "contentEsp": "Los tamales ch'oles son una delicia hecha con masa de maíz, rellenos de carne de pollo o de res guisada y envueltos en hojas de plátano.",
+    "imagePath": "assets/image/explora/tamales.webp"
+  },
+  {
+    "id": "gastronomia_002",
+    "titleEsp": "Pozol con cacao",
+    "contentEsp": "Bebida tradicional hecha a base de maíz y cacao, refrescante y nutritiva.",
+    "imagePath": "assets/image/explora/pozol_de_cacao.webp"
+  },
+  {
+    "id": "gastronomia_003",
+    "titleEsp": "Puchero",
+    "contentEsp": "El puchero es una comida tipica que consiste en carne de res con verduras.",
+    "imagePath": "assets/image/explora/puchero.webp"
+  },
+  {
+    "id": "gastronomia_004",
+    "titleEsp": "Frijol con arroz",
+    "contentEsp": "Un caldo de frijoles guisados acompañado de arroz blanco.",
+    "imagePath": "assets/image/explora/frijoles.webp"
+  },
+  {
+    "id": "gastronomia_005",
+    "titleEsp": "Tortillas hechas a mano",
+    "contentEsp": "Tortillas preparadas a base de maiz y calentadas a fogon.",
+    "imagePath": "assets/image/explora/tortillas.webp"
+  },
+  {
+    "id": "gastronomia_006",
+    "titleEsp": "Castañas",
+    "contentEsp": "Son las semillas del arbol de castaña herbidas.",
+    "imagePath": "assets/image/explora/castana.webp"
+  },
+  {
+    "id": "gastronomia_007",
+    "titleEsp": "Chaya",
+    "contentEsp": "Son las hojas de la planta de chaya, esta tiene diferentes variedades y se preparan a herbor.",
+    "imagePath": "assets/image/explora/chaya.webp"
+  },
+  {
+    "id": "gastronomia_008",
+    "titleEsp": "Tamalitos de Elote",
+    "contentEsp": "Platillo tpico de la region a base de una masa de elotes, envuelto en hoja de elotes y hervido.",
+    "imagePath": "assets/image/explora/tamales_de_elote.webp"
+  },
+  {
+    "id": "gastronomia_009",
+    "titleEsp": "Torta de Elote",
+    "contentEsp": "Platillo tipico a base de una masa de elote horneado.",
+    "imagePath": "assets/image/explora/torta_de_elote.webp"
+  },
+  {
+    "id": "gastronomia_010",
+    "titleEsp": "Malanga",
+    "contentEsp": "Platillo hecho a base de herbor, especialmente para acompañar el desayuno.",
+    "imagePath": "assets/image/explora/malanga.webp"
+  },
+  {
+    "id": "gastronomia_011",
+    "titleEsp": "Dulce de coco",
+    "contentEsp": "Comida dulce hecha de coco con azucar, esta puede ser acompañada de pozol.",
+    "imagePath": "assets/image/explora/dulce_de_coco.webp"
+  },
+  {
+    "id": "gastronomia_012",
+    "titleEsp": "Dulce de papaya",
+    "contentEsp": "Comida dulce hecha de papaya con azucar, esta puede ser acompañada de pozol.",
+    "imagePath": "assets/image/explora/dulce_de_papaya.webp"
+  },
+  {
+    "id": "gastronomia_013",
+    "titleEsp": "Caracol",
+    "contentEsp": "Platillo creado con caracoles de rio y platano verde.",
+    "imagePath": "assets/image/explora/caracol.webp"
+  },
+  {
+    "id": "gastronomia_014",
+    "titleEsp": "Tostadas",
+    "contentEsp": "Tortilla tostada elaborada de maiz tierno.",
+    "imagePath": "assets/image/explora/tostada.webp"
+  },
+  {
+    "id": "gastronomia_015",
+    "titleEsp": "Empanada de calabaza",
+    "contentEsp": "Es una tortilla doblada hecha con semillas de calabaza triturada y el relleno es de frijoles fritos.",
+    "imagePath": "assets/image/explora/tortilla_de_calabaza.webp"
+  },
+  {
+    "id": "gastronomia_016",
+    "titleEsp": "Tortilla de frijol",
+    "contentEsp": "Tortilla hecha a base de maza revuelta con frijoles.",
+    "imagePath": "assets/image/explora/tortilla_de_frijol.webp"
+  },
+  {
+    "id": "gastronomia_017",
+    "titleEsp": "Platanitos fritos",
+    "contentEsp": "Platanidos preparados aplastados y fritos.",
+    "imagePath": "assets/image/explora/platanitos.webp"
+  },
+  {
+    "id": "gastronomia_018",
+    "titleEsp": "Chayotes sancochados",
+    "contentEsp": "Chayotes hechos a herbor.",
+    "imagePath": "assets/image/explora/chayote.webp"
+  },
+  {
+    "id": "gastronomia_019",
+    "titleEsp": "Huevo asado",
+    "contentEsp": "Comida hecha de huevo revuelto que se pone a asar en el comal.",
+    "imagePath": "assets/image/explora/huevo_asado.webp"
+  },
+  {
+    "id": "gastronomia_020",
+    "titleEsp": "Pescado en mone",
+    "contentEsp": "Comida elaborada de pescado, hierva santa (momo), platano y otros complementos, esta se coloca en el fogon y se deja asando.",
+    "imagePath": "assets/image/explora/pescado.webp"
+  },
+  {
+    "id": "gastronomia_021",
+    "titleEsp": "Pozol blanco",
+    "contentEsp": "Bebida tradicional hecha a base de maíz, refrescante y nutritiva.",
+    "imagePath": "assets/image/explora/pozol_blanco.webp"
+  },
+  {
+    "id": "gastronomia_022",
+    "titleEsp": "Quelite",
+    "contentEsp": "Hojas de una planta, esta es una de las variedades de la chaya, esta se prepara hirviendola.",
+    "imagePath": "assets/image/explora/quelite.webp"
+  },
+  {
+    "id": "gastronomia_023",
+    "titleEsp": "Empanada de huevo",
+    "contentEsp": "Bebida tradicional hecha a base de maíz, refrescante y nutritiva.",
+    "imagePath": "assets/image/explora/empanada_de_huevo.webp"
+  },
+  {
+    "id": "gastronomia_024",
+    "titleEsp": "Tamalitos de frijol",
+    "contentEsp": "Comida tipica preparada de maza con relleno de frijoles e hierba santa (momo).",
+    "imagePath": "assets/image/explora/tamales_de_frijol.webp"
+  },
+  {
+    "id": "gastronomia_025",
+    "titleEsp": "Caldo de pollo con arroz",
+    "contentEsp": "Platillo tipico preparado con pollo, verduras y arroz.",
+    "imagePath": "assets/image/explora/pollo_con_arroz.webp"
+  },
+  {
+    "id": "gastronomia_026",
+    "titleEsp": "Caldo blanco",
+    "contentEsp": "Caldo de pollo sancochado.",
+    "imagePath": "assets/image/explora/caldo_de_pollo.webp"
+  },
+  {
+    "id": "gastronomia_027",
+    "titleEsp": "Pescado frito",
+    "contentEsp": "Pescado Frito acompañado de ensalada de lechuga y cebolla con chile.",
+    "imagePath": "assets/image/explora/pescado_frito.webp"
+  },
+  {
+    "id": "gastronomia_028",
+    "titleEsp": "Elotes herbidos",
+    "contentEsp": "Elote herbido embarrado de mayonesa y bañado de chile en polvo.",
+    "imagePath": "assets/image/explora/elote.webp"
+  },
+  {
+    "id": "gastronomia_029",
+    "titleEsp": "Chanchamitos",
+    "contentEsp": "Creado con maza y relleno con carne deshebrada, es como los tamales pero pequeño.",
+    "imagePath": "assets/image/explora/chanchamitos.webp"
+  },
+  {
+    "id": "gastronomia_030",
+    "titleEsp": "Chinin",
+    "contentEsp": "Fruta que se da en las zonas ch'oles, se convirtio en uno de sus alimentos base de temporada.",
+    "imagePath": "assets/image/explora/chinin.webp"
+  }
+]

@@ -3,11 +3,14 @@ import 'package:flame/game.dart';
 
 import '../game_canvas/menu_game.dart';
 import '../core/widgets/animated_floating_button.dart';
-import '../../core/audio_manager.dart';
 import './chat_ai/floating_chat_bubble.dart';
 import './chat_ai/chatbot_content.dart';
 import './modulos/module_selection_screen.dart';
 import './perfil/profile_screen.dart';
+import './ajustes/settings_screen.dart';
+import '../../core/audio_manager.dart';
+import '../../core/brightness_manager.dart';
+import './explora/explora_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -20,19 +23,17 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    // 🎵 Iniciar la música del menú principal al cargar la pantalla
     AudioManager.instance.playTrack('menu_principal.mp3', volume: 0.5);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // Evita que la pantalla se comprima y mueva el fondo o los botones
       resizeToAvoidBottomInset: false,
       body: Stack(
         fit: StackFit.expand,
         children: [
-          // 1. Fondo del juego de Flame (Se quedará completamente estático)
+          // 1. Fondo del juego de Flame
           GameWidget(game: MenuGame()),
 
           // 2. Capa superior con SafeArea y los botones del menú
@@ -68,6 +69,20 @@ class _HomeScreenState extends State<HomeScreen> {
                       size: 140,
                       onTap: () {
                         debugPrint('Ajustes presionado');
+                        SettingsScreen.show(
+                          context: context,
+                          initialVolume: AudioManager.instance.globalVolume,
+                          initialBrightness:
+                              BrightnessManager.instance.brightness,
+                          onVolumeChanged: (newVolume) {
+                            AudioManager.instance.setVolume(newVolume);
+                          },
+                          onBrightnessChanged: (newBrightness) {
+                            BrightnessManager.instance.setBrightness(
+                              newBrightness,
+                            );
+                          },
+                        );
                       },
                     ),
 
@@ -77,9 +92,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       size: 140,
                       onTap: () {
                         debugPrint('Comenzar presionado');
-
-                        // 🚀 Navegación limpia sin await. 
-                        // La ModuleSelectionScreen se encarga de todo su flujo interno y audio.
                         Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -95,6 +107,12 @@ class _HomeScreenState extends State<HomeScreen> {
                       size: 140,
                       onTap: () {
                         debugPrint('Explora presionado');
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const ExploraScreen(),
+                          ),
+                        );
                       },
                     ),
 

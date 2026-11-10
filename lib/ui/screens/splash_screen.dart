@@ -27,7 +27,7 @@ class _SplashScreenState extends State<SplashScreen> {
       'elements/nubes_tira.webp',
     ]);
 
-    await Future.delayed(const Duration(seconds: 4));
+    await Future.delayed(const Duration(seconds: 3));
 
     if (!mounted) return;
 

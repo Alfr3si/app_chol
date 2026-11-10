@@ -6,7 +6,11 @@ class AudioManager with WidgetsBindingObserver {
   AudioManager._internal();
 
   bool _isInitialized = false;
-  String? _currentTrack; // Para llevar el registro de qué canción está sonando
+  String? _currentTrack;
+  
+  // 🔊 NUEVO: Control de volumen global (rango de 0.0 a 1.0)
+  double _globalVolume = 0.5;
+  double get globalVolume => _globalVolume;
 
   void init() {
     if (_isInitialized) return;
@@ -20,36 +24,48 @@ class AudioManager with WidgetsBindingObserver {
     _isInitialized = false;
   }
 
-  ///Reproduce cualquier pista de audio
-  Future<void> playTrack(String fileName, {double volume = 0.5}) async {
+  ///  Método para cambiar el volumen en tiempo real
+  void setVolume(double newVolume) {
+    _globalVolume = newVolume.clamp(0.0, 1.0);
+    
+    // Si hay una pista sonando, actualizamos el volumen de FlameAudio inmediatamente
+    if (_currentTrack != null) {
+      FlameAudio.bgm.audioPlayer.setVolume(_globalVolume);
+    }
+    debugPrint('Volumen global actualizado a: ${(_globalVolume * 100).toInt()}%');
+  }
+
+  /// Reproduce cualquier pista de audio usando el volumen global
+  Future<void> playTrack(String fileName, {double? volume}) async {
     try {
-      // Si la misma pista ya está sonando, no la reiniciamos
+      // Usamos el volumen global si no se especifica uno local
+      final targetVolume = volume ?? _globalVolume;
+
       if (_currentTrack == fileName) return;
 
-      // Si hay otra pista sonando, la detenemos primero
       if (_currentTrack != null) {
         FlameAudio.bgm.stop();
       }
 
-      await FlameAudio.bgm.play(fileName, volume: volume);
+      await FlameAudio.bgm.play(fileName, volume: targetVolume);
       _currentTrack = fileName;
-      debugPrint('Reproduciendo pista: $fileName');
+      debugPrint('Reproduciendo pista: $fileName con volumen: $targetVolume');
     } catch (e) {
       debugPrint('Error al reproducir la pista $fileName: $e');
     }
   }
 
-  // Pausar (útil al bloquear el teléfono)
+  // Pausar
   void pauseMusic() {
     FlameAudio.bgm.pause();
   }
 
-  // Reanudar la última pista activa
+  // Reanudar
   void resumeMusic() {
     FlameAudio.bgm.resume();
   }
 
-  // Detener por completo y limpiar el registro de pista actual
+  // Detener
   void stopMusic() {
     FlameAudio.bgm.stop();
     _currentTrack = null;
