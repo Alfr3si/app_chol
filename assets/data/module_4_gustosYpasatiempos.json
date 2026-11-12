@@ -13,7 +13,8 @@
     },
     {
       "espanol": "Limón",
-      "chol": "Ilmoñix"
+      "chol": "Ilmoñix",
+      "path_imagen": "assets/image/palabras/limon.webp"
     },
     {
       "espanol": "Pitaya",
@@ -21,11 +22,14 @@
     },
     {
       "espanol": "Mango",
-      "chol": "Manko"
+      "chol": "Manko",
+      "path_audio": "assets/audio/palabras/mango.mp3",
+      "path_imagen": "assets/image/palabras/mango.webp"
     },
     {
       "espanol": "Nance",
-      "chol": "Chi'"
+      "chol": "Chi'",
+      "path_imagen": "assets/image/palabras/nance.webp"
     },
     {
       "espanol": "Plátano",
@@ -41,7 +45,8 @@
     },
     {
       "espanol": "Guayaba",
-      "chol": "Pätya"
+      "chol": "Pätya",
+      "path_imagen": "assets/image/palabras/guayaba.webp"
     },
     {
       "espanol": "Ciruela",
@@ -97,63 +102,85 @@
     },
     {
       "espanol": "Frijol",
-      "chol": "Bu'ul"
+      "chol": "Bu'ul",
+      "path_imagen": "assets/image/palabras/frijol.webp"
     },
     {
       "espanol": "Tortilla",
-      "chol": "Waj"
+      "chol": "Waj",
+      "path_imagen": "assets/image/palabras/tortilla.webp"
     },
     {
       "espanol": "Huevo",
-      "chol": "Tyumuty"
+      "chol": "Tyumuty",
+      "path_imagen": "assets/image/palabras/huevo.webp"
     },
     {
       "espanol": "Pozol",
-      "chol": "Sa'"
+      "chol": "Sa'",
+      "path_imagen": "assets/image/palabras/pozol.webp"
     },
     {
       "espanol": "Pozol con cacao",
-      "chol": "Xä'bä"
+      "chol": "Xä'bä",
+      "path_imagen": "assets/image/palabras/pozolcc.webp"
     },
     {
       "espanol": "Café",
-      "chol": "Kajpe"
+      "chol": "Kajpe",
+      "path_imagen": "assets/image/palabras/cafe.webp"
     },
     {
       "espanol": "Atol",
-      "chol": "Ul"
+      "chol": "Ul",
+      "path_audio": "assets/audio/palabras/atol.mp3",
+      "path_imagen": "assets/image/palabras/atol.webp"
     },
     {
       "espanol": "Jugar",
-      "chol": "Nak"
+      "chol": "Nak",
+      "path_audio": "assets/audio/palabras/jugar.mp3",
+      "path_imagen": "assets/image/palabras/jugar.webp"
     },
     {
       "espanol": "Caminar",
-      "chol": "Xämbal"
+      "chol": "Xämbal",
+      "path_audio": "assets/audio/palabras/caminar.mp3",
+      "path_imagen": "assets/image/palabras/caminar.webp"
     },
     {
       "espanol": "Correr",
-      "chol": "Ajñe"
+      "chol": "Ajñe",
+      "path_audio": "assets/audio/palabras/correr.mp3",
+      "path_imagen": "assets/image/palabras/correr.webp"
     },
     {
       "espanol": "Nadar",
-      "chol": "Nuxejel"
+      "chol": "Nuxejel",
+      "path_audio": "assets/audio/palabras/nadar.mp3",
+      "path_imagen": "assets/image/palabras/nadar.webp"
     },
     {
       "espanol": "Visitar",
-      "chol": "Jula' al"
+      "chol": "Jula' al",
+      "path_audio": "assets/audio/palabras/visitar.mp3",
+      "path_imagen": "assets/image/palabras/visitar.webp"
     },
     {
       "espanol": "Trepar",
-      "chol": "Letsel"
+      "chol": "Letsel",
+      "path_audio": "assets/audio/palabras/trepar.mp3",
+      "path_imagen": "assets/image/palabras/trepar.webp"
     },
     {
       "espanol": "Círculo",
-      "chol": "Selekña"
+      "chol": "Selekña",
+      "path_imagen": "assets/image/palabras/circulo.webp"
     },
     {
       "espanol": "Cuadrado",
-      "chol": "Lakal"
+      "chol": "Lakal",
+      "path_imagen": "assets/image/palabras/cuadrado.webp"
     },
     {
       "espanol": "Triángulo",
@@ -161,23 +188,30 @@
     },
     {
       "espanol": "6",
-      "chol": "Wäkp'ej"
+      "chol": "Wäkp'ej",
+      "path_audio": "assets/audio/palabras/seis.mp3"
     },
     {
       "espanol": "7",
-      "chol": "Wukp'ej"
+      "chol": "Wukp'ej",
+      "path_audio": "assets/audio/palabras/siete.mp3",
+      "path_imagen": "assets/image/palabras/siete.webp"
     },
     {
       "espanol": "8",
-      "chol": "Waxäkp'ej"
+      "chol": "Waxäkp'ej",
+      "path_audio": "assets/audio/palabras/ocho.mp3"
     },
     {
       "espanol": "9",
-      "chol": "Bolomp'ej"
+      "chol": "Bolomp'ej",
+      "path_audio": "assets/audio/palabras/nueve.mp3"
     },
     {
       "espanol": "10",
-      "chol": "Lujump'ej"
+      "chol": "Lujump'ej",
+      "path_audio": "assets/audio/palabras/diez.mp3",
+      "path_imagen": "assets/image/palabras/diez.webp"
     },
     {
       "espanol": "11",
@@ -185,7 +219,8 @@
     },
     {
       "espanol": "12",
-      "chol": "Cha'lujump'ej"
+      "chol": "Cha'lujump'ej",
+      "path_imagen": "assets/image/palabras/doce.webp"
     },
     {
       "espanol": "13",
@@ -217,7 +252,8 @@
     },
     {
       "espanol": "20",
-      "chol": "Junk'al"
+      "chol": "Junk'al",
+      "path_imagen": "assets/image/palabras/veinte.webp"
     },
     {
       "espanol": "Días",
@@ -243,7 +279,8 @@
   "muestras_sintacticas": [
     {
       "espanol": "Me gusta el pozol",
-      "chol": "Kmulañ li sa'"
+      "chol": "Kmulañ li sa'",
+      "path_imagen": "assets/image/palabras/pozol.webp"
     },
     {
       "espanol": "Me encanta la yuca",
@@ -263,11 +300,13 @@
     },
     {
       "espanol": "¿Cuántos círculos hay?",
-      "chol": "¿jayp'eki selekňabä añ?"
+      "chol": "¿jayp'eki selekňabä añ?",
+      "path_imagen": "assets/image/palabras/circulo.webp"
     },
     {
       "espanol": "Hay seis círculos",
-      "chol": "Añ wäkp'ej selekñabä"
+      "chol": "Añ wäkp'ej selekñabä",
+      "path_imagen": "assets/image/palabras/circulo.webp"
     },
     {
       "espanol": "Hay once naranjas",
@@ -279,19 +318,23 @@
     },
     {
       "espanol": "Hoy es 20 de noviembre",
-      "chol": "Junk'al k'in wäleli"
+      "chol": "Junk'al k'in wäleli",
+      "path_imagen": "assets/image/palabras/veinte.webp"
     },
     {
       "espanol": "Yo camino a la milpa",
-      "chol": "Joñoň muk'oň tyi xämbal tyi cholel"
+      "chol": "Joñoň muk'oň tyi xämbal tyi cholel",
+      "path_imagen": "assets/image/palabras/caminar.webp"
     },
     {
       "espanol": "Los niños nadan en el río",
-      "chol": "Jiñi alp'eñalo' muk'o' tyi ñuxejel tyi kolem ja'"
+      "chol": "Jiñi alp'eñalo' muk'o' tyi ñuxejel tyi kolem ja'",
+      "path_imagen": "assets/image/palabras/nadar.webp"
     },
     {
       "espanol": "Mis hermanos corren por el campo",
-      "chol": "Jiñi kermañujo' muk'o' tyi ajñel tyi jami"
+      "chol": "Jiñi kermaňujo' muk'o' tyi ajñel tyi jami",
+      "path_imagen": "assets/image/palabras/correr.webp"
     }
   ]
 }

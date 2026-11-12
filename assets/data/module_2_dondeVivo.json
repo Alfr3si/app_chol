@@ -36,11 +36,15 @@
     },
     {
       "espanol": "Casa",
-      "chol": "Otyoty"
+      "chol": "Otyoty",
+      "path_audio": "assets/audio/palabras/Casa.mp3",
+      "path_imagen": "assets/image/palabras/casa.webp"
     },
     {
       "espanol": "Sala",
-      "chol": "Mal"
+      "chol": "Mal",
+      "path_audio": "assets/audio/palabras/Sala.mp3",
+      "path_imagen": "assets/image/palabras/sala.webp"
     },
     {
       "espanol": "Cocina",
@@ -52,23 +56,29 @@
     },
     {
       "espanol": "Patio",
-      "chol": "Paty otyoty"
+      "chol": "Paty otyoty",
+      "path_audio": "assets/audio/palabras/Patio.mp3",
+      "path_imagen": "assets/image/palabras/patio.webp"
     },
     {
       "espanol": "Alto",
-      "chol": "Chan"
+      "chol": "Chan",
+      "path_audio": "assets/audio/palabras/Alto.mp3"
     },
     {
       "espanol": "Chaparro",
-      "chol": "Pek"
+      "chol": "Pek",
+      "path_audio": "assets/audio/palabras/Chaparro.mp3"
     },
     {
       "espanol": "Flaco",
-      "chol": "Tyäkin"
+      "chol": "Tyäkin",
+      "path_audio": "assets/audio/palabras/Flaco.mp3"
     },
     {
       "espanol": "Gordo",
-      "chol": "Jujp'eñ"
+      "chol": "Jujp'eñ",
+      "path_audio": "assets/audio/palabras/Gordo.mp3"
     },
     {
       "espanol": "Pequeño",
@@ -76,7 +86,8 @@
     },
     {
       "espanol": "Grande",
-      "chol": "Kolem"
+      "chol": "Kolem",
+      "path_audio": "assets/audio/palabras/Grande.mp3"
     },
     {
       "espanol": "Corto",
@@ -88,7 +99,9 @@
     },
     {
       "espanol": "Escuela",
-      "chol": "Yotyle ak'ejuño"
+      "chol": "Yotyle ak'ejuño",
+      "path_audio": "assets/audio/palabras/escuela.mp3",
+      "path_imagen": "assets/image/palabras/escuela.webp"
     },
     {
       "espanol": "Iglesia",
@@ -96,23 +109,32 @@
     },
     {
       "espanol": "Río",
-      "chol": "Kolem ja'"
+      "chol": "Kolem ja'",
+      "path_audio": "assets/audio/palabras/Rio.mp3",
+      "path_imagen": "assets/image/palabras/rio.webp"
     },
     {
       "espanol": "Cerros",
-      "chol": "Wits"
+      "chol": "Wits",
+      "path_audio": "assets/audio/palabras/Cerro.mp3",
+      "path_imagen": "assets/image/palabras/gcerro.webp"
     },
     {
       "espanol": "Cuevas",
-      "chol": "Ch'en"
+      "chol": "Ch'en",
+      "path_audio": "assets/audio/palabras/Cueva.mp3",
+      "path_imagen": "assets/image/palabras/gcueva.webp"
     },
     {
       "espanol": "Arroyo",
-      "chol": "Pa'"
+      "chol": "Pa'",
+      "path_audio": "assets/audio/palabras/Arroyo.mp3",
+      "path_imagen": "assets/image/palabras/grio.webp"
     },
     {
       "espanol": "Perro",
-      "chol": "Ts'i'"
+      "chol": "Ts'i'",
+      "path_imagen": "assets/image/palabras/perro.webp"
     },
     {
       "espanol": "Pollito",
@@ -120,15 +142,19 @@
     },
     {
       "espanol": "Gallina",
-      "chol": "Na' muty"
+      "chol": "Na' muty",
+      "path_audio": "assets/audio/palabras/Gallina.mp3",
+      "path_imagen": "assets/image/palabras/gallina.webp"
     },
     {
       "espanol": "Gallo",
-      "chol": "Tyaty muty"
+      "chol": "Tyaty muty",
+      "path_imagen": "assets/image/palabras/gallo.webp"
     },
     {
       "espanol": "Pavo",
-      "chol": "Ajtso'"
+      "chol": "Ajtso'",
+      "path_audio": "assets/audio/palabras/pavo.mp3"
     },
     {
       "espanol": "Pava",
@@ -136,19 +162,24 @@
     },
     {
       "espanol": "Vaca",
-      "chol": "Wakax"
+      "chol": "Wakax",
+      "path_imagen": "assets/image/palabras/vaca.webp"
     },
     {
       "espanol": "Caballo",
-      "chol": "Kawayu'"
+      "chol": "Kawayu'",
+      "path_imagen": "assets/image/palabras/caballo.webp"
     },
     {
       "espanol": "Pato",
-      "chol": "Pech"
+      "chol": "Pech",
+      "path_audio": "assets/audio/palabras/pato.mp3",
+      "path_imagen": "assets/image/palabras/pato.webp"
     },
     {
       "espanol": "Pez",
-      "chol": "Chäy"
+      "chol": "Chäy",
+      "path_imagen": "assets/image/palabras/pez.webp"
     },
     {
       "espanol": "Mariposa",
@@ -156,25 +187,30 @@
     },
     {
       "espanol": "Dueño del cerro",
-      "chol": "Yum wits"
+      "chol": "Yum wits",
+      "path_audio": "assets/audio/palabras/dueno_cerro.mp3"
     },
     {
       "espanol": "Dueño de la cueva",
-      "chol": "Yum ch'en"
+      "chol": "Yum ch'en",
+      "path_audio": "assets/audio/palabras/dueno_cueva.mp3"
     },
     {
       "espanol": "Dueño del río",
-      "chol": "Yum ja'"
+      "chol": "Yum ja'",
+      "path_audio": "assets/audio/palabras/dueno_rio.mp3"
     }
   ],
   "muestras_sintacticas": [
     {
       "espanol": "Este es mi perro",
-      "chol": "Kcha'an ili ts'i'"
+      "chol": "Kcha'an ili ts'i'",
+      "path_imagen": "assets/image/palabras/perro.webp"
     },
     {
       "espanol": "Estos son mis hermanos",
-      "chol": "Jiño ili jkermaňujo'"
+      "chol": "Jiño ili jkermaňujo'",
+      "path_imagen": "assets/image/palabras/hermano.webp"
     },
     {
       "espanol": "Estas naranjas son mías",
@@ -182,23 +218,28 @@
     },
     {
       "espanol": "Nosotros somos campesinos",
-      "chol": "Joñoñloň aj cholejoñloň"
+      "chol": "Joñoñloň aj cholejoñloň",
+      "path_imagen": "assets/image/palabras/campesino.webp"
     },
     {
       "espanol": "Mi casa es pequeña",
-      "chol": "Jiñi li kotyoty chuty"
+      "chol": "Jiñi li kotyoty chuty",
+      "path_imagen": "assets/image/palabras/casa.webp"
     },
     {
       "espanol": "Mi casa no es grande",
-      "chol": "Jiñi li kotyoty kolem"
+      "chol": "Jiñi li kotyoty kolem",
+      "path_imagen": "assets/image/palabras/casa.webp"
     },
     {
       "espanol": "Mi papá es alto",
-      "chol": "Jiñi li ktyaty chan"
+      "chol": "Jiñi li ktyaty chan",
+      "path_imagen": "assets/image/palabras/papa.webp"
     },
     {
       "espanol": "Hay cuatro escuelas en Guayal",
-      "chol": "Añ tyämp'ej ityoty ajk'ejuño' tyi Guayal"
+      "chol": "Añ tyämp'ej ityoty ajk'ejuño' tyi Guayal",
+      "path_imagen": "assets/image/palabras/escuela.webp"
     },
     {
       "espanol": "¿Qué es esto?",
@@ -206,7 +247,8 @@
     },
     {
       "espanol": "¿Es este un río?",
-      "chol": "¿kolem ja' ili?"
+      "chol": "¿kolem ja' ili?",
+      "path_imagen": "assets/image/palabras/rio.webp"
     },
     {
       "espanol": "¿Es esta una iglesia?",
@@ -214,7 +256,8 @@
     },
     {
       "espanol": "¿Es este tu padre?",
-      "chol": "A tyaty ili"
+      "chol": "A tyaty ili",
+      "path_imagen": "assets/image/palabras/papa.webp"
     },
     {
       "espanol": "¿Este es tu pollo?",
@@ -226,7 +269,8 @@
     },
     {
       "espanol": "¿Estas gallinas son tuyas?",
-      "chol": "¿Aña'mutyo' ili?"
+      "chol": "¿Aña'mutyo' ili?",
+      "path_imagen": "assets/image/palabras/gallina.webp"
     },
     {
       "espanol": "Esta no es una iglesia",
@@ -238,15 +282,18 @@
     },
     {
       "espanol": "Este no es mi tío",
-      "chol": "Mach kyujmelik ili"
+      "chol": "Mach kyujmelik ili",
+      "path_imagen": "assets/image/palabras/tio.webp"
     },
     {
       "espanol": "Estos no son mis abuelos",
-      "chol": "Mach kyumo' ibanli"
+      "chol": "Mach kyumo' ibanli",
+      "path_imagen": "assets/image/palabras/abuelo.webp"
     },
     {
       "espanol": "Estas vacas no son tuyas",
-      "chol": "Mach kwakaxoik ili"
+      "chol": "Mach kwakaxoik ili",
+      "path_imagen": "assets/image/palabras/vaca.webp"
     }
   ]
 }

@@ -15,11 +15,25 @@ class ComunidadesView extends StatefulWidget {
 class _ComunidadesViewState extends State<ComunidadesView> {
   List<ExploraItem> _items = [];
   bool _isLoading = true;
+  final ScrollController _scrollController = ScrollController();
+
+  // Paleta de colores consistente
+  static const Color _bgBlack = Color(0xFF121212);
+  static const Color _cardBlack = Color(0xFF1E1E1E);
+  static const Color _orangePrimary = Color(0xFFFF7A00);
+  static const Color _orangeAccent = Color(0xFFFF9E3D);
+  static const Color _pureWhite = Color(0xFFFFFFFF);
 
   @override
   void initState() {
     super.initState();
     _loadData();
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
   }
 
   Future<void> _loadData() async {
@@ -36,63 +50,72 @@ class _ComunidadesViewState extends State<ComunidadesView> {
     }
   }
 
-  // Método para mostrar el modal con la descripción completa y la imagen de la comunidad
+  // Método para mostrar el modal con indicador de scroll visible en la descripción
   void _showDetailModal(BuildContext context, String title, String content, String imagePath) {
+    final ScrollController modalScrollController = ScrollController();
+
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          backgroundColor: const Color(0xFF1E1E1E),
+          backgroundColor: _cardBlack,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
-            side: const BorderSide(color: Color(0xFFFF7A00), width: 1.5),
+            side: const BorderSide(color: _orangePrimary, width: 1.5),
           ),
           title: Text(
             title,
             style: const TextStyle(
-              color: Color(0xFFFF7A00),
+              color: _orangePrimary,
               fontWeight: FontWeight.bold,
               fontSize: 18,
             ),
           ),
           content: SizedBox(
             width: MediaQuery.of(context).size.width * 0.5,
-            child: SingleChildScrollView(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  if (imagePath.isNotEmpty) ...[
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(8),
-                      child: Image.asset(
-                        imagePath,
-                        height: 140,
-                        width: double.infinity,
-                        fit: BoxFit.cover,
-                        errorBuilder: (context, error, stackTrace) =>
-                            const Icon(Icons.broken_image, size: 50, color: Colors.white54),
+            child: Scrollbar(
+              controller: modalScrollController,
+              thumbVisibility: true, // 👈 Indicador de scroll visible dentro del modal
+              radius: const Radius.circular(8),
+              child: SingleChildScrollView(
+                controller: modalScrollController,
+                padding: const EdgeInsets.only(right: 8.0),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    if (imagePath.isNotEmpty) ...[
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(8),
+                        child: Image.asset(
+                          imagePath,
+                          height: 140,
+                          width: double.infinity,
+                          fit: BoxFit.cover,
+                          errorBuilder: (context, error, stackTrace) =>
+                              const Icon(Icons.broken_image, size: 50, color: Colors.white54),
+                        ),
                       ),
+                      const SizedBox(height: 12),
+                    ],
+                    Text(
+                      content,
+                      style: const TextStyle(
+                        color: Colors.white70,
+                        fontSize: 14,
+                        height: 1.5,
+                      ),
+                      textAlign: TextAlign.justify,
                     ),
-                    const SizedBox(height: 12),
                   ],
-                  Text(
-                    content,
-                    style: const TextStyle(
-                      color: Colors.white70,
-                      fontSize: 14,
-                      height: 1.5,
-                    ),
-                    textAlign: TextAlign.justify,
-                  ),
-                ],
+                ),
               ),
             ),
           ),
           actions: [
             TextButton(
               style: TextButton.styleFrom(
-                foregroundColor: Colors.white,
-                backgroundColor: const Color(0xFFFF7A00),
+                foregroundColor: _pureWhite,
+                backgroundColor: _orangePrimary,
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
               ),
@@ -108,102 +131,108 @@ class _ComunidadesViewState extends State<ComunidadesView> {
   @override
   Widget build(BuildContext context) {
     if (_isLoading) {
-      return const Center(child: CircularProgressIndicator(color: Color(0xFFFF7A00)));
+      return const Center(child: CircularProgressIndicator(color: _orangePrimary));
     }
 
     if (_items.isEmpty) {
       return const Center(
-        child: Text("No hay datos de comunidades disponibles", style: TextStyle(color: Colors.white)),
+        child: Text("No hay datos de comunidades disponibles", style: TextStyle(color: _pureWhite)),
       );
     }
 
-    return GridView.builder(
-      padding: const EdgeInsets.all(16.0),
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 3, // 3 columnas en landscape
-        mainAxisSpacing: 14.0,
-        crossAxisSpacing: 14.0,
-        childAspectRatio: 2.2,
-      ),
-      itemCount: _items.length,
-      itemBuilder: (context, index) {
-        final item = _items[index];
-        
-        // CORRECCIÓN: Inicia mostrando Español por defecto, y conmuta a Ch'ol al presionar el botón superior.
-        final title = widget.isCholLanguage 
-            ? item.titleEsp 
-            : (item.titleChol.isNotEmpty ? item.titleChol : item.titleEsp);
-            
-        final content = widget.isCholLanguage 
-            ? item.contentEsp 
-            : (item.contentChol.isNotEmpty ? item.contentChol : item.contentEsp);
+    // Scrollbar principal visible para la cuadrícula de tarjetas
+    return Scrollbar(
+      controller: _scrollController,
+      thumbVisibility: true,
+      radius: const Radius.circular(8),
+      child: GridView.builder(
+        controller: _scrollController,
+        padding: const EdgeInsets.all(16.0),
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 3, // 3 columnas en landscape
+          mainAxisSpacing: 14.0,
+          crossAxisSpacing: 14.0,
+          childAspectRatio: 2.2,
+        ),
+        itemCount: _items.length,
+        itemBuilder: (context, index) {
+          final item = _items[index];
+          
+          final title = widget.isCholLanguage 
+              ? item.titleEsp 
+              : (item.titleChol.isNotEmpty ? item.titleChol : item.titleEsp);
+              
+          final content = widget.isCholLanguage 
+              ? item.contentEsp 
+              : (item.contentChol.isNotEmpty ? item.contentChol : item.contentEsp);
 
-        return InkWell(
-          onTap: () => _showDetailModal(context, title, content, item.imagePath),
-          borderRadius: BorderRadius.circular(12),
-          child: Container(
-            decoration: BoxDecoration(
-              color: const Color(0xFF1E1E1E).withOpacity(0.9),
-              borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: const Color(0xFFFF7A00).withOpacity(0.7), width: 1.5),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.5),
-                  blurRadius: 6,
-                  offset: const Offset(0, 3),
-                ),
-              ],
-            ),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
-              child: Row(
-                children: [
-                  Container(
-                    width: 60,
-                    decoration: BoxDecoration(
-                      color: const Color(0xFF121212),
-                      borderRadius: BorderRadius.circular(8),
-                      border: Border.all(color: const Color(0xFFFF9E3D), width: 1),
-                    ),
-                    child: Center(
-                      child: item.imagePath.isNotEmpty
-                          ? ClipRRect(
-                              borderRadius: BorderRadius.circular(7),
-                              child: Image.asset(
-                                item.imagePath,
-                                width: 60,
-                                height: double.infinity,
-                                fit: BoxFit.cover,
-                                errorBuilder: (context, error, stackTrace) =>
-                                    const Icon(Icons.map, size: 26, color: Color(0xFFFF7A00)),
-                              ),
-                            )
-                          : const Icon(Icons.map, size: 26, color: Color(0xFFFF7A00)),
-                    ),
-                  ),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: Center(
-                      child: Text(
-                        title,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 12,
-                          color: Colors.white,
-                          shadows: [Shadow(color: Colors.black, blurRadius: 2)],
-                        ),
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
+          return InkWell(
+            onTap: () => _showDetailModal(context, title, content, item.imagePath),
+            borderRadius: BorderRadius.circular(12),
+            child: Container(
+              decoration: BoxDecoration(
+                color: _cardBlack.withOpacity(0.9),
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(color: _orangePrimary.withOpacity(0.7), width: 1.5),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.5),
+                    blurRadius: 6,
+                    offset: const Offset(0, 3),
                   ),
                 ],
               ),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
+                child: Row(
+                  children: [
+                    Container(
+                      width: 60,
+                      decoration: BoxDecoration(
+                        color: _bgBlack,
+                        borderRadius: BorderRadius.circular(8),
+                        border: Border.all(color: _orangeAccent, width: 1),
+                      ),
+                      child: Center(
+                        child: item.imagePath.isNotEmpty
+                            ? ClipRRect(
+                                borderRadius: BorderRadius.circular(7),
+                                child: Image.asset(
+                                  item.imagePath,
+                                  width: 60,
+                                  height: double.infinity,
+                                  fit: BoxFit.cover,
+                                  errorBuilder: (context, error, stackTrace) =>
+                                      const Icon(Icons.map, size: 26, color: _orangePrimary),
+                                ),
+                              )
+                            : const Icon(Icons.map, size: 26, color: _orangePrimary),
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: Center(
+                        child: Text(
+                          title,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 12,
+                            color: _pureWhite,
+                            shadows: [Shadow(color: Colors.black, blurRadius: 2)],
+                          ),
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ),
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 }

@@ -10,39 +10,57 @@
     },
     {
       "espanol": "Cabeza",
-      "chol": "Jol"
+      "chol": "Jol",
+      "path_audio": "assets/audio/palabras/cabeza.mp3",
+      "path_imagen": "assets/image/palabras/cabeza.webp"
     },
     {
       "espanol": "Ojos",
-      "chol": "Wuty"
+      "chol": "Wuty",
+      "path_audio": "assets/audio/palabras/ojo.mp3",
+      "path_imagen": "assets/image/palabras/ojo.webp"
     },
     {
       "espanol": "Nariz",
-      "chol": "Ni'"
+      "chol": "Ni'",
+      "path_audio": "assets/audio/palabras/nariz.mp3",
+      "path_imagen": "assets/image/palabras/nariz.webp"
     },
     {
       "espanol": "Boca",
-      "chol": "Tyi'"
+      "chol": "Tyi'",
+      "path_audio": "assets/audio/palabras/boca.mp3",
+      "path_imagen": "assets/image/palabras/boca.webp"
     },
     {
       "espanol": "Orejas",
-      "chol": "Chikin"
+      "chol": "Chikin",
+      "path_audio": "assets/audio/palabras/oreja.mp3",
+      "path_imagen": "assets/image/palabras/oreja.webp"
     },
     {
       "espanol": "Manos",
-      "chol": "K'ä'"
+      "chol": "K'ä'",
+      "path_audio": "assets/audio/palabras/mano.mp3",
+      "path_imagen": "assets/image/palabras/mano.webp"
     },
     {
       "espanol": "Dedos",
-      "chol": "Yalo' k'ä'"
+      "chol": "Yalo' k'ä'",
+      "path_audio": "assets/audio/palabras/dedo.mp3",
+      "path_imagen": "assets/image/palabras/dedo.webp"
     },
     {
       "espanol": "Piernas",
-      "chol": "Ya'"
+      "chol": "Ya'",
+      "path_audio": "assets/audio/palabras/piernas.mp3",
+      "path_imagen": "assets/image/palabras/pierna.webp"
     },
     {
       "espanol": "Pie",
-      "chol": "Ok"
+      "chol": "Ok",
+      "path_audio": "assets/audio/palabras/pie.mp3",
+      "path_imagen": "assets/image/palabras/pie.webp"
     },
     {
       "espanol": "Feo",
@@ -54,23 +72,33 @@
     },
     {
       "espanol": "Feliz",
-      "chol": "Tyijikňa"
+      "chol": "Tyijikňa",
+      "path_audio": "assets/audio/palabras/feliz.mp3",
+      "path_imagen": "assets/image/palabras/feliz.webp"
     },
     {
       "espanol": "Triste",
-      "chol": "Ch'äjyem"
+      "chol": "Ch'äjyem",
+      "path_audio": "assets/audio/palabras/triste.mp3",
+      "path_imagen": "assets/image/palabras/triste.webp"
     },
     {
       "espanol": "Cansado",
-      "chol": "Bo'yem"
+      "chol": "Bo'yem",
+      "path_audio": "assets/audio/palabras/cansado.mp3",
+      "path_imagen": "assets/image/palabras/cansado.webp"
     },
     {
       "espanol": "Con hambre",
-      "chol": "Wi'ñal"
+      "chol": "Wi'ñal",
+      "path_audio": "assets/audio/palabras/hambre.mp3",
+      "path_imagen": "assets/image/palabras/hambre.webp"
     },
     {
       "espanol": "Con sed",
-      "chol": "Tyäkin tyi'"
+      "chol": "Tyäkin tyi'",
+      "path_audio": "assets/audio/palabras/sed.mp3",
+      "path_imagen": "assets/image/palabras/sed.webp"
     },
     {
       "espanol": "Enojado",
@@ -82,19 +110,26 @@
     },
     {
       "espanol": "Gripa",
-      "chol": "Tya'ni'"
+      "chol": "Tya'ni'",
+      "path_audio": "assets/audio/palabras/gripa.mp3",
+      "path_imagen": "assets/image/palabras/gripa.webp"
     },
     {
       "espanol": "Diarrea",
-      "chol": "Ja'ñäk' tya'"
+      "chol": "Ja'ñäk' tya'",
+      "path_audio": "assets/audio/palabras/Damian_diarrea.mp3"
     },
     {
       "espanol": "Tos",
-      "chol": "Ojba"
+      "chol": "Ojba",
+      "path_audio": "assets/audio/palabras/tos.mp3",
+      "path_imagen": "assets/image/palabras/tos.webp"
     },
     {
       "espanol": "Fiebre",
-      "chol": "K'ajk"
+      "chol": "K'ajk",
+      "path_audio": "assets/audio/palabras/fiebre.mp3",
+      "path_imagen": "assets/image/palabras/fiebre.webp"
     },
     {
       "espanol": "Fractura / quebradura",
@@ -102,7 +137,8 @@
     },
     {
       "espanol": "Dolor de cabeza",
-      "chol": "K'ux jol"
+      "chol": "K'ux jol",
+      "path_imagen": "assets/image/palabras/cabeza.webp"
     },
     {
       "espanol": "Dolor de panza",
@@ -118,27 +154,39 @@
     },
     {
       "espanol": "Medicina",
-      "chol": "Ts'ak"
+      "chol": "Ts'ak",
+      "path_audio": "assets/audio/palabras/medicina.mp3",
+      "path_imagen": "assets/image/palabras/medicina.webp"
     },
     {
       "espanol": "Inyección",
-      "chol": "Joch'"
+      "chol": "Joch'",
+      "path_audio": "assets/audio/palabras/inyeccion.mp3",
+      "path_imagen": "assets/image/palabras/inyeccion.webp"
     },
     {
       "espanol": "Ropa",
-      "chol": "Pislel"
+      "chol": "Pislel",
+      "path_audio": "assets/audio/palabras/ropa.mp3",
+      "path_imagen": "assets/image/palabras/ropa.webp"
     },
     {
       "espanol": "Playera / Camisa",
-      "chol": "Bujk"
+      "chol": "Bujk",
+      "path_audio": "assets/audio/palabras/camisa.mp3",
+      "path_imagen": "assets/image/palabras/playera.webp"
     },
     {
       "espanol": "Vestido",
-      "chol": "P'o'"
+      "chol": "P'o'",
+      "path_audio": "assets/audio/palabras/vestido.mp3",
+      "path_imagen": "assets/image/palabras/vestido.webp"
     },
     {
       "espanol": "Zapatos",
-      "chol": "Xäñä'"
+      "chol": "Xäñä'",
+      "path_audio": "assets/audio/palabras/zapatos.mp3",
+      "path_imagen": "assets/image/palabras/zapato.webp"
     }
   ],
   "muestras_sintacticas": [
@@ -152,43 +200,55 @@
     },
     {
       "espanol": "Él está cansado",
-      "chol": "Bo'yemix iba li"
+      "chol": "Bo'yemix iba li",
+      "path_imagen": "assets/image/palabras/cansado.webp"
     },
     {
       "espanol": "Ella está feliz",
-      "chol": "Ixi tyijikña iyu'bin"
+      "chol": "Ixi tyijikña iyu'bin",
+      "path_imagen": "assets/image/palabras/feliz.webp"
     },
     {
       "espanol": "El bebé tiene hambre",
-      "chol": "Wi'îña ili aläl"
+      "chol": "Wi'îña ili aläl",
+      "path_imagen": "assets/image/palabras/hambre.webp"
     },
     {
       "espanol": "Mi hermano tiene sed",
-      "chol": "Tyäkin ityi' li kermaňu"
+      "chol": "Tyäkin ityi' li kermaňu",
+      "path_imagen": "assets/image/palabras/sed.webp"
     },
     {
       "espanol": "Mamá está triste",
-      "chol": "Ch'äjyem yu'biň mam"
+      "chol": "Ch'äjyem yu'biň mam",
+      "path_imagen": "assets/image/palabras/triste.webp"
     },
     {
       "espanol": "Octavio tiene fiebre",
-      "chol": "Aj Octavio k'ajk muk'"
+      "chol": "Aj Octavio k'ajk muk'",
+      "path_audio": "assets/audio/palabras/Octavio_fiebre.mp3",
+      "path_imagen": "assets/image/palabras/fiebre.webp"
     },
     {
       "espanol": "Damián tiene diarrea",
-      "chol": "Aj Damián ja'ñäk' tya' muk'"
+      "chol": "Aj Damián ja'ñäk' tya' muk'",
+      "path_audio": "assets/audio/palabras/Damian_diarrea.mp3"
     },
     {
       "espanol": "Rosa tiene gripa",
-      "chol": "Xrosa tya' ni' muk'"
+      "chol": "Xrosa tya' ni' muk'",
+      "path_audio": "assets/audio/palabras/rosa_gripa.mp3",
+      "path_imagen": "assets/image/palabras/gripa.webp"
     },
     {
       "espanol": "Mi abuela preparó un té",
-      "chol": "Jiñi jko' tyi ch'äxä its'ak"
+      "chol": "Jiñi jko' tyi ch'äxä its'ak",
+      "path_imagen": "assets/image/palabras/abuela.webp"
     },
     {
       "espanol": "Mi papá tomó una pastilla",
-      "chol": "Jiñi kpap tyi buk'u"
+      "chol": "Jiñi kpap tyi buk'u",
+      "path_imagen": "assets/image/palabras/papa.webp"
     },
     {
       "espanol": "¿Cómo te sientes?",
@@ -200,23 +260,30 @@
     },
     {
       "espanol": "Me siento mal",
-      "chol": "Mach yom ku'bin"
+      "chol": "Mach yom ku'bin",
+      "path_audio": "assets/audio/palabras/me_siento_mal.mp3"
     },
     {
       "espanol": "¿Qué estás vistiendo?",
-      "chol": "¿chuki yes chonkol a xoje'?"
+      "chol": "¿chuki yes chonkol a xoje'?",
+      "path_imagen": "assets/image/palabras/ropa.webp"
     },
     {
       "espanol": "¿Qué está vistiendo él/ella?",
-      "chol": "¿chuki yes chonkol ixoje' jiñi?"
+      "chol": "¿chuki yes chonkol ixoje' jiñi?",
+      "path_imagen": "assets/image/palabras/ropa.webp"
     },
     {
       "espanol": "Ella viste un vestido amarillo",
-      "chol": "Ixä xojol icha'añ jump'ojch p'o' xk'änk'äñbä"
+      "chol": "Ixä xojol icha'añ jump'ojch p'o' xk'änk'äñbä",
+      "path_audio": "assets/audio/palabras/vestido_amarillo.mp3",
+      "path_imagen": "assets/image/palabras/vestido.webp"
     },
     {
       "espanol": "Mis zapatos son negros",
-      "chol": "I-ik li kxäñä'"
+      "chol": "I-ik li kxäñä'",
+      "path_audio": "assets/audio/palabras/zapatos_negros.mp3",
+      "path_imagen": "assets/image/palabras/zapato.webp"
     }
   ]
 }

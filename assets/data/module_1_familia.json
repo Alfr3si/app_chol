@@ -6,7 +6,8 @@
   "muestras_lexicas": [
     {
       "espanol": "Adiós",
-      "chol": "Kmajle / koñix"
+      "chol": "Kmajle / koñix",
+      "path_audio": "assets/audio/palabras/adios.mp3"
     },
     {
       "espanol": "Bueno (respuesta al adiós)",
@@ -18,19 +19,23 @@
     },
     {
       "espanol": "Ahí vengo",
-      "chol": "Ya' ktyile"
+      "chol": "Ya' ktyile",
+      "path_audio": "assets/audio/palabras/ahi_vengo.mp3"
     },
     {
       "espanol": "Voy llegando",
-      "chol": "Ya' kpase"
+      "chol": "Ya' kpase",
+      "path_audio": "assets/audio/palabras/voy_llegando.mp3"
     },
     {
       "espanol": "Pásale (respuesta al buenas)",
-      "chol": "Tyalety"
+      "chol": "Tyalety",
+      "path_audio": "assets/audio/palabras/pasale.mp3"
     },
     {
       "espanol": "Ven (respuesta al buenas)",
-      "chol": "La'me"
+      "chol": "La'me",
+      "path_audio": "assets/audio/palabras/ven.mp3"
     },
     {
       "espanol": "Adiós (colectivo)",
@@ -38,7 +43,9 @@
     },
     {
       "espanol": "Mañana",
-      "chol": "K'iñ / säk´añ"
+      "chol": "K'iñ / säk´añ",
+      "path_audio": "assets/audio/palabras/manana.mp3",
+      "path_imagen": "assets/image/palabras/manana.webp"
     },
     {
       "espanol": "Medio día",
@@ -46,11 +53,15 @@
     },
     {
       "espanol": "Tarde",
-      "chol": "Och'an k'in / chañe k'in"
+      "chol": "Och'an k'in / chañe k'in",
+      "path_audio": "assets/audio/palabras/tarde.mp3",
+      "path_imagen": "assets/image/palabras/tarde.webp"
     },
     {
       "espanol": "Noche",
-      "chol": "Ik´añ"
+      "chol": "Ik´añ",
+      "path_audio": "assets/audio/palabras/noche.mp3",
+      "path_imagen": "assets/image/palabras/noche.webp"
     },
     {
       "espanol": "Madrugada",
@@ -62,15 +73,21 @@
     },
     {
       "espanol": "Padre / papá",
-      "chol": "Pap / Tyaty"
+      "chol": "Pap / Tyaty",
+      "path_audio": "assets/audio/palabras/papa.mp3",
+      "path_imagen": "assets/image/palabras/papa.webp"
     },
     {
       "espanol": "Madre / mamá",
-      "chol": "Mam / ña'"
+      "chol": "Mam / ña'",
+      "path_audio": "assets/audio/palabras/mama.mp3",
+      "path_imagen": "assets/image/palabras/mama.webp"
     },
     {
       "espanol": "Hermano (mayor)",
-      "chol": "K'ermañu / kuskuñ"
+      "chol": "K'ermañu / kuskuñ",
+      "path_audio": "assets/audio/palabras/hermano.mp3",
+      "path_imagen": "assets/image/palabras/hermano_mayor.webp"
     },
     {
       "espanol": "Hermana",
@@ -78,19 +95,25 @@
     },
     {
       "espanol": "Abuelo",
-      "chol": "Yum"
+      "chol": "Yum",
+      "path_audio": "assets/audio/palabras/abuelo.mp3",
+      "path_imagen": "assets/image/palabras/abuelo.webp"
     },
     {
       "espanol": "Abuela",
-      "chol": "Ko'"
+      "chol": "Ko'",
+      "path_audio": "assets/audio/palabras/abuela.mp3",
+      "path_imagen": "assets/image/palabras/abuela.webp"
     },
     {
       "espanol": "Niño",
-      "chol": "Chuty alo' / chuty wiñik"
+      "chol": "Chuty alo' / chuty wiñik",
+      "path_imagen": "assets/image/palabras/nino.webp"
     },
     {
       "espanol": "Niña",
-      "chol": "Chuty k'alil / chuty ixik"
+      "chol": "Chuty k'alil / chuty ixik",
+      "path_imagen": "assets/image/palabras/nina.webp"
     },
     {
       "espanol": "Hijo",
@@ -102,11 +125,13 @@
     },
     {
       "espanol": "Tío (paterno y materno)",
-      "chol": "Yujmel / kichan"
+      "chol": "Yujmel / kichan",
+      "path_imagen": "assets/image/palabras/tio.webp"
     },
     {
       "espanol": "Tía",
-      "chol": "Na'je"
+      "chol": "Na'je",
+      "path_imagen": "assets/image/palabras/tia.webp"
     },
     {
       "espanol": "Bebé",
@@ -114,43 +139,57 @@
     },
     {
       "espanol": "1",
-      "chol": "Jump'ej"
+      "chol": "Jump'ej",
+      "path_audio": "assets/audio/palabras/uno.mp3"
     },
     {
       "espanol": "2",
-      "chol": "Chap'ej"
+      "chol": "Chap'ej",
+      "path_audio": "assets/audio/palabras/dos.mp3"
     },
     {
       "espanol": "3",
-      "chol": "Uxp'ej"
+      "chol": "Uxp'ej",
+      "path_audio": "assets/audio/palabras/tres.mp3",
+      "path_imagen": "assets/image/palabras/tres.webp"
     },
     {
       "espanol": "4",
-      "chol": "Chämp'ej"
+      "chol": "Chämp'ej",
+      "path_audio": "assets/audio/palabras/cuatro.mp3"
     },
     {
       "espanol": "5",
-      "chol": "Jop'ej"
+      "chol": "Jop'ej",
+      "path_audio": "assets/audio/palabras/cinco.mp3",
+      "path_imagen": "assets/image/palabras/cinco.webp"
     },
     {
       "espanol": "6",
-      "chol": "Wäkp'ej"
+      "chol": "Wäkp'ej",
+      "path_audio": "assets/audio/palabras/seis.mp3"
     },
     {
       "espanol": "7",
-      "chol": "Wukp'ej"
+      "chol": "Wukp'ej",
+      "path_audio": "assets/audio/palabras/siete.mp3",
+      "path_imagen": "assets/image/palabras/siete.webp"
     },
     {
       "espanol": "8",
-      "chol": "Waxäkp'ej"
+      "chol": "Waxäkp'ej",
+      "path_audio": "assets/audio/palabras/ocho.mp3"
     },
     {
       "espanol": "9",
-      "chol": "Bolomp'ej"
+      "chol": "Bolomp'ej",
+      "path_audio": "assets/audio/palabras/nueve.mp3"
     },
     {
       "espanol": "10",
-      "chol": "Lujump éj"
+      "chol": "Lujump éj",
+      "path_audio": "assets/audio/palabras/diez.mp3",
+      "path_imagen": "assets/image/palabras/diez.webp"
     },
     {
       "espanol": "Nombre",
@@ -184,11 +223,15 @@
     },
     {
       "espanol": "Yo soy un niño",
-      "chol": "Joñoň chuty (alo'on) / Joñon chuty (wiñikon)"
+      "chol": "Joñoň chuty (alo'on) / Joñon chuty (wiñikon)",
+      "path_audio": "assets/audio/palabras/yo_soy_un_nino.mp3",
+      "path_imagen": "assets/image/palabras/nino.webp"
     },
     {
       "espanol": "Yo soy una niña",
-      "chol": "Joñoñ xchuty (k´aläloñ) / Joñoñ xchuty (ixikoň)"
+      "chol": "Joñoň xchuty (k´aläloñ) / Joñoň xchuty (ixikoň)",
+      "path_audio": "assets/audio/palabras/yo_soy_una_nina.mp3",
+      "path_imagen": "assets/image/palabras/nina.webp"
     },
     {
       "espanol": "Él es un niño",
@@ -196,11 +239,15 @@
     },
     {
       "espanol": "Él es mi papá",
-      "chol": "Jiñi ili kpap / Jiñi ili ktyaty"
+      "chol": "Jiñi ili kpap / Jiñi ili ktyaty",
+      "path_audio": "assets/audio/palabras/el_es_mi_papa.mp3",
+      "path_imagen": "assets/image/palabras/papa.webp"
     },
     {
       "espanol": "Él es mi abuelo",
-      "chol": "Jini ili kyum"
+      "chol": "Jini ili kyum",
+      "path_audio": "assets/audio/palabras/el_es_mi_abuelo.mp3",
+      "path_imagen": "assets/image/palabras/abuelo.webp"
     },
     {
       "espanol": "Él es mi hermano",
@@ -216,7 +263,9 @@
     },
     {
       "espanol": "Ella es mi mamá",
-      "chol": "Jini ili kmam / Jini ili kña"
+      "chol": "Jini ili kmam / Jini ili kña",
+      "path_audio": "assets/audio/palabras/ella_es_mi_mama.mp3",
+      "path_imagen": "assets/image/palabras/mama.webp"
     },
     {
       "espanol": "Ella es mi abuela",
@@ -260,11 +309,15 @@
     },
     {
       "espanol": "Mi casa es amarilla",
-      "chol": "Jiñi kotyoty xk'änk'än"
+      "chol": "Jiñi kotyoty xk'änk'än",
+      "path_audio": "assets/audio/palabras/mi_casa_es_amarilla.mp3",
+      "path_imagen": "assets/image/palabras/casa_amarilla.webp"
     },
     {
       "espanol": "Mi perro es pequeño",
-      "chol": "Jiñi kts'i' chutyjach"
+      "chol": "Jiñi kts'i' chutyjach",
+      "path_audio": "assets/audio/palabras/mi_perro_es_pequeño.mp3",
+      "path_imagen": "assets/image/palabras/perro.webp"
     },
     {
       "espanol": "Mi mamá es alta",

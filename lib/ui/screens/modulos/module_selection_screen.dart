@@ -1,11 +1,12 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flame/game.dart';
 import 'package:flame_audio/flame_audio.dart';
 
 import '../../game_canvas/menu_game.dart'; // Ajusta la ruta si es necesario
 import '../../../core/audio_manager.dart';
-import './familia/mapa_modulo1.dart';
+import './familia/mapa_modulo1_screen.dart';
+import 'module_carousel.dart';
+import 'module_header.dart';
 
 class ModuleSelectionScreen extends StatefulWidget {
   const ModuleSelectionScreen({super.key});
@@ -18,7 +19,7 @@ class _ModuleSelectionScreenState extends State<ModuleSelectionScreen> {
   // Controlador para el PageView
   late final PageController _pageController;
 
-  // Lista de módulos (Cada uno usa su marco limpio como única imagen de fondo de tarjeta)
+  // Lista de módulos con tu formato original exacto
   final List<Map<String, String>> _modulos = [
     {
       'id': 'modulo_1',
@@ -59,7 +60,7 @@ class _ModuleSelectionScreenState extends State<ModuleSelectionScreen> {
     super.dispose();
   }
 
-Future<void> _seleccionarModulo(String idModulo, String titulo) async {
+  Future<void> _seleccionarModulo(String idModulo, String titulo) async {
     debugPrint('Módulo seleccionado y abierto: $idModulo');
     
     if (idModulo == 'modulo_1') {
@@ -98,174 +99,17 @@ Future<void> _seleccionarModulo(String idModulo, String titulo) async {
               children: [
                 const SizedBox(height: 10),
 
-                // Cabecera con Título y Botón de Regreso a la derecha
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                  child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      // Título principal centrado de forma absoluta
-                      const Text(
-                        'SELECCIONA UN MÓDULO',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                          letterSpacing: 1.5,
-                          shadows: [
-                            Shadow(
-                              offset: Offset(2, 2),
-                              blurRadius: 6,
-                              color: Colors.black87,
-                            ),
-                          ],
-                        ),
-                      ),
-                      
-                      // Botón de Regreso alineado a la derecha
-                      Align(
-                        alignment: Alignment.centerRight,
-                        child: GestureDetector(
-                          onTap: () {
-                            Navigator.pop(context); // Regresa a la pantalla anterior (HomeScreen)
-                          },
-                          child: Container(
-                            width: 80,
-                            height: 80,
-                            decoration: const BoxDecoration(
-                              shape: BoxShape.circle,
-                            ),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(25),
-                              child: Image.asset(
-                                'assets/image/elements/button_x.webp',
-                                fit: BoxFit.cover,
-                                errorBuilder: (context, error, stack) {
-                                  return Container(
-                                    color: Colors.orange,
-                                    child: const Icon(Icons.arrow_back, color: Colors.white),
-                                  );
-                                },
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                // Cabecera modularizada
+                const ModuleHeader(),
 
                 const SizedBox(height: 15),
 
-                // ANIMATED BUILDER: Aísla el movimiento solo para el carrusel
+                // Carrusel modularizado
                 Expanded(
-                  child: AnimatedBuilder(
-                    animation: _pageController,
-                    builder: (context, child) {
-                      double currentPageValue = 0.0;
-                      if (_pageController.hasClients &&
-                          _pageController.position.haveDimensions) {
-                        currentPageValue = _pageController.page ?? 0.0;
-                      }
-
-                      return Column(
-                        children: [
-                          Expanded(
-                            child: Center(
-                              child: SizedBox(
-                                height: 340,
-                                child: PageView.builder(
-                                  controller: _pageController,
-                                  itemCount: _modulos.length,
-                                  itemBuilder: (context, index) {
-                                    // Cálculo de escala para la tarjeta central y laterales
-                                    double scale = max(
-                                      0.85,
-                                      (1.0 -
-                                          (currentPageValue - index).abs() *
-                                              0.25),
-                                    );
-
-                                    // Efecto flotante vertical
-                                    double translateY =
-                                        (currentPageValue - index).abs() * 15.0;
-
-                                    final modulo = _modulos[index];
-                                    final bool isCurrent =
-                                        (index == currentPageValue.round());
-
-                                    return Center(
-                                      child: Transform.translate(
-                                        offset: Offset(0, translateY),
-                                        child: Transform.scale(
-                                          scale: scale,
-                                          child: GestureDetector(
-                                            onTap: () {
-                                              if (!isCurrent) {
-                                                _pageController.animateToPage(
-                                                  index,
-                                                  duration: const Duration(
-                                                    milliseconds: 300,
-                                                  ),
-                                                  curve: Curves.easeInOut,
-                                                );
-                                              } else {
-                                                _seleccionarModulo(
-                                                  modulo['id']!,
-                                                  modulo['titulo']!,
-                                                );
-                                              }
-                                            },
-                                            child: Container(
-                                              width: 446,
-                                              height: 252,
-                                              decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.circular(20),
-                                                // Única imagen de fondo para la tarjeta del módulo
-                                                image: DecorationImage(
-                                                  image: AssetImage(modulo['tarjeta']!),
-                                                  fit: BoxFit.fill,
-                                                ),
-                                              ),
-                                              // Aquí puedes poner opcionalmente un texto o icono centrado si lo requieres dentro de la tarjeta
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                ),
-                              ),
-                            ),
-                          ),
-
-                          // Indicador visual de puntos dinámico
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: List.generate(
-                              _modulos.length,
-                              (index) => Container(
-                                margin: const EdgeInsets.symmetric(
-                                  horizontal: 4,
-                                  vertical: 15,
-                                ),
-                                width: (currentPageValue.round() == index)
-                                    ? 14
-                                    : 8,
-                                height: 8,
-                                decoration: BoxDecoration(
-                                  color: (currentPageValue.round() == index)
-                                      ? Colors.orange
-                                      : Colors.white54,
-                                  borderRadius: BorderRadius.circular(4),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      );
-                    },
+                  child: ModuleCarousel(
+                    pageController: _pageController,
+                    modulos: _modulos,
+                    onModuloSelected: _seleccionarModulo,
                   ),
                 ),
               ],
