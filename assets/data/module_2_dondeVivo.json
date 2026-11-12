@@ -7,195 +7,228 @@
   "elicitador": "Amelia Escobar Potenciano",
   "muestras_lexicas": [
     {
+      "categoria": "pronombres",
       "espanol": "Yo",
       "chol": "Joñoñ"
     },
     {
+      "categoria": "pronombres",
       "espanol": "Tu",
       "chol": "Jatyety"
     },
     {
+      "categoria": "pronombres",
       "espanol": "Él",
       "chol": "Jiñi"
     },
     {
+      "categoria": "pronombres",
       "espanol": "Ella",
       "chol": "Ixä"
     },
     {
+      "categoria": "pronombres",
       "espanol": "Nosotros",
       "chol": "Joñoñla (incluyente) / Joñoñloň (no incluyente)"
     },
     {
+      "categoria": "pronombres",
       "espanol": "Ustedes",
       "chol": "Jatyetyla"
     },
     {
+      "categoria": "pronombres",
       "espanol": "Ellos",
       "chol": "Jiño"
     },
     {
+      "categoria": "casa",
       "espanol": "Casa",
       "chol": "Otyoty",
       "path_audio": "assets/audio/palabras/Casa.mp3",
       "path_imagen": "assets/image/palabras/casa.webp"
     },
     {
+      "categoria": "casa",
       "espanol": "Sala",
       "chol": "Mal",
       "path_audio": "assets/audio/palabras/Sala.mp3",
       "path_imagen": "assets/image/palabras/sala.webp"
     },
     {
+      "categoria": "casa",
       "espanol": "Cocina",
       "chol": "No tiene traducción"
     },
     {
+      "categoria": "casa",
       "espanol": "Cuarto",
       "chol": "Wätyi bäl"
     },
     {
+      "categoria": "casa",
       "espanol": "Patio",
       "chol": "Paty otyoty",
       "path_audio": "assets/audio/palabras/Patio.mp3",
       "path_imagen": "assets/image/palabras/patio.webp"
     },
     {
+      "categoria": "adjetivos",
       "espanol": "Alto",
       "chol": "Chan",
       "path_audio": "assets/audio/palabras/Alto.mp3"
     },
     {
+      "categoria": "adjetivos",
       "espanol": "Chaparro",
       "chol": "Pek",
       "path_audio": "assets/audio/palabras/Chaparro.mp3"
     },
     {
+      "categoria": "adjetivos",
       "espanol": "Flaco",
       "chol": "Tyäkin",
       "path_audio": "assets/audio/palabras/Flaco.mp3"
     },
     {
+      "categoria": "adjetivos",
       "espanol": "Gordo",
       "chol": "Jujp'eñ",
       "path_audio": "assets/audio/palabras/Gordo.mp3"
     },
     {
+      "categoria": "adjetivos",
       "espanol": "Pequeño",
       "chol": "Chuty"
     },
     {
+      "categoria": "adjetivos",
       "espanol": "Grande",
       "chol": "Kolem",
       "path_audio": "assets/audio/palabras/Grande.mp3"
     },
     {
+      "categoria": "adjetivos",
       "espanol": "Corto",
       "chol": "Kom"
     },
     {
+      "categoria": "adjetivos",
       "espanol": "Largo",
       "chol": "Tyam / päl"
     },
     {
-      "espanol": "Escuela",
-      "chol": "Yotyle ak'ejuño",
-      "path_audio": "assets/audio/palabras/escuela.mp3",
-      "path_imagen": "assets/image/palabras/escuela.webp"
-    },
-    {
+      "categoria": "entorno",
       "espanol": "Iglesia",
       "chol": "Klesia"
     },
     {
+      "categoria": "entorno",
       "espanol": "Río",
       "chol": "Kolem ja'",
       "path_audio": "assets/audio/palabras/Rio.mp3",
       "path_imagen": "assets/image/palabras/rio.webp"
     },
     {
+      "categoria": "entorno",
       "espanol": "Cerros",
       "chol": "Wits",
       "path_audio": "assets/audio/palabras/Cerro.mp3",
       "path_imagen": "assets/image/palabras/gcerro.webp"
     },
     {
+      "categoria": "entorno",
       "espanol": "Cuevas",
       "chol": "Ch'en",
       "path_audio": "assets/audio/palabras/Cueva.mp3",
       "path_imagen": "assets/image/palabras/gcueva.webp"
     },
     {
+      "categoria": "entorno",
       "espanol": "Arroyo",
       "chol": "Pa'",
       "path_audio": "assets/audio/palabras/Arroyo.mp3",
       "path_imagen": "assets/image/palabras/grio.webp"
     },
     {
+      "categoria": "animales",
       "espanol": "Perro",
       "chol": "Ts'i'",
       "path_imagen": "assets/image/palabras/perro.webp"
     },
     {
+      "categoria": "animales",
       "espanol": "Pollito",
       "chol": "Yal Muty"
     },
     {
+      "categoria": "animales",
       "espanol": "Gallina",
       "chol": "Na' muty",
       "path_audio": "assets/audio/palabras/Gallina.mp3",
       "path_imagen": "assets/image/palabras/gallina.webp"
     },
     {
+      "categoria": "animales",
       "espanol": "Gallo",
       "chol": "Tyaty muty",
       "path_imagen": "assets/image/palabras/gallo.webp"
     },
     {
+      "categoria": "animales",
       "espanol": "Pavo",
       "chol": "Ajtso'",
       "path_audio": "assets/audio/palabras/pavo.mp3"
     },
     {
+      "categoria": "animales",
       "espanol": "Pava",
       "chol": "Ña' ak'ach"
     },
     {
+      "categoria": "animales",
       "espanol": "Vaca",
       "chol": "Wakax",
       "path_imagen": "assets/image/palabras/vaca.webp"
     },
     {
+      "categoria": "animales",
       "espanol": "Caballo",
       "chol": "Kawayu'",
       "path_imagen": "assets/image/palabras/caballo.webp"
     },
     {
+      "categoria": "animales",
       "espanol": "Pato",
       "chol": "Pech",
       "path_audio": "assets/audio/palabras/pato.mp3",
       "path_imagen": "assets/image/palabras/pato.webp"
     },
     {
+      "categoria": "animales",
       "espanol": "Pez",
       "chol": "Chäy",
       "path_imagen": "assets/image/palabras/pez.webp"
     },
     {
+      "categoria": "animales",
       "espanol": "Mariposa",
       "chol": "Pejpem"
     },
     {
+      "categoria": "mitologia",
       "espanol": "Dueño del cerro",
       "chol": "Yum wits",
       "path_audio": "assets/audio/palabras/dueno_cerro.mp3"
     },
     {
+      "categoria": "mitologia",
       "espanol": "Dueño de la cueva",
       "chol": "Yum ch'en",
       "path_audio": "assets/audio/palabras/dueno_cueva.mp3"
     },
     {
+      "categoria": "mitologia",
       "espanol": "Dueño del río",
       "chol": "Yum ja'",
       "path_audio": "assets/audio/palabras/dueno_rio.mp3"
@@ -203,94 +236,114 @@
   ],
   "muestras_sintacticas": [
     {
+      "categoria": "animales",
       "espanol": "Este es mi perro",
       "chol": "Kcha'an ili ts'i'",
       "path_imagen": "assets/image/palabras/perro.webp"
     },
     {
+      "categoria": "familia",
       "espanol": "Estos son mis hermanos",
       "chol": "Jiño ili jkermaňujo'",
       "path_imagen": "assets/image/palabras/hermano.webp"
     },
     {
+      "categoria": "frutas",
       "espanol": "Estas naranjas son mías",
       "chol": "Kcha'an ili alaxax"
     },
     {
+      "categoria": "oficios",
       "espanol": "Nosotros somos campesinos",
       "chol": "Joñoñloň aj cholejoñloň",
       "path_imagen": "assets/image/palabras/campesino.webp"
     },
     {
+      "categoria": "casa",
       "espanol": "Mi casa es pequeña",
       "chol": "Jiñi li kotyoty chuty",
       "path_imagen": "assets/image/palabras/casa.webp"
     },
     {
+      "categoria": "casa",
       "espanol": "Mi casa no es grande",
       "chol": "Jiñi li kotyoty kolem",
       "path_imagen": "assets/image/palabras/casa.webp"
     },
     {
+      "categoria": "familia",
       "espanol": "Mi papá es alto",
       "chol": "Jiñi li ktyaty chan",
       "path_imagen": "assets/image/palabras/papa.webp"
     },
     {
+      "categoria": "escuela",
       "espanol": "Hay cuatro escuelas en Guayal",
       "chol": "Añ tyämp'ej ityoty ajk'ejuño' tyi Guayal",
       "path_imagen": "assets/image/palabras/escuela.webp"
     },
     {
+      "categoria": "preguntas",
       "espanol": "¿Qué es esto?",
       "chol": "¿chuki yes ili?"
     },
     {
+      "categoria": "preguntas",
       "espanol": "¿Es este un río?",
       "chol": "¿kolem ja' ili?",
       "path_imagen": "assets/image/palabras/rio.webp"
     },
     {
+      "categoria": "preguntas",
       "espanol": "¿Es esta una iglesia?",
       "chol": "¿klesia ili?"
     },
     {
+      "categoria": "preguntas",
       "espanol": "¿Es este tu padre?",
       "chol": "A tyaty ili",
       "path_imagen": "assets/image/palabras/papa.webp"
     },
     {
+      "categoria": "preguntas",
       "espanol": "¿Este es tu pollo?",
       "chol": "¿A muty ili?"
     },
     {
+      "categoria": "preguntas",
       "espanol": "¿Son estos tus hijos?",
       "chol": "¿Awalo bilo ili?"
     },
     {
+      "categoria": "preguntas",
       "espanol": "¿Estas gallinas son tuyas?",
       "chol": "¿Aña'mutyo' ili?",
       "path_imagen": "assets/image/palabras/gallina.webp"
     },
     {
+      "categoria": "negaciones",
       "espanol": "Esta no es una iglesia",
       "chol": "Mach klesiajik ili"
     },
     {
+      "categoria": "negaciones",
       "espanol": "Esta pelota no es mía",
       "chol": "Mach kpelotajik ili"
     },
     {
+      "categoria": "negaciones",
       "espanol": "Este no es mi tío",
       "chol": "Mach kyujmelik ili",
       "path_imagen": "assets/image/palabras/tio.webp"
     },
     {
+      "categoria": "negaciones",
       "espanol": "Estos no son mis abuelos",
       "chol": "Mach kyumo' ibanli",
       "path_imagen": "assets/image/palabras/abuelo.webp"
     },
     {
+      "categoria": "negaciones",
       "espanol": "Estas vacas no son tuyas",
       "chol": "Mach kwakaxoik ili",
       "path_imagen": "assets/image/palabras/vaca.webp"

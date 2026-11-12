@@ -1,3 +1,4 @@
+// lib/modules/modulo1/actividades/actividad_saludos_screen.dart
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart'; // Necesario para rootBundle
@@ -21,31 +22,26 @@ class _ActividadSaludosScreenState extends State<ActividadSaludosScreen> {
     _cargarDatosDesdeJson();
   }
 
-  Future<void> _cargarDatosDesdeJson() async {
+Future<void> _cargarDatosDesdeJson() async {
     try {
-      // 1. Cargas el archivo JSON desde tus assets (ajusta la ruta según tengas tu archivo)
       final String jsonString = await rootBundle.loadString('assets/data/module_1_familia.json');
       final Map<String, dynamic> jsonData = json.decode(jsonString);
 
-      // 2. Extraes únicamente la sección de muestras léxicas o filtras los saludos
       final List<dynamic> muestras = jsonData['muestras_lexicas'] ?? [];
 
-      // 3. Convertimos los primeros elementos correspondientes a saludos en ItemVocabulario
-      // (Puedes filtrar por índices o por categoría según estructures tu JSON)
       setState(() {
-        _listaSaludos = muestras.take(8).map((item) {
-          return ItemVocabulario(
-            espanol: item['espanol'] ?? '',
-            chol: item['chol'] ?? '',
-          );
-        }).toList();
+        _listaSaludos = muestras
+            .map((item) => ItemVocabulario.fromJson(item))
+            // 🔍 FILTRO: Solo dejamos los que tienen audio obligatorio
+            .where((item) => item.pathAudio != null && item.pathAudio!.isNotEmpty)
+            .take(8)
+            .toList();
+        
         _isLoading = false;
       });
     } catch (e) {
       debugPrint('Error al cargar el JSON de saludos: $e');
-      setState(() {
-        _isLoading = false;
-      });
+      setState(() => _isLoading = false);
     }
   }
 

@@ -1,5 +1,7 @@
+// lib/modules/modulo1/components/actividad_generica_screen.dart
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:flame_audio/flame_audio.dart'; // 🔊 Para reproducir los audios
 import '../../../../domain/models/item_vocabulario.dart';
 
 class ActividadGenericaScreen extends StatefulWidget {
@@ -38,9 +40,11 @@ class _ActividadGenericaScreenState extends State<ActividadGenericaScreen>
   @override
   void initState() {
     super.initState();
-    _activeQueue = List.from(widget.listaItems)..shuffle();
+    // 🔍 Filtramos para trabajar ÚNICAMENTE con los elementos que tienen audio válido
+    _activeQueue = List.from(
+      widget.listaItems.where((item) => item.pathAudio != null && item.pathAudio!.isNotEmpty),
+    )..shuffle();
 
-    // Inicializamos el controlador de animaciones (duración de 300 milisegundos)
     _animationController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 300),
@@ -62,6 +66,17 @@ class _ActividadGenericaScreenState extends State<ActividadGenericaScreen>
   void dispose() {
     _animationController.dispose();
     super.dispose();
+  }
+
+  Future<void> _reproducirAudio(String? path) async {
+    if (path == null || path.isEmpty) return;
+    try {
+      // Limpiamos la ruta para que FlameAudio busque dentro de assets/audio/
+      String assetName = path.replaceAll('assets/audio/palabras/', '');
+      await FlameAudio.play('palabras/$assetName');
+    } catch (e) {
+      debugPrint('Error al reproducir audio: $e');
+    }
   }
 
   void _prepararPregunta() {
@@ -86,7 +101,11 @@ class _ActividadGenericaScreenState extends State<ActividadGenericaScreen>
     _selectedAnswer = null;
     _isAnswerCorrect = null;
 
-    // Disparamos la animación cada vez que cambia la pregunta
+    // Reproducimos el audio automáticamente al cargar la pregunta
+    if (current.pathAudio != null) {
+      _reproducirAudio(current.pathAudio);
+    }
+
     _animationController.forward(from: 0.0);
   }
 
@@ -206,7 +225,6 @@ class _ActividadGenericaScreenState extends State<ActividadGenericaScreen>
         child: SafeArea(
           child: Stack(
             children: [
-              // Contenido principal animado con Fade y Scale
               Center(
                 child: FadeTransition(
                   opacity: _fadeAnimation,
@@ -218,7 +236,7 @@ class _ActividadGenericaScreenState extends State<ActividadGenericaScreen>
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
-                          // Indicador superior mini
+                          // Indicador superior
                           Center(
                             child: Container(
                               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
@@ -227,7 +245,7 @@ class _ActividadGenericaScreenState extends State<ActividadGenericaScreen>
                                 borderRadius: BorderRadius.circular(6),
                               ),
                               child: Text(
-                                _isReviewRound ? '🔄 Ronda de repaso de errores' : '💬 Elige la traducción correcta:',
+                                _isReviewRound ? '🔄 Ronda de repaso de errores' : '🔊 Escucha el audio y elige:',
                                 style: TextStyle(
                                   fontSize: 11,
                                   fontWeight: FontWeight.bold,
@@ -236,27 +254,45 @@ class _ActividadGenericaScreenState extends State<ActividadGenericaScreen>
                               ),
                             ),
                           ),
-                          const SizedBox(height: 8),
+                          const SizedBox(height: 16),
 
-                          // Tarjeta superior (Pregunta)
+                          // 🔊 Botón grande de Audio central estilo Duolingo
+                          if (current.pathAudio != null && current.pathAudio!.isNotEmpty) ...[
+                            Center(
+                              child: InkWell(
+                                onTap: () => _reproducirAudio(current.pathAudio),
+                                child: Container(
+                                  padding: const EdgeInsets.all(16),
+                                  decoration: BoxDecoration(
+                                    color: Colors.orange.shade700,
+                                    shape: BoxShape.circle,
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black.withOpacity(0.4),
+                                        blurRadius: 8,
+                                        offset: const Offset(0, 4),
+                                      ),
+                                    ],
+                                  ),
+                                  child: const Icon(Icons.volume_up, color: Colors.white, size: 48),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 16),
+                          ],
+
+                          // Tarjeta de apoyo en Español
                           Container(
                             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
                             decoration: BoxDecoration(
                               color: Colors.grey.shade900.withOpacity(0.85),
                               borderRadius: BorderRadius.circular(20),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black.withOpacity(0.3),
-                                  blurRadius: 4,
-                                  offset: const Offset(0, 2),
-                                ),
-                              ],
                               border: Border.all(color: Colors.orangeAccent, width: 1.5),
                             ),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                const Icon(Icons.school_outlined, color: Colors.orangeAccent, size: 18),
+                                const Icon(Icons.translate, color: Colors.orangeAccent, size: 18),
                                 const SizedBox(width: 6),
                                 Flexible(
                                   child: Text(
@@ -272,9 +308,9 @@ class _ActividadGenericaScreenState extends State<ActividadGenericaScreen>
                               ],
                             ),
                           ),
-                          const SizedBox(height: 10),
+                          const SizedBox(height: 16),
 
-                          // Cuadrícula 2x2 de respuestas
+                          // Cuadrícula 2x2 de respuestas (Ch'ol)
                           GridView.builder(
                             shrinkWrap: true,
                             physics: const NeverScrollableScrollPhysics(),
@@ -296,11 +332,9 @@ class _ActividadGenericaScreenState extends State<ActividadGenericaScreen>
                                 if (opcion == current.chol) {
                                   colorFondo = Colors.green.shade900.withOpacity(0.95);
                                   colorBorde = Colors.greenAccent;
-                                  colorTexto = Colors.white;
                                 } else if (opcion == _selectedAnswer) {
                                   colorFondo = Colors.red.shade900.withOpacity(0.95);
                                   colorBorde = Colors.redAccent;
-                                  colorTexto = Colors.white;
                                 }
                               }
 
@@ -342,17 +376,14 @@ class _ActividadGenericaScreenState extends State<ActividadGenericaScreen>
                 ),
               ),
 
-              // 🎯 CUADRO FLOTANTE CENTRADO CON ANIMACIÓN DE APARICIÓN
+              // 🎯 CUADRO FLOTANTE DE RESULTADO
               if (_selectedAnswer != null)
                 TweenAnimationBuilder<double>(
                   tween: Tween<double>(begin: 0.0, end: 1.0),
                   duration: const Duration(milliseconds: 250),
                   curve: Curves.elasticOut,
                   builder: (context, value, child) {
-                    return Transform.scale(
-                      scale: value,
-                      child: child,
-                    );
+                    return Transform.scale(scale: value, child: child);
                   },
                   child: Container(
                     color: Colors.black.withOpacity(0.4),
@@ -369,13 +400,6 @@ class _ActividadGenericaScreenState extends State<ActividadGenericaScreen>
                             color: _isAnswerCorrect == true ? Colors.greenAccent : Colors.redAccent,
                             width: 2,
                           ),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.5),
-                              blurRadius: 10,
-                              offset: const Offset(0, 5),
-                            ),
-                          ],
                         ),
                         child: Column(
                           mainAxisSize: MainAxisSize.min,

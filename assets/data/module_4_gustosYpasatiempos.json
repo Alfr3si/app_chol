@@ -4,334 +4,406 @@
   "region": "Tacotalpa, Tabasco",
   "muestras_lexicas": [
     {
+      "categoria": "frutas",
       "espanol": "Fruta",
       "chol": "Wuty tye'"
     },
     {
+      "categoria": "frutas",
       "espanol": "Naranja",
       "chol": "Alaxax"
     },
     {
+      "categoria": "frutas",
       "espanol": "Limón",
       "chol": "Ilmoñix",
       "path_imagen": "assets/image/palabras/limon.webp"
     },
     {
+      "categoria": "frutas",
       "espanol": "Pitaya",
       "chol": "Nijin"
     },
     {
+      "categoria": "frutas",
       "espanol": "Mango",
       "chol": "Manko",
       "path_audio": "assets/audio/palabras/mango.mp3",
       "path_imagen": "assets/image/palabras/mango.webp"
     },
     {
+      "categoria": "frutas",
       "espanol": "Nance",
       "chol": "Chi'",
       "path_imagen": "assets/image/palabras/nance.webp"
     },
     {
+      "categoria": "frutas",
       "espanol": "Plátano",
       "chol": "Ja'as"
     },
     {
+      "categoria": "frutas",
       "espanol": "Zapote",
       "chol": "Wayja'as"
     },
     {
+      "categoria": "frutas",
       "espanol": "Guaya",
       "chol": "Mojtyoy"
     },
     {
+      "categoria": "frutas",
       "espanol": "Guayaba",
       "chol": "Pätya",
       "path_imagen": "assets/image/palabras/guayaba.webp"
     },
     {
+      "categoria": "frutas",
       "espanol": "Ciruela",
       "chol": "Po'om"
     },
     {
+      "categoria": "frutas",
       "espanol": "Chelele",
       "chol": "Bits'"
     },
     {
+      "categoria": "alimentos",
       "espanol": "Caña",
       "chol": "Sik'ä'"
     },
     {
+      "categoria": "alimentos",
       "espanol": "Yuca",
       "chol": "Ts'ijň"
     },
     {
+      "categoria": "alimentos",
       "espanol": "Camote",
       "chol": "Ajkum"
     },
     {
+      "categoria": "alimentos",
       "espanol": "Yerbamora",
       "chol": "Ch'ajuk'"
     },
     {
+      "categoria": "alimentos",
       "espanol": "Quelite",
       "chol": "K'äñ-ej"
     },
     {
+      "categoria": "alimentos",
       "espanol": "Chaya",
       "chol": "Ek'"
     },
     {
+      "categoria": "alimentos",
       "espanol": "Chapaya",
       "chol": "Ch'ib"
     },
     {
+      "categoria": "alimentos",
       "espanol": "Chayote",
       "chol": "Ch'ijch'um"
     },
     {
+      "categoria": "alimentos",
       "espanol": "Calabaza",
       "chol": "Ch'ujm"
     },
     {
+      "categoria": "alimentos",
       "espanol": "Macal",
       "chol": "Juk'"
     },
     {
+      "categoria": "alimentos",
       "espanol": "Comida",
       "chol": "Bäñik'"
     },
     {
+      "categoria": "alimentos",
       "espanol": "Frijol",
       "chol": "Bu'ul",
       "path_imagen": "assets/image/palabras/frijol.webp"
     },
     {
+      "categoria": "alimentos",
       "espanol": "Tortilla",
       "chol": "Waj",
       "path_imagen": "assets/image/palabras/tortilla.webp"
     },
     {
+      "categoria": "alimentos",
       "espanol": "Huevo",
       "chol": "Tyumuty",
       "path_imagen": "assets/image/palabras/huevo.webp"
     },
     {
+      "categoria": "alimentos",
       "espanol": "Pozol",
       "chol": "Sa'",
       "path_imagen": "assets/image/palabras/pozol.webp"
     },
     {
+      "categoria": "alimentos",
       "espanol": "Pozol con cacao",
       "chol": "Xä'bä",
       "path_imagen": "assets/image/palabras/pozolcc.webp"
     },
     {
+      "categoria": "alimentos",
       "espanol": "Café",
       "chol": "Kajpe",
       "path_imagen": "assets/image/palabras/cafe.webp"
     },
     {
+      "categoria": "alimentos",
       "espanol": "Atol",
       "chol": "Ul",
       "path_audio": "assets/audio/palabras/atol.mp3",
       "path_imagen": "assets/image/palabras/atol.webp"
     },
     {
+      "categoria": "pasatiempos",
       "espanol": "Jugar",
       "chol": "Nak",
       "path_audio": "assets/audio/palabras/jugar.mp3",
       "path_imagen": "assets/image/palabras/jugar.webp"
     },
     {
+      "categoria": "pasatiempos",
       "espanol": "Caminar",
       "chol": "Xämbal",
       "path_audio": "assets/audio/palabras/caminar.mp3",
       "path_imagen": "assets/image/palabras/caminar.webp"
     },
     {
+      "categoria": "pasatiempos",
       "espanol": "Correr",
       "chol": "Ajñe",
       "path_audio": "assets/audio/palabras/correr.mp3",
       "path_imagen": "assets/image/palabras/correr.webp"
     },
     {
+      "categoria": "pasatiempos",
       "espanol": "Nadar",
       "chol": "Nuxejel",
       "path_audio": "assets/audio/palabras/nadar.mp3",
       "path_imagen": "assets/image/palabras/nadar.webp"
     },
     {
+      "categoria": "pasatiempos",
       "espanol": "Visitar",
       "chol": "Jula' al",
       "path_audio": "assets/audio/palabras/visitar.mp3",
       "path_imagen": "assets/image/palabras/visitar.webp"
     },
     {
+      "categoria": "pasatiempos",
       "espanol": "Trepar",
       "chol": "Letsel",
       "path_audio": "assets/audio/palabras/trepar.mp3",
       "path_imagen": "assets/image/palabras/trepar.webp"
     },
     {
+      "categoria": "geometria",
       "espanol": "Círculo",
       "chol": "Selekña",
       "path_imagen": "assets/image/palabras/circulo.webp"
     },
     {
+      "categoria": "geometria",
       "espanol": "Cuadrado",
       "chol": "Lakal",
       "path_imagen": "assets/image/palabras/cuadrado.webp"
     },
     {
+      "categoria": "geometria",
       "espanol": "Triángulo",
       "chol": "Ts'ujki'bal"
     },
     {
+      "categoria": "numeros",
       "espanol": "6",
       "chol": "Wäkp'ej",
       "path_audio": "assets/audio/palabras/seis.mp3"
     },
     {
+      "categoria": "numeros",
       "espanol": "7",
       "chol": "Wukp'ej",
       "path_audio": "assets/audio/palabras/siete.mp3",
       "path_imagen": "assets/image/palabras/siete.webp"
     },
     {
+      "categoria": "numeros",
       "espanol": "8",
       "chol": "Waxäkp'ej",
       "path_audio": "assets/audio/palabras/ocho.mp3"
     },
     {
+      "categoria": "numeros",
       "espanol": "9",
       "chol": "Bolomp'ej",
       "path_audio": "assets/audio/palabras/nueve.mp3"
     },
     {
+      "categoria": "numeros",
       "espanol": "10",
       "chol": "Lujump'ej",
       "path_audio": "assets/audio/palabras/diez.mp3",
       "path_imagen": "assets/image/palabras/diez.webp"
     },
     {
+      "categoria": "numeros",
       "espanol": "11",
       "chol": "Junlujump'ej"
     },
     {
+      "categoria": "numeros",
       "espanol": "12",
       "chol": "Cha'lujump'ej",
       "path_imagen": "assets/image/palabras/doce.webp"
     },
     {
+      "categoria": "numeros",
       "espanol": "13",
       "chol": "Uxlujump'ej"
     },
     {
+      "categoria": "numeros",
       "espanol": "14",
       "chol": "Chänlujump'ej"
     },
     {
+      "categoria": "numeros",
       "espanol": "15",
       "chol": "Jo'lujump'ej"
     },
     {
+      "categoria": "numeros",
       "espanol": "16",
       "chol": "wäklujump'ej"
     },
     {
+      "categoria": "numeros",
       "espanol": "17",
       "chol": "wuklujump'ej"
     },
     {
+      "categoria": "numeros",
       "espanol": "18",
       "chol": "waxäklujump'ej"
     },
     {
+      "categoria": "numeros",
       "espanol": "19",
       "chol": "Bolomlujump'ej"
     },
     {
+      "categoria": "numeros",
       "espanol": "20",
       "chol": "Junk'al",
       "path_imagen": "assets/image/palabras/veinte.webp"
     },
     {
+      "categoria": "tiempo",
       "espanol": "Días",
       "chol": "K'in"
     },
     {
+      "categoria": "acciones",
       "espanol": "Escribir",
       "chol": "Ts'ijb"
     },
     {
+      "categoria": "acciones",
       "espanol": "Oír",
       "chol": "Näch'tyan"
     },
     {
+      "categoria": "acciones",
       "espanol": "Ver",
       "chol": "K'el"
     },
     {
+      "categoria": "acciones",
       "espanol": "Hablar",
       "chol": "Ty'aň"
     }
   ],
   "muestras_sintacticas": [
     {
+      "categoria": "alimentos",
       "espanol": "Me gusta el pozol",
       "chol": "Kmulañ li sa'",
       "path_imagen": "assets/image/palabras/pozol.webp"
     },
     {
+      "categoria": "alimentos",
       "espanol": "Me encanta la yuca",
       "chol": "Kmulaň li ts'ijň"
     },
     {
+      "categoria": "alimentos",
       "espanol": "No me gusta el chayote",
       "chol": "Ma'aîñ kmulañ li ch'ijch'um"
     },
     {
+      "categoria": "alimentos",
       "espanol": "¿Te gusta el mole?",
       "chol": "¿a mulaň li mole?"
     },
     {
+      "categoria": "alimentos",
       "espanol": "¿Cuál es tu comida favorita?",
       "chol": "¿ba'kibä bäñäk' a weñ mulaň?"
     },
     {
+      "categoria": "geometria",
       "espanol": "¿Cuántos círculos hay?",
       "chol": "¿jayp'eki selekňabä añ?",
       "path_imagen": "assets/image/palabras/circulo.webp"
     },
     {
+      "categoria": "geometria",
       "espanol": "Hay seis círculos",
       "chol": "Añ wäkp'ej selekñabä",
       "path_imagen": "assets/image/palabras/circulo.webp"
     },
     {
+      "categoria": "frutas",
       "espanol": "Hay once naranjas",
       "chol": "Añ junlujump'ej alaxax"
     },
     {
+      "categoria": "tiempo",
       "espanol": "¿Qué día es hoy?",
       "chol": "¿chuki tyi k'in wäleli?"
     },
     {
+      "categoria": "tiempo",
       "espanol": "Hoy es 20 de noviembre",
       "chol": "Junk'al k'in wäleli",
       "path_imagen": "assets/image/palabras/veinte.webp"
     },
     {
+      "categoria": "pasatiempos",
       "espanol": "Yo camino a la milpa",
       "chol": "Joñoň muk'oň tyi xämbal tyi cholel",
       "path_imagen": "assets/image/palabras/caminar.webp"
     },
     {
+      "categoria": "pasatiempos",
       "espanol": "Los niños nadan en el río",
       "chol": "Jiñi alp'eñalo' muk'o' tyi ñuxejel tyi kolem ja'",
       "path_imagen": "assets/image/palabras/nadar.webp"
     },
     {
+      "categoria": "pasatiempos",
       "espanol": "Mis hermanos corren por el campo",
       "chol": "Jiñi kermaňujo' muk'o' tyi ajñel tyi jami",
       "path_imagen": "assets/image/palabras/correr.webp"

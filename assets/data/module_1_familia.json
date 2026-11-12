@@ -5,333 +5,338 @@
   "elicitador": "Amelia Escobar Potenciano",
   "muestras_lexicas": [
     {
+      "categoria": "saludos",
       "espanol": "Adiós",
       "chol": "Kmajle / koñix",
       "path_audio": "assets/audio/palabras/adios.mp3"
     },
     {
+      "categoria": "saludos",
       "espanol": "Bueno (respuesta al adiós)",
       "chol": "Yom / yomäch"
     },
     {
+      "categoria": "saludos",
       "espanol": "Buenas (cuando llegas a un lugar)",
       "chol": "Paseli"
     },
     {
+      "categoria": "saludos",
       "espanol": "Ahí vengo",
       "chol": "Ya' ktyile",
       "path_audio": "assets/audio/palabras/ahi_vengo.mp3"
     },
     {
+      "categoria": "saludos",
       "espanol": "Voy llegando",
       "chol": "Ya' kpase",
       "path_audio": "assets/audio/palabras/voy_llegando.mp3"
     },
     {
+      "categoria": "saludos",
       "espanol": "Pásale (respuesta al buenas)",
       "chol": "Tyalety",
       "path_audio": "assets/audio/palabras/pasale.mp3"
     },
     {
+      "categoria": "saludos",
       "espanol": "Ven (respuesta al buenas)",
       "chol": "La'me",
       "path_audio": "assets/audio/palabras/ven.mp3"
     },
     {
+      "categoria": "saludos",
       "espanol": "Adiós (colectivo)",
       "chol": "(mux) Kmajle / koñix / Lu' kmajle / lu' koñix"
     },
     {
+      "categoria": "tiempo",
       "espanol": "Mañana",
       "chol": "K'iñ / säk´añ",
       "path_audio": "assets/audio/palabras/manana.mp3",
       "path_imagen": "assets/image/palabras/manana.webp"
     },
     {
+      "categoria": "tiempo",
       "espanol": "Medio día",
       "chol": "Xink'ini"
     },
     {
+      "categoria": "tiempo",
       "espanol": "Tarde",
       "chol": "Och'an k'in / chañe k'in",
       "path_audio": "assets/audio/palabras/tarde.mp3",
       "path_imagen": "assets/image/palabras/tarde.webp"
     },
     {
+      "categoria": "tiempo",
       "espanol": "Noche",
       "chol": "Ik´añ",
       "path_audio": "assets/audio/palabras/noche.mp3",
       "path_imagen": "assets/image/palabras/noche.webp"
     },
     {
+      "categoria": "tiempo",
       "espanol": "Madrugada",
       "chol": "A'bile"
     },
     {
+      "categoria": "familia",
       "espanol": "Familia (parientes)",
       "chol": "Majchilo'"
     },
     {
+      "categoria": "familia",
       "espanol": "Padre / papá",
       "chol": "Pap / Tyaty",
       "path_audio": "assets/audio/palabras/papa.mp3",
       "path_imagen": "assets/image/palabras/papa.webp"
     },
     {
+      "categoria": "familia",
       "espanol": "Madre / mamá",
       "chol": "Mam / ña'",
       "path_audio": "assets/audio/palabras/mama.mp3",
       "path_imagen": "assets/image/palabras/mama.webp"
     },
     {
+      "categoria": "familia",
       "espanol": "Hermano (mayor)",
       "chol": "K'ermañu / kuskuñ",
       "path_audio": "assets/audio/palabras/hermano.mp3",
       "path_imagen": "assets/image/palabras/hermano_mayor.webp"
     },
     {
+      "categoria": "familia",
       "espanol": "Hermana",
       "chol": "Chich"
     },
     {
+      "categoria": "familia",
       "espanol": "Abuelo",
       "chol": "Yum",
       "path_audio": "assets/audio/palabras/abuelo.mp3",
       "path_imagen": "assets/image/palabras/abuelo.webp"
     },
     {
+      "categoria": "familia",
       "espanol": "Abuela",
       "chol": "Ko'",
       "path_audio": "assets/audio/palabras/abuela.mp3",
       "path_imagen": "assets/image/palabras/abuela.webp"
     },
     {
+      "categoria": "familia",
       "espanol": "Niño",
       "chol": "Chuty alo' / chuty wiñik",
       "path_imagen": "assets/image/palabras/nino.webp"
     },
     {
+      "categoria": "familia",
       "espanol": "Niña",
       "chol": "Chuty k'alil / chuty ixik",
       "path_imagen": "assets/image/palabras/nina.webp"
     },
     {
+      "categoria": "familia",
       "espanol": "Hijo",
       "chol": "Alo bil'"
     },
     {
+      "categoria": "familia",
       "espanol": "Hija",
       "chol": "Ixik'alil"
     },
     {
+      "categoria": "familia",
       "espanol": "Tío (paterno y materno)",
       "chol": "Yujmel / kichan",
       "path_imagen": "assets/image/palabras/tio.webp"
     },
     {
+      "categoria": "familia",
       "espanol": "Tía",
       "chol": "Na'je",
       "path_imagen": "assets/image/palabras/tia.webp"
     },
     {
+      "categoria": "familia",
       "espanol": "Bebé",
       "chol": "Aläl"
     },
     {
-      "espanol": "1",
-      "chol": "Jump'ej",
-      "path_audio": "assets/audio/palabras/uno.mp3"
-    },
-    {
-      "espanol": "2",
-      "chol": "Chap'ej",
-      "path_audio": "assets/audio/palabras/dos.mp3"
-    },
-    {
-      "espanol": "3",
-      "chol": "Uxp'ej",
-      "path_audio": "assets/audio/palabras/tres.mp3",
-      "path_imagen": "assets/image/palabras/tres.webp"
-    },
-    {
-      "espanol": "4",
-      "chol": "Chämp'ej",
-      "path_audio": "assets/audio/palabras/cuatro.mp3"
-    },
-    {
-      "espanol": "5",
-      "chol": "Jop'ej",
-      "path_audio": "assets/audio/palabras/cinco.mp3",
-      "path_imagen": "assets/image/palabras/cinco.webp"
-    },
-    {
-      "espanol": "6",
-      "chol": "Wäkp'ej",
-      "path_audio": "assets/audio/palabras/seis.mp3"
-    },
-    {
-      "espanol": "7",
-      "chol": "Wukp'ej",
-      "path_audio": "assets/audio/palabras/siete.mp3",
-      "path_imagen": "assets/image/palabras/siete.webp"
-    },
-    {
-      "espanol": "8",
-      "chol": "Waxäkp'ej",
-      "path_audio": "assets/audio/palabras/ocho.mp3"
-    },
-    {
-      "espanol": "9",
-      "chol": "Bolomp'ej",
-      "path_audio": "assets/audio/palabras/nueve.mp3"
-    },
-    {
-      "espanol": "10",
-      "chol": "Lujump éj",
-      "path_audio": "assets/audio/palabras/diez.mp3",
-      "path_imagen": "assets/image/palabras/diez.webp"
-    },
-    {
+      "categoria": "presentacion",
       "espanol": "Nombre",
       "chol": "Ka'ba'"
     },
     {
+      "categoria": "presentacion",
       "espanol": "Apellido",
       "chol": "Jol Ka'ba'"
     },
     {
+      "categoria": "presentacion",
       "espanol": "Edad",
       "chol": "Ja 'bilel"
     },
     {
+      "categoria": "entorno",
       "espanol": "Ciudad",
       "chol": "Kolem lum / kaxlan lum"
     },
     {
+      "categoria": "presentacion",
       "espanol": "Él / ella",
       "chol": "Jini"
     }
   ],
   "muestras_sintacticas": [
     {
+      "categoria": "presentacion",
       "espanol": "Yo soy Octavio",
       "chol": "Joñoň aj Octavio"
     },
     {
+      "categoria": "presentacion",
       "espanol": "Mi nombre es Octavio",
       "chol": "Jk'aba aj Octavio"
     },
     {
+      "categoria": "presentacion",
       "espanol": "Yo soy un niño",
       "chol": "Joñoň chuty (alo'on) / Joñon chuty (wiñikon)",
       "path_audio": "assets/audio/palabras/yo_soy_un_nino.mp3",
       "path_imagen": "assets/image/palabras/nino.webp"
     },
     {
+      "categoria": "presentacion",
       "espanol": "Yo soy una niña",
       "chol": "Joñoň xchuty (k´aläloñ) / Joñoň xchuty (ixikoň)",
       "path_audio": "assets/audio/palabras/yo_soy_una_nina.mp3",
       "path_imagen": "assets/image/palabras/nina.webp"
     },
     {
+      "categoria": "familia",
       "espanol": "Él es un niño",
       "chol": "Jiñi ili xchuty alo' / Jini ili chuty wiñik"
     },
     {
+      "categoria": "familia",
       "espanol": "Él es mi papá",
       "chol": "Jiñi ili kpap / Jiñi ili ktyaty",
       "path_audio": "assets/audio/palabras/el_es_mi_papa.mp3",
       "path_imagen": "assets/image/palabras/papa.webp"
     },
     {
+      "categoria": "familia",
       "espanol": "Él es mi abuelo",
       "chol": "Jini ili kyum",
       "path_audio": "assets/audio/palabras/el_es_mi_abuelo.mp3",
       "path_imagen": "assets/image/palabras/abuelo.webp"
     },
     {
+      "categoria": "familia",
       "espanol": "Él es mi hermano",
       "chol": "Jiñi ili kermañu / Jiñi ili kuskuň"
     },
     {
+      "categoria": "familia",
       "espanol": "Él es mi tío",
       "chol": "Jiñi ili kyujme / Jini ili kichan"
     },
     {
+      "categoria": "familia",
       "espanol": "Ella es una niña",
       "chol": "Jiñi ili xchuty k'aläl / Jiñi ili xchuty ixik"
     },
     {
+      "categoria": "familia",
       "espanol": "Ella es mi mamá",
       "chol": "Jini ili kmam / Jini ili kña",
       "path_audio": "assets/audio/palabras/ella_es_mi_mama.mp3",
       "path_imagen": "assets/image/palabras/mama.webp"
     },
     {
+      "categoria": "familia",
       "espanol": "Ella es mi abuela",
       "chol": "Jiñi ili jko"
     },
     {
+      "categoria": "familia",
       "espanol": "Ella es mi hermana",
       "chol": "Jiñi ili kchich"
     },
     {
+      "categoria": "familia",
       "espanol": "Esta es mi familia",
       "chol": "Jiñi ili kmajchilo'"
     },
     {
+      "categoria": "presentacion",
       "espanol": "Yo vivo en Tacotalpa",
       "chol": "Joñoň chumuloň tyi Ts'ul"
     },
     {
+      "categoria": "presentacion",
       "espanol": "Yo tengo 7 años",
       "chol": "Joñoň wukp'ej ka'bilel"
     },
     {
+      "categoria": "presentacion",
       "espanol": "¿Cómo te llamas?",
       "chol": "¿Bajche' ak'aba'?"
     },
     {
+      "categoria": "presentacion",
       "espanol": "¿Dónde vives? / ¿De dónde eres?",
       "chol": "¿Ba'ki chumulety? / ¿Ba'ki ch'oyolety?"
     },
     {
+      "categoria": "presentacion",
       "espanol": "¿De dónde vienes?",
       "chol": "¿Ba'ki tyälemety?"
     },
     {
+      "categoria": "presentacion",
       "espanol": "¿Cuántos años tienes?",
       "chol": "¿Bajche'aja'bilel?"
     },
     {
+      "categoria": "presentacion",
       "espanol": "Mi nombre es María",
       "chol": "Jkaba' aj María / Jkaba x-María"
     },
     {
+      "categoria": "vivienda",
       "espanol": "Mi casa es amarilla",
       "chol": "Jiñi kotyoty xk'änk'än",
       "path_audio": "assets/audio/palabras/mi_casa_es_amarilla.mp3",
       "path_imagen": "assets/image/palabras/casa_amarilla.webp"
     },
     {
+      "categoria": "entorno",
       "espanol": "Mi perro es pequeño",
       "chol": "Jiñi kts'i' chutyjach",
       "path_audio": "assets/audio/palabras/mi_perro_es_pequeño.mp3",
       "path_imagen": "assets/image/palabras/perro.webp"
     },
     {
+      "categoria": "familia",
       "espanol": "Mi mamá es alta",
       "chol": "Jiñi chañ li kmam"
     },
     {
+      "categoria": "vivienda",
       "espanol": "Su sombrero es blanco",
       "chol": "Jiñi säsäk ipixol"
     },
     {
+      "categoria": "familia",
       "espanol": "Él vive con su hijo",
       "chol": "Jiñi ili chumul yik'oty iyalo 'bil"
     },
     {
+      "categoria": "entorno",
       "espanol": "Su gallina está grande",
       "chol": "Jiñi kolemix imuty"
     }

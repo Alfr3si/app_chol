@@ -4,285 +4,405 @@
   "region": "Tacotalpa, Tabasco",
   "muestras_lexicas": [
     {
+      "categoria": "oficios",
       "espanol": "Trabajo",
       "chol": "Toñel"
     },
     {
+      "categoria": "oficios",
       "espanol": "Maestro",
       "chol": "Xpäsjun",
       "path_audio": "assets/audio/palabras/maestro.mp3",
       "path_imagen": "assets/image/palabras/maestro.webp"
     },
     {
+      "categoria": "oficios",
       "espanol": "Campesino",
       "chol": "Aj cholejel",
       "path_audio": "assets/audio/palabras/campesino.mp3",
       "path_imagen": "assets/image/palabras/campesino.webp"
     },
     {
+      "categoria": "oficios",
       "espanol": "Albañil",
       "chol": "Xpäty otyoty",
       "path_imagen": "assets/image/palabras/albanil.webp"
     },
     {
+      "categoria": "oficios",
       "espanol": "Pescador",
       "chol": "Aj lukbäl",
       "path_audio": "assets/audio/palabras/pescador.mp3",
       "path_imagen": "assets/image/palabras/pescador.webp"
     },
     {
+      "categoria": "oficios",
       "espanol": "Curandero",
       "chol": "Xts'ak",
       "path_audio": "assets/audio/palabras/curandero.mp3",
       "path_imagen": "assets/image/palabras/curandero.webp"
     },
     {
+      "categoria": "escuela",
       "espanol": "Escuela",
       "chol": "Yotyle aj k'ejuño'",
       "path_audio": "assets/audio/palabras/escuela.mp3",
       "path_imagen": "assets/image/palabras/escuela.webp"
     },
     {
+      "categoria": "utiles",
       "espanol": "Cuaderno",
       "chol": "Jun",
       "path_audio": "assets/audio/palabras/cuaderno.mp3",
       "path_imagen": "assets/image/palabras/cuaderno.webp"
     },
     {
+      "categoria": "utiles",
       "espanol": "Tijera",
       "chol": "Tyexelex",
       "path_audio": "assets/audio/palabras/tijera.mp3",
       "path_imagen": "assets/image/palabras/tijera.webp"
     },
     {
+      "categoria": "utiles",
       "espanol": "Libro",
       "chol": "Dubru",
       "path_audio": "assets/audio/palabras/libro.mp3",
       "path_imagen": "assets/image/palabras/libro.webp"
     },
     {
+      "categoria": "utiles",
       "espanol": "Silla",
       "chol": "Buchli bäl",
       "path_audio": "assets/audio/palabras/silla.mp3",
       "path_imagen": "assets/image/palabras/silla.webp"
     },
     {
+      "categoria": "utiles",
       "espanol": "Puerta",
       "chol": "Tyi'otyoty",
       "path_audio": "assets/audio/palabras/puerta.mp3",
       "path_imagen": "assets/image/palabras/puerta.webp"
     },
     {
+      "categoria": "numeros",
+      "espanol": "1",
+      "chol": "Jump'ej",
+      "path_audio": "assets/audio/palabras/uno.mp3"
+    },
+    {
+      "categoria": "numeros",
+      "espanol": "2",
+      "chol": "Chap'ej",
+      "path_audio": "assets/audio/palabras/dos.mp3"
+    },
+    {
+      "categoria": "numeros",
+      "espanol": "3",
+      "chol": "Uxp'ej",
+      "path_audio": "assets/audio/palabras/tres.mp3",
+      "path_imagen": "assets/image/palabras/tres.webp"
+    },
+    {
+      "categoria": "numeros",
+      "espanol": "4",
+      "chol": "Chämp'ej",
+      "path_audio": "assets/audio/palabras/cuatro.mp3"
+    },
+    {
+      "categoria": "numeros",
+      "espanol": "5",
+      "chol": "Jop'ej",
+      "path_audio": "assets/audio/palabras/cinco.mp3",
+      "path_imagen": "assets/image/palabras/cinco.webp"
+    },
+    {
+      "categoria": "numeros",
+      "espanol": "6",
+      "chol": "Wäkp'ej",
+      "path_audio": "assets/audio/palabras/seis.mp3"
+    },
+    {
+      "categoria": "numeros",
+      "espanol": "7",
+      "chol": "Wukp'ej",
+      "path_audio": "assets/audio/palabras/siete.mp3",
+      "path_imagen": "assets/image/palabras/siete.webp"
+    },
+    {
+      "categoria": "numeros",
+      "espanol": "8",
+      "chol": "Waxäkp'ej",
+      "path_audio": "assets/audio/palabras/ocho.mp3"
+    },
+    {
+      "categoria": "numeros",
+      "espanol": "9",
+      "chol": "Bolomp'ej",
+      "path_audio": "assets/audio/palabras/nueve.mp3"
+    },
+    {
+      "categoria": "numeros",
+      "espanol": "10",
+      "chol": "Lujump éj",
+      "path_audio": "assets/audio/palabras/diez.mp3",
+      "path_imagen": "assets/image/palabras/diez.webp"
+    },
+    {
+      "categoria": "acciones",
       "espanol": "Cocinar",
       "chol": "Päty bäñäkäl",
       "path_audio": "assets/audio/palabras/cocinar.mp3"
     },
     {
+      "categoria": "acciones",
       "espanol": "Lavar",
       "chol": "Pokoñel",
       "path_audio": "assets/audio/palabras/lavar.mp3",
       "path_imagen": "assets/image/palabras/lavar.webp"
     },
     {
+      "categoria": "acciones",
       "espanol": "Limpiar",
       "chol": "Sujkun",
       "path_audio": "assets/audio/palabras/limpiar.mp3",
       "path_imagen": "assets/image/palabras/limpiar.webp"
     },
     {
+      "categoria": "acciones",
       "espanol": "Barrer",
       "chol": "Misujel",
       "path_audio": "assets/audio/palabras/barrer.mp3",
       "path_imagen": "assets/image/palabras/barrer.webp"
     },
     {
+      "categoria": "acciones",
       "espanol": "Sembrar",
       "chol": "Päk´oñel",
       "path_audio": "assets/audio/palabras/sembrar.mp3"
     },
     {
+      "categoria": "acciones",
       "espanol": "Trabajar",
       "chol": "Toñel"
     },
     {
+      "categoria": "acciones",
       "espanol": "Pescar",
       "chol": "lukbäl",
       "path_audio": "assets/audio/palabras/pescar.mp3"
     },
     {
+      "categoria": "acciones",
       "espanol": "Construir",
       "chol": "Meloñel"
     },
     {
+      "categoria": "acciones",
       "espanol": "Cazar",
       "chol": "Xäñtye'el"
     },
     {
+      "categoria": "cultura",
       "espanol": "Festividades",
       "chol": "K'iñejel"
     },
     {
+      "categoria": "colores",
       "espanol": "Verde",
       "chol": "Xäjxäx"
     },
     {
+      "categoria": "colores",
       "espanol": "Rojo",
       "chol": "Chächäk"
     },
     {
+      "categoria": "colores",
       "espanol": "Negro",
       "chol": "L'ik'"
     },
     {
+      "categoria": "colores",
       "espanol": "Blanco",
       "chol": "Säsäk"
     },
     {
+      "categoria": "colores",
       "espanol": "Amarillo",
       "chol": "K'änk'än"
     },
     {
+      "categoria": "acciones",
       "espanol": "Pintar",
       "chol": "Bon"
     },
     {
+      "categoria": "acciones",
       "espanol": "Escribir",
       "chol": "Ts'ijbuň"
     },
     {
+      "categoria": "acciones",
       "espanol": "Cortar",
       "chol": "Sety"
     },
     {
+      "categoria": "acciones",
       "espanol": "Jugar",
       "chol": "Nak",
       "path_audio": "assets/audio/palabras/jugar.mp3",
       "path_imagen": "assets/image/palabras/jugar.webp"
     },
     {
+      "categoria": "acciones",
       "espanol": "Bailar",
       "chol": "Soñ"
     },
     {
+      "categoria": "acciones",
       "espanol": "Cantar",
       "chol": "Ka'y"
     },
     {
+      "categoria": "acciones",
       "espanol": "Contar",
       "chol": "Tsik"
     },
     {
+      "categoria": "acciones",
       "espanol": "Desayunar",
       "chol": "Uch'el"
     },
     {
+      "categoria": "acciones",
       "espanol": "Aprender",
       "chol": "Käñe"
     },
     {
+      "categoria": "acciones",
       "espanol": "Escuchar",
       "chol": "Näch"
     },
     {
+      "categoria": "acciones",
       "espanol": "Estudiar",
       "chol": "K'ejuñ"
     }
   ],
   "muestras_sintacticas": [
     {
+      "categoria": "oficios",
       "espanol": "Yo soy pescador",
       "chol": "Joñon xlukbäloň",
       "path_imagen": "assets/image/palabras/pescador.webp"
     },
     {
+      "categoria": "oficios",
       "espanol": "Ella es maestra",
       "chol": "Ili xpäsjuň",
       "path_imagen": "assets/image/palabras/maestro.webp"
     },
     {
+      "categoria": "oficios",
       "espanol": "Nosotros somos campesinos",
       "chol": "Joñoñlon xcholejeloñloň",
       "path_imagen": "assets/image/palabras/campesino.webp"
     },
     {
+      "categoria": "oficios",
       "espanol": "Ellos son curanderos",
       "chol": "Ixä xts'ako'",
       "path_imagen": "assets/image/palabras/curandero.webp"
     },
     {
+      "categoria": "utiles",
       "espanol": "Hay muchas sillas",
       "chol": "ka bä añ buchli bäl",
       "path_audio": "assets/audio/palabras/muchas_sillas.mp3",
       "path_imagen": "assets/image/palabras/sillas.webp"
     },
     {
+      "categoria": "colores",
       "espanol": "Las sillas son amarillas",
       "chol": "K'änk'äîn li buchli bäl",
       "path_audio": "assets/audio/palabras/sillas_amarillas.mp3",
       "path_imagen": "assets/image/palabras/silla_amarilla.webp"
     },
     {
+      "categoria": "oficios",
       "espanol": "Los maestros enseñan",
       "chol": "Li xpäsjuño muk'o' tyi käntyisaj",
       "path_imagen": "assets/image/palabras/maestro.webp"
     },
     {
+      "categoria": "familia",
       "espanol": "Mi mamá cocina en el fogón",
       "chol": "Jiñi kmam ipäty ibäñik' tyi k'ajk",
       "path_audio": "assets/audio/palabras/mama_cocina.mp3",
       "path_imagen": "assets/image/palabras/abuela_cocinando.webp"
     },
     {
+      "categoria": "familia",
       "espanol": "Mi papá trabaja en la milpa",
       "chol": "Jiñi kpap muk tyi toñel tyi cholel",
       "path_audio": "assets/audio/palabras/papa_trabaja.mp3",
       "path_imagen": "assets/image/palabras/gcosecha.webp"
     },
     {
+      "categoria": "familia",
       "espanol": "Esas niñas son bonitas",
       "chol": "Ixä saj xk'alälo' ñoj ilekaxo'",
       "path_imagen": "assets/image/palabras/nina.webp"
     },
     {
+      "categoria": "familia",
       "espanol": "Mis hermanas barren la casa",
       "chol": "Jiñi kchicho' imisuño' li otyoty",
       "path_audio": "assets/audio/palabras/hermanas_barren.mp3",
       "path_imagen": "assets/image/palabras/hermanas_barren.webp"
     },
     {
+      "categoria": "familia",
       "espanol": "Mi hermano sale a cazar en la noche",
       "chol": "Jiñi kermaňu' ilok'el majlel tyi xäñtye'el tyi ik'añ",
       "path_imagen": "assets/image/palabras/noche.webp"
     },
     {
+      "categoria": "animales",
       "espanol": "El perro caza tepezcuintle",
       "chol": "Ili ts'i' ichuke' jalaw",
       "path_imagen": "assets/image/palabras/perro.webp"
     },
     {
+      "categoria": "utiles",
       "espanol": "El libro está debajo de la silla",
       "chol": "Li dibru ya'añ tyi iye bal li buchli bäl",
       "path_audio": "assets/audio/palabras/libro_debajo.mp3",
       "path_imagen": "assets/image/palabras/libro_silla.webp"
     },
     {
+      "categoria": "utiles",
       "espanol": "El cuaderno está al lado de las tijeras",
       "chol": "Jiñi jun ya'an tyi ity'ej tyi tyexelex",
       "path_audio": "assets/audio/palabras/cuaderno_alado.mp3",
       "path_imagen": "assets/image/palabras/cuaderno.webp"
     },
     {
+      "categoria": "preguntas",
       "espanol": "¿Dónde están los niños?",
       "chol": "¿Ba'ki año li alp'eñalo'?",
       "path_imagen": "assets/image/palabras/grupo.webp"
     },
     {
+      "categoria": "acciones",
       "espanol": "Los niños juegan en el patio",
       "chol": "Jiñi alp'eñalo' muk'o' tyi tyi Paty otyoty",
       "path_audio": "assets/audio/palabras/ninos_nadan.mp3",
       "path_imagen": "assets/image/palabras/patio.webp"
     },
     {
+      "categoria": "acciones",
       "espanol": "Los niños están jugando en la hora del recreo",
       "chol": "Li alpeñalo' chonkolo' tyi ñak tyi yorojlel uch'el",
       "path_imagen": "assets/image/palabras/jugar.webp"
