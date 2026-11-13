@@ -1,10 +1,16 @@
 // lib/modules/modulo1/mapa_modulo1_screen.dart
 import 'package:flutter/material.dart';
+
 import '../../../core/base/base_mapa_screen.dart';
 
-// Importa aquí las pantallas de tus actividades del Módulo 1:
-import './actividades/actividad_saludos_screen.dart';
-// import 'actividad_2_screen.dart';
+// Importa las pantallas usando los nombres exactos de tus archivos de actividades:
+import './actividades/actividad_saludos_audio_screen.dart';
+import './actividades/actividad_familia_relacionar_screen.dart';
+import './actividades/actividad_familia_imagen_audio_screen.dart';
+import './actividades/actividad_familia_seleccion_imagen_screen.dart';
+import './actividades/actividad_memorama_screen.dart';
+import './actividades/actividad_presentacion_relacionar_screen.dart';
+import './actividades/actividad_tiempo_seleccion_imagen_screen.dart';
 
 class MapaModulo1Screen extends StatelessWidget {
   const MapaModulo1Screen({super.key});
@@ -14,7 +20,7 @@ class MapaModulo1Screen extends StatelessWidget {
     return BaseMapaScreen(
       moduloId: 1,
       tituloModulo: 'Mi familia y yo',
-      
+
       // 1. Fondo correspondiente a este mapa
       backgroundAsset: 'elements/mapa1.webp',
 
@@ -36,16 +42,16 @@ class MapaModulo1Screen extends StatelessWidget {
         Rect.fromLTWH(66.4672, 236.578, 100.264, 83.3656),
       ],
 
-      // 3. Coordenadas de las casas / sensores de actividad (actualizadas a partir de los puntos del XML)
+      // 3. Coordenadas de las casas / sensores de actividad
       casasRects: const [
-        Rect.fromLTWH(120, 129.333, 30.0, 30.0),     // ID 33
-        Rect.fromLTWH(544, 98.6667, 30.0, 30.0),    // ID 34
-        Rect.fromLTWH(832, 129.333, 30.0, 30.0),    // ID 35
-        Rect.fromLTWH(833.333, 356, 30.0, 30.0),    // ID 36
-        Rect.fromLTWH(804, 552, 30.0, 30.0),        // ID 37
-        Rect.fromLTWH(160, 552, 30.0, 30.0),        // ID 38
-        Rect.fromLTWH(448, 353.333, 30.0, 30.0),    // ID 39
-        Rect.fromLTWH(120, 322.667, 30.0, 30.0),    // ID 40
+        Rect.fromLTWH(120, 129.333, 30.0, 30.0), // ID 33
+        Rect.fromLTWH(544, 98.6667, 30.0, 30.0), // ID 34
+        Rect.fromLTWH(832, 129.333, 30.0, 30.0), // ID 35
+        Rect.fromLTWH(833.333, 356, 30.0, 30.0), // ID 36
+        Rect.fromLTWH(804, 552, 30.0, 30.0), // ID 37
+        Rect.fromLTWH(160, 552, 30.0, 30.0), // ID 38
+        Rect.fromLTWH(448, 353.333, 30.0, 30.0), // ID 39
+        Rect.fromLTWH(120, 322.667, 30.0, 30.0), // ID 40
       ],
 
       // 4. Títulos de las casas que aparecerán en la ventana flotante
@@ -65,13 +71,41 @@ class MapaModulo1Screen extends StatelessWidget {
         switch (activityName) {
           case 'Actividad 1':
           case 'Saludos':
-            return const ActividadSaludosScreen();
+            return const ActividadSaludosAudioScreen();
+
           case 'Actividad 2':
-            // return const Actividad2Screen();
+          case 'Mi Familia':
+            return const ActividadFamiliaRelacionarScreen();
+
+          case 'Actividad 3':
+            return const ActividadVisualFamiliaScreen();
+
+          case 'Actividad 4':
+            return const ActividadFamiliaSeleccionImagenScreen();
+
+          case 'Actividad 5':
+            return const ActividadMemoramaScreen();
+
+          case 'Actividad 6':
+            return const ActividadPresentacionRelacionarScreen();
+
+          case 'Actividad 7':
+            return const ActividadTiempoSeleccionImagenScreen();
+
+          case 'Actividad 8':
           default:
             return Scaffold(
-              appBar: AppBar(title: Text(activityName)),
-              body: Center(child: Text('Pantalla de $activityName en construcción')),
+              appBar: AppBar(
+                backgroundColor: Colors.brown.shade800,
+                title: Text(activityName, style: const TextStyle(color: Colors.white)),
+                iconTheme: const IconThemeData(color: Colors.white),
+              ),
+              body: Center(
+                child: Text(
+                  'Pantalla de $activityName en construcción',
+                  style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Colors.brown),
+                ),
+              ),
             );
         }
       },

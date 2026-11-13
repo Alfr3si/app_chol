@@ -1,15 +1,15 @@
-// lib/modules/modulo1/components/actividad_generica_screen.dart
+// lib/modules/modulo1/components/actividad_audio.dart
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:flame_audio/flame_audio.dart'; // 🔊 Para reproducir los audios
+import 'package:flame_audio/flame_audio.dart';
 import '../../../../domain/models/item_vocabulario.dart';
 
-class ActividadGenericaScreen extends StatefulWidget {
+class ActividadAudio extends StatefulWidget {
   final String tituloActividad;
   final List<ItemVocabulario> listaItems;
   final String backgroundImage;
 
-  const ActividadGenericaScreen({
+  const ActividadAudio({
     super.key,
     required this.tituloActividad,
     required this.listaItems,
@@ -17,10 +17,10 @@ class ActividadGenericaScreen extends StatefulWidget {
   });
 
   @override
-  State<ActividadGenericaScreen> createState() => _ActividadGenericaScreenState();
+  State<ActividadAudio> createState() => _ActividadAudioState();
 }
 
-class _ActividadGenericaScreenState extends State<ActividadGenericaScreen>
+class _ActividadAudioState extends State<ActividadAudio>
     with SingleTickerProviderStateMixin {
   late List<ItemVocabulario> _activeQueue;
   final List<ItemVocabulario> _failedQueue = [];
@@ -32,7 +32,6 @@ class _ActividadGenericaScreenState extends State<ActividadGenericaScreen>
   String? _selectedAnswer;
   bool? _isAnswerCorrect;
 
-  // 🎬 Controladores de animación
   late AnimationController _animationController;
   late Animation<double> _fadeAnimation;
   late Animation<double> _scaleAnimation;
@@ -40,9 +39,11 @@ class _ActividadGenericaScreenState extends State<ActividadGenericaScreen>
   @override
   void initState() {
     super.initState();
-    // 🔍 Filtramos para trabajar ÚNICAMENTE con los elementos que tienen audio válido
+    // Filtro flexible: acepta elementos que tengan texto válido en Ch'ol y Español
     _activeQueue = List.from(
-      widget.listaItems.where((item) => item.pathAudio != null && item.pathAudio!.isNotEmpty),
+      widget.listaItems.where((item) =>
+          item.chol.isNotEmpty &&
+          item.espanol.isNotEmpty),
     )..shuffle();
 
     _animationController = AnimationController(
@@ -71,7 +72,6 @@ class _ActividadGenericaScreenState extends State<ActividadGenericaScreen>
   Future<void> _reproducirAudio(String? path) async {
     if (path == null || path.isEmpty) return;
     try {
-      // Limpiamos la ruta para que FlameAudio busque dentro de assets/audio/
       String assetName = path.replaceAll('assets/audio/palabras/', '');
       await FlameAudio.play('palabras/$assetName');
     } catch (e) {
@@ -101,8 +101,7 @@ class _ActividadGenericaScreenState extends State<ActividadGenericaScreen>
     _selectedAnswer = null;
     _isAnswerCorrect = null;
 
-    // Reproducimos el audio automáticamente al cargar la pregunta
-    if (current.pathAudio != null) {
+    if (current.pathAudio != null && current.pathAudio!.isNotEmpty) {
       _reproducirAudio(current.pathAudio);
     }
 
@@ -119,10 +118,8 @@ class _ActividadGenericaScreenState extends State<ActividadGenericaScreen>
       _selectedAnswer = seleccion;
       _isAnswerCorrect = esCorrecto;
 
-      if (!esCorrecto) {
-        if (!_failedQueue.contains(current)) {
-          _failedQueue.add(current);
-        }
+      if (!esCorrecto && !_failedQueue.contains(current)) {
+        _failedQueue.add(current);
       }
     });
   }
@@ -168,12 +165,15 @@ class _ActividadGenericaScreenState extends State<ActividadGenericaScreen>
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16),
         ),
         content: const Text(
-          '¡Has completado con éxito este desafío de aprendizaje!',
+          '¡Has completado con éxito este desafío de escucha!',
           style: TextStyle(color: Colors.white70, fontSize: 13),
         ),
         actions: [
           ElevatedButton(
-            style: ElevatedButton.styleFrom(backgroundColor: Colors.green.shade700, padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4)),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.green.shade700,
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+            ),
             onPressed: () {
               Navigator.pop(context);
               Navigator.pop(context);
@@ -225,158 +225,155 @@ class _ActividadGenericaScreenState extends State<ActividadGenericaScreen>
         child: SafeArea(
           child: Stack(
             children: [
-              Center(
-                child: FadeTransition(
-                  opacity: _fadeAnimation,
-                  child: ScaleTransition(
-                    scale: _scaleAnimation,
-                    child: SingleChildScrollView(
-                      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
+              Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Column(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                      decoration: BoxDecoration(
+                        color: Colors.black.withOpacity(0.6),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Text(
+                        _isReviewRound ? '🔄 Ronda de repaso de errores' : '🔊 Escucha el audio y elige:',
+                        style: TextStyle(
+                          fontSize: 11,
+                          fontWeight: FontWeight.bold,
+                          color: _isReviewRound ? Colors.orangeAccent : Colors.white,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 12),
+                    Expanded(
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          // Indicador superior
-                          Center(
-                            child: Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                              decoration: BoxDecoration(
-                                color: Colors.black.withOpacity(0.6),
-                                borderRadius: BorderRadius.circular(6),
-                              ),
-                              child: Text(
-                                _isReviewRound ? '🔄 Ronda de repaso de errores' : '🔊 Escucha el audio y elige:',
-                                style: TextStyle(
-                                  fontSize: 11,
-                                  fontWeight: FontWeight.bold,
-                                  color: _isReviewRound ? Colors.orangeAccent : Colors.white,
-                                ),
-                              ),
-                            ),
-                          ),
-                          const SizedBox(height: 16),
-
-                          // 🔊 Botón grande de Audio central estilo Duolingo
-                          if (current.pathAudio != null && current.pathAudio!.isNotEmpty) ...[
-                            Center(
-                              child: InkWell(
-                                onTap: () => _reproducirAudio(current.pathAudio),
-                                child: Container(
-                                  padding: const EdgeInsets.all(16),
-                                  decoration: BoxDecoration(
-                                    color: Colors.orange.shade700,
-                                    shape: BoxShape.circle,
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.black.withOpacity(0.4),
-                                        blurRadius: 8,
-                                        offset: const Offset(0, 4),
+                          Expanded(
+                            flex: 4,
+                            child: FadeTransition(
+                              opacity: _fadeAnimation,
+                              child: ScaleTransition(
+                                scale: _scaleAnimation,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    if (current.pathAudio != null && current.pathAudio!.isNotEmpty) ...[
+                                      InkWell(
+                                        onTap: () => _reproducirAudio(current.pathAudio),
+                                        child: Container(
+                                          padding: const EdgeInsets.all(20),
+                                          decoration: BoxDecoration(
+                                            color: Colors.orange.shade700,
+                                            shape: BoxShape.circle,
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: Colors.black.withOpacity(0.4),
+                                                blurRadius: 6,
+                                                offset: const Offset(0, 3),
+                                              ),
+                                            ],
+                                          ),
+                                          child: const Icon(Icons.volume_up, color: Colors.white, size: 40),
+                                        ),
                                       ),
+                                      const SizedBox(height: 12),
                                     ],
-                                  ),
-                                  child: const Icon(Icons.volume_up, color: Colors.white, size: 48),
+                                    Container(
+                                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                                      decoration: BoxDecoration(
+                                        color: Colors.grey.shade900.withOpacity(0.85),
+                                        borderRadius: BorderRadius.circular(14),
+                                        border: Border.all(color: Colors.orangeAccent, width: 1.5),
+                                      ),
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: [
+                                          const Icon(Icons.translate, color: Colors.orangeAccent, size: 16),
+                                          const SizedBox(width: 6),
+                                          Flexible(
+                                            child: Text(
+                                              current.espanol,
+                                              textAlign: TextAlign.center,
+                                              style: const TextStyle(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ),
-                            const SizedBox(height: 16),
-                          ],
-
-                          // Tarjeta de apoyo en Español
-                          Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-                            decoration: BoxDecoration(
-                              color: Colors.grey.shade900.withOpacity(0.85),
-                              borderRadius: BorderRadius.circular(20),
-                              border: Border.all(color: Colors.orangeAccent, width: 1.5),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                const Icon(Icons.translate, color: Colors.orangeAccent, size: 18),
-                                const SizedBox(width: 6),
-                                Flexible(
-                                  child: Text(
-                                    current.espanol,
-                                    textAlign: TextAlign.center,
-                                    style: const TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
                           ),
-                          const SizedBox(height: 16),
+                          const SizedBox(width: 12),
+                          Expanded(
+                            flex: 5,
+                            child: ListView.builder(
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              itemCount: _opcionesActuales.length,
+                              itemBuilder: (context, index) {
+                                final opcion = _opcionesActuales[index];
+                                Color colorFondo = Colors.grey.shade900.withOpacity(0.85);
+                                Color colorBorde = Colors.blueAccent.shade200;
+                                Color colorTexto = Colors.white;
 
-                          // Cuadrícula 2x2 de respuestas (Ch'ol)
-                          GridView.builder(
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            itemCount: _opcionesActuales.length,
-                            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 2,
-                              crossAxisSpacing: 8,
-                              mainAxisSpacing: 8,
-                              childAspectRatio: 4.8,
-                            ),
-                            itemBuilder: (context, index) {
-                              final opcion = _opcionesActuales[index];
-                              
-                              Color colorFondo = Colors.grey.shade900.withOpacity(0.85);
-                              Color colorBorde = Colors.blueAccent.shade200;
-                              Color colorTexto = Colors.white;
-
-                              if (_selectedAnswer != null) {
-                                if (opcion == current.chol) {
-                                  colorFondo = Colors.green.shade900.withOpacity(0.95);
-                                  colorBorde = Colors.greenAccent;
-                                } else if (opcion == _selectedAnswer) {
-                                  colorFondo = Colors.red.shade900.withOpacity(0.95);
-                                  colorBorde = Colors.redAccent;
+                                if (_selectedAnswer != null) {
+                                  if (opcion == current.chol) {
+                                    colorFondo = Colors.green.shade900.withOpacity(0.95);
+                                    colorBorde = Colors.greenAccent;
+                                  } else if (opcion == _selectedAnswer) {
+                                    colorFondo = Colors.red.shade900.withOpacity(0.95);
+                                    colorBorde = Colors.redAccent;
+                                  }
                                 }
-                              }
 
-                              return ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: colorFondo,
-                                  foregroundColor: colorTexto,
-                                  elevation: 1,
-                                  padding: EdgeInsets.zero,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(16),
-                                    side: BorderSide(color: colorBorde, width: 1.2),
-                                  ),
-                                ),
-                                onPressed: () => _verificarRespuesta(opcion),
-                                child: Center(
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: 4),
-                                    child: Text(
-                                      opcion,
-                                      textAlign: TextAlign.center,
-                                      maxLines: 2,
-                                      overflow: TextOverflow.ellipsis,
-                                      style: TextStyle(
-                                        fontSize: 11.5,
-                                        fontWeight: FontWeight.bold,
-                                        color: colorTexto,
+                                return Container(
+                                  margin: const EdgeInsets.symmetric(vertical: 4),
+                                  child: SizedBox(
+                                    height: 42,
+                                    child: ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: colorFondo,
+                                        foregroundColor: colorTexto,
+                                        elevation: 1,
+                                        padding: const EdgeInsets.symmetric(horizontal: 8),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(10),
+                                          side: BorderSide(color: colorBorde, width: 1.2),
+                                        ),
+                                      ),
+                                      onPressed: () => _verificarRespuesta(opcion),
+                                      child: Center(
+                                        child: Text(
+                                          opcion,
+                                          textAlign: TextAlign.center,
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                            fontSize: 11,
+                                            fontWeight: FontWeight.bold,
+                                            color: colorTexto,
+                                          ),
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),
-                              );
-                            },
+                                );
+                              },
+                            ),
                           ),
                         ],
                       ),
                     ),
-                  ),
+                  ],
                 ),
               ),
-
-              // 🎯 CUADRO FLOTANTE DE RESULTADO
               if (_selectedAnswer != null)
                 TweenAnimationBuilder<double>(
                   tween: Tween<double>(begin: 0.0, end: 1.0),
@@ -392,8 +389,8 @@ class _ActividadGenericaScreenState extends State<ActividadGenericaScreen>
                         width: 260,
                         padding: const EdgeInsets.all(16),
                         decoration: BoxDecoration(
-                          color: _isAnswerCorrect == true 
-                              ? Colors.green.shade900.withOpacity(0.95) 
+                          color: _isAnswerCorrect == true
+                              ? Colors.green.shade900.withOpacity(0.95)
                               : Colors.red.shade900.withOpacity(0.95),
                           borderRadius: BorderRadius.circular(20),
                           border: Border.all(
