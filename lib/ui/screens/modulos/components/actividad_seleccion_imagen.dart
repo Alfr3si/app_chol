@@ -22,6 +22,7 @@ class ActividadSeleccionImagen extends StatefulWidget {
 
 class _ActividadSeleccionImagenState extends State<ActividadSeleccionImagen>
     with SingleTickerProviderStateMixin {
+  late List<ItemVocabulario> _itemsValidos;
   late List<ItemVocabulario> _activeQueue;
   final List<ItemVocabulario> _failedQueue = [];
 
@@ -33,7 +34,6 @@ class _ActividadSeleccionImagenState extends State<ActividadSeleccionImagen>
   bool? _isAnswerCorrect;
   int _intentosRestantes = 2;
 
-  // 🔤 Controla si el cuadro de texto (Ch'ol y Español) está desplegado
   bool _mostrarTraduccion = false;
 
   late AnimationController _animationController;
@@ -43,12 +43,16 @@ class _ActividadSeleccionImagenState extends State<ActividadSeleccionImagen>
   @override
   void initState() {
     super.initState();
-    // Filtro flexible: acepta elementos de la lista recibida que tengan texto válido
-    _activeQueue = List.from(
-      widget.listaItems.where((item) =>
-          item.chol.isNotEmpty &&
-          item.espanol.isNotEmpty),
-    )..shuffle();
+    // Filtro estricto: solo items que tengan tanto audio como imagen existentes en el JSON
+    _itemsValidos = widget.listaItems.where((item) =>
+        item.chol.isNotEmpty &&
+        item.espanol.isNotEmpty &&
+        item.pathImagen != null &&
+        item.pathImagen!.trim().isNotEmpty &&
+        item.pathAudio != null &&
+        item.pathAudio!.trim().isNotEmpty).toList();
+
+    _activeQueue = List.from(_itemsValidos)..shuffle();
 
     _animationController = AnimationController(
       vsync: this,
@@ -74,7 +78,7 @@ class _ActividadSeleccionImagenState extends State<ActividadSeleccionImagen>
     try {
       String assetName = path.replaceAll('assets/audio/palabras/', '');
       await FlameAudio.play('palabras/$assetName');
-      
+
       setState(() {
         _mostrarTraduccion = true;
       });
@@ -89,7 +93,8 @@ class _ActividadSeleccionImagenState extends State<ActividadSeleccionImagen>
     final current = _activeQueue[_currentIndex];
     final random = Random();
 
-    List<ItemVocabulario> distractores = widget.listaItems
+    // Los distractores también se toman exclusivamente de _itemsValidos (con imagen garantizada)
+    List<ItemVocabulario> distractores = _itemsValidos
         .where((item) => item.chol != current.chol)
         .toList()
       ..shuffle(random);
@@ -215,8 +220,10 @@ class _ActividadSeleccionImagenState extends State<ActividadSeleccionImagen>
     if (_activeQueue.isEmpty) {
       return Scaffold(
         backgroundColor: const Color(0xFFFAF3E0),
-        appBar: AppBar(backgroundColor: Colors.brown.shade800, title: const Text('Cargando...')),
-        body: const Center(child: CircularProgressIndicator(color: Colors.orange)),
+        appBar: AppBar(backgroundColor: Colors.brown.shade800, title: const Text('Aviso')),
+        body: const Center(
+          child: Text('No hay elementos con imagen y audio disponibles para esta actividad.'),
+        ),
       );
     }
 
@@ -314,24 +321,12 @@ class _ActividadSeleccionImagenState extends State<ActividadSeleccionImagen>
                                     borderRadius: BorderRadius.circular(13.5),
                                     child: Padding(
                                       padding: const EdgeInsets.all(6.0),
-                                      child: item.pathImagen != null && item.pathImagen!.isNotEmpty
-                                          ? Image.asset(
-                                              item.pathImagen!,
-                                              fit: BoxFit.contain,
-                                              errorBuilder: (context, error, stackTrace) =>
-                                                  const Icon(Icons.image_not_supported, size: 32, color: Colors.grey),
-                                            )
-                                          : Center(
-                                              child: Text(
-                                                item.espanol,
-                                                textAlign: TextAlign.center,
-                                                style: const TextStyle(
-                                                  fontSize: 11,
-                                                  fontWeight: FontWeight.bold,
-                                                  color: Colors.brown,
-                                                ),
-                                              ),
-                                            ),
+                                      child: Image.asset(
+                                        item.pathImagen!,
+                                        fit: BoxFit.contain,
+                                        errorBuilder: (context, error, stackTrace) =>
+                                            const Icon(Icons.image_not_supported, size: 32, color: Colors.grey),
+                                      ),
                                     ),
                                   ),
                                 ),

@@ -35,7 +35,11 @@ class _ActividadFamiliaSeleccionImagenScreenState extends State<ActividadFamilia
             .where((item) =>
                 item.categoria == 'familia' &&
                 item.chol.isNotEmpty &&
-                item.espanol.isNotEmpty)
+                item.espanol.isNotEmpty &&
+                item.pathImagen != null &&
+                item.pathImagen!.trim().isNotEmpty &&
+                item.pathAudio != null &&
+                item.pathAudio!.trim().isNotEmpty)
             .toList();
 
         _isLoading = false;
@@ -59,7 +63,7 @@ class _ActividadFamiliaSeleccionImagenScreenState extends State<ActividadFamilia
     if (_listaItems.isEmpty) {
       return Scaffold(
         appBar: AppBar(title: const Text('Aviso')),
-        body: const Center(child: Text('No hay suficientes elementos de vocabulario.')),
+        body: const Center(child: Text('No hay suficientes elementos con imagen y audio en esta categoría.')),
       );
     }
 

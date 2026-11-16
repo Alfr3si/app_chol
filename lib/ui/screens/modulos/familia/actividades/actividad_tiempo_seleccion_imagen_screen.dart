@@ -30,20 +30,26 @@ class _ActividadTiempoSeleccionImagenScreenState extends State<ActividadTiempoSe
 
       final List<dynamic> muestras = jsonData['muestras_lexicas'] ?? [];
 
-      setState(() {
-        _listaItems = muestras
-            .map((item) => ItemVocabulario.fromJson(item))
-            // Filtro estricto: categoría tiempo + texto válido + imagen y audio obligatorios (Mañana, Tarde, Noche)
-            .where((item) =>
-                item.categoria == widget.categoriaFiltro &&
-                item.chol.isNotEmpty &&
-                item.espanol.isNotEmpty &&
-                item.pathImagen != null &&
-                item.pathImagen!.isNotEmpty &&
-                item.pathAudio != null &&
-                item.pathAudio!.isNotEmpty)
-            .toList();
+      // Filtro estricto con manejo seguro de null en categoria
+      final filtrados = muestras
+          .map((item) => ItemVocabulario.fromJson(item))
+          .where((item) =>
+              (item.categoria ?? '').trim().toLowerCase() == widget.categoriaFiltro.trim().toLowerCase() &&
+              item.chol.trim().isNotEmpty &&
+              item.espanol.trim().isNotEmpty &&
+              item.pathImagen != null &&
+              item.pathImagen!.trim().isNotEmpty &&
+              item.pathAudio != null &&
+              item.pathAudio!.trim().isNotEmpty);
 
+      // Deduplicamos por palabra en Ch'ol para asegurar exactamente 1 pregunta por concepto (Mañana, Tarde, Noche)
+      final Map<String, ItemVocabulario> unicosPorChol = {};
+      for (var item in filtrados) {
+        unicosPorChol.putIfAbsent(item.chol.trim().toLowerCase(), () => item);
+      }
+
+      setState(() {
+        _listaItems = unicosPorChol.values.toList();
         _isLoading = false;
       });
     } catch (e) {

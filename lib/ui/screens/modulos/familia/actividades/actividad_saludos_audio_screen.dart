@@ -2,7 +2,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart'; // Necesario para rootBundle
+import 'package:flutter/services.dart';
 
 import '../../../../../domain/models/item_vocabulario.dart';
 import '../../components/actividad_audio.dart';
@@ -33,18 +33,26 @@ class _ActividadSaludosAudioScreenState extends State<ActividadSaludosAudioScree
 
       final List<dynamic> muestras = jsonData['muestras_lexicas'] ?? [];
 
-      setState(() {
-        _listaSaludos = muestras
-            .map((item) => ItemVocabulario.fromJson(item))
-            // 🔍 FILTRO FLEXIBLE: Categoría 'saludos' con texto válido en Ch'ol y Español
-            .where(
-              (item) =>
-                  item.categoria == 'saludos' &&
-                  item.chol.isNotEmpty &&
-                  item.espanol.isNotEmpty,
-            )
-            .toList();
+      // Filtro estricto con manejo seguro de null en categoria
+      final filtrados = muestras
+          .map((item) => ItemVocabulario.fromJson(item))
+          .where(
+            (item) =>
+                (item.categoria ?? '').trim().toLowerCase() == 'saludos' &&
+                item.chol.trim().isNotEmpty &&
+                item.espanol.trim().isNotEmpty &&
+                item.pathAudio != null &&
+                item.pathAudio!.trim().isNotEmpty,
+          );
 
+      // Evitamos duplicados de la misma expresión en Ch'ol
+      final Map<String, ItemVocabulario> unicosPorChol = {};
+      for (var item in filtrados) {
+        unicosPorChol.putIfAbsent(item.chol.trim().toLowerCase(), () => item);
+      }
+
+      setState(() {
+        _listaSaludos = unicosPorChol.values.toList();
         _isLoading = false;
       });
     } catch (e) {
@@ -55,7 +63,6 @@ class _ActividadSaludosAudioScreenState extends State<ActividadSaludosAudioScree
 
   @override
   Widget build(BuildContext context) {
-    // Si todavía está cargando el archivo, mostramos un indicador visual
     if (_isLoading) {
       return Scaffold(
         backgroundColor: const Color(0xFFFAF3E0),
@@ -73,17 +80,19 @@ class _ActividadSaludosAudioScreenState extends State<ActividadSaludosAudioScree
       );
     }
 
-    // Si ocurrió algún error o está vacío
     if (_listaSaludos.isEmpty) {
       return Scaffold(
-        appBar: AppBar(title: const Text('Error')),
+        appBar: AppBar(
+          backgroundColor: Colors.brown.shade800,
+          title: const Text('Aviso', style: TextStyle(color: Colors.white)),
+          iconTheme: const IconThemeData(color: Colors.white),
+        ),
         body: const Center(
-          child: Text('No se pudieron cargar los datos de saludos.'),
+          child: Text('No hay saludos con audio disponible en este módulo.'),
         ),
       );
     }
 
-    // Retornamos la pantalla refactorizada con los datos filtrados exclusivamente de la categoría 'saludos'
     return ActividadAudio(
       tituloActividad: 'Actividad 1: Saludos',
       backgroundImage: 'assets/image/learning/bg_casa_06.webp',

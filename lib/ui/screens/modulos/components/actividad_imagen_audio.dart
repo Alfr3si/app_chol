@@ -40,12 +40,15 @@ class _ActividadImagenAudioState extends State<ActividadImagenAudio>
   @override
   void initState() {
     super.initState();
-    // Filtro flexible: acepta elementos con texto válido en Ch'ol y Español
+    // Filtro estricto: solo items que tengan tanto imagen como audio existentes en el JSON
     _activeQueue = List.from(
-      widget.listaItems.where((item) => 
-        item.chol.isNotEmpty && 
-        item.espanol.isNotEmpty
-      ),
+      widget.listaItems.where((item) =>
+          item.chol.isNotEmpty &&
+          item.espanol.isNotEmpty &&
+          item.pathImagen != null &&
+          item.pathImagen!.trim().isNotEmpty &&
+          item.pathAudio != null &&
+          item.pathAudio!.trim().isNotEmpty),
     )..shuffle();
 
     _animationController = AnimationController(
@@ -84,7 +87,7 @@ class _ActividadImagenAudioState extends State<ActividadImagenAudio>
     final random = Random();
 
     List<String> opcionesFalsas = widget.listaItems
-        .where((item) => item.chol != current.chol)
+        .where((item) => item.chol.isNotEmpty && item.chol != current.chol)
         .map((item) => item.chol)
         .toList()
       ..shuffle(random);
@@ -211,8 +214,10 @@ class _ActividadImagenAudioState extends State<ActividadImagenAudio>
     if (_activeQueue.isEmpty) {
       return Scaffold(
         backgroundColor: const Color(0xFFFAF3E0),
-        appBar: AppBar(backgroundColor: Colors.brown.shade800, title: const Text('Cargando...')),
-        body: const Center(child: CircularProgressIndicator(color: Colors.orange)),
+        appBar: AppBar(backgroundColor: Colors.brown.shade800, title: const Text('Aviso')),
+        body: const Center(
+          child: Text('No hay elementos con imagen y audio disponibles para esta actividad.'),
+        ),
       );
     }
 
@@ -293,27 +298,12 @@ class _ActividadImagenAudioState extends State<ActividadImagenAudio>
                                   ),
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(13.5),
-                                    child: current.pathImagen != null && current.pathImagen!.isNotEmpty
-                                        ? Image.asset(
-                                            current.pathImagen!,
-                                            fit: BoxFit.contain,
-                                            errorBuilder: (context, error, stackTrace) =>
-                                                const Icon(Icons.image_not_supported, size: 40, color: Colors.grey),
-                                          )
-                                        : Center(
-                                            child: Padding(
-                                              padding: const EdgeInsets.all(8.0),
-                                              child: Text(
-                                                current.espanol,
-                                                textAlign: TextAlign.center,
-                                                style: const TextStyle(
-                                                  fontSize: 12,
-                                                  fontWeight: FontWeight.bold,
-                                                  color: Colors.brown,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
+                                    child: Image.asset(
+                                      current.pathImagen!,
+                                      fit: BoxFit.contain,
+                                      errorBuilder: (context, error, stackTrace) =>
+                                          const Icon(Icons.image_not_supported, size: 40, color: Colors.grey),
+                                    ),
                                   ),
                                 ),
                               ),
@@ -334,23 +324,21 @@ class _ActividadImagenAudioState extends State<ActividadImagenAudio>
                                     style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: Colors.brown.shade900),
                                     overflow: TextOverflow.ellipsis,
                                   ),
-                                  if (current.pathAudio != null && current.pathAudio!.isNotEmpty) ...[
-                                    const SizedBox(height: 4),
-                                    SizedBox(
-                                      height: 28,
-                                      child: ElevatedButton.icon(
-                                        style: ElevatedButton.styleFrom(
-                                          backgroundColor: Colors.orange.shade700,
-                                          foregroundColor: Colors.white,
-                                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-                                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-                                        ),
-                                        onPressed: () => _reproducirAudio(current.pathAudio),
-                                        icon: const Icon(Icons.volume_up, size: 14),
-                                        label: const Text('Escuchar', style: TextStyle(fontSize: 10)),
+                                  const SizedBox(height: 4),
+                                  SizedBox(
+                                    height: 28,
+                                    child: ElevatedButton.icon(
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: Colors.orange.shade700,
+                                        foregroundColor: Colors.white,
+                                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                                       ),
+                                      onPressed: () => _reproducirAudio(current.pathAudio),
+                                      icon: const Icon(Icons.volume_up, size: 14),
+                                      label: const Text('Escuchar', style: TextStyle(fontSize: 10)),
                                     ),
-                                  ],
+                                  ),
                                 ],
                               ),
                             ),

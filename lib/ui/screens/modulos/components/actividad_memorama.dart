@@ -53,7 +53,7 @@ class _ActividadMemoramaState extends State<ActividadMemorama> {
   }
 
   Future<void> _reproducirAudio(String? path) async {
-    if (path == null || path.isEmpty) return;
+    if (path == null || path.trim().isEmpty) return;
     try {
       String assetName = path.replaceAll('assets/audio/palabras/', '');
       await FlameAudio.play('palabras/$assetName');
@@ -63,13 +63,19 @@ class _ActividadMemoramaState extends State<ActividadMemorama> {
   }
 
   void _iniciarMemorama() {
-    // 🔍 FILTRO ESTRICTO: Solo elementos con texto en Ch'ol y que tengan una ruta de imagen válida
-    List<ItemVocabulario> disponibles = widget.listaItems
-        .where((item) =>
-            item.chol.isNotEmpty &&
-            item.pathImagen != null &&
-            item.pathImagen!.isNotEmpty)
-        .toList()
+    // 1. Filtramos estrictamente elementos con texto en Ch'ol e imagen existente en el JSON
+    final filtrados = widget.listaItems.where((item) =>
+        item.chol.trim().isNotEmpty &&
+        item.pathImagen != null &&
+        item.pathImagen!.trim().isNotEmpty);
+
+    // 2. Evitamos palabras repetidas para no duplicar idUnico en el tablero
+    final Map<String, ItemVocabulario> unicosPorChol = {};
+    for (var item in filtrados) {
+      unicosPorChol.putIfAbsent(item.chol.trim().toLowerCase(), () => item);
+    }
+
+    List<ItemVocabulario> disponibles = unicosPorChol.values.toList()
       ..shuffle(Random());
 
     int cantidad = disponibles.length >= 4 ? 4 : disponibles.length;
@@ -79,7 +85,7 @@ class _ActividadMemoramaState extends State<ActividadMemorama> {
     List<CartaMemorama> tempCartas = [];
 
     for (var item in seleccionados) {
-      // Carta 1: Muestra el texto en Ch'ol
+      // Carta 1: Muestra exclusivamente el texto en Ch'ol
       tempCartas.add(CartaMemorama(
         idUnico: item.chol,
         textoMostrado: item.chol,
@@ -192,6 +198,16 @@ class _ActividadMemoramaState extends State<ActividadMemorama> {
       );
     }
 
+    if (_cartas.isEmpty) {
+      return Scaffold(
+        backgroundColor: const Color(0xFFFAF3E0),
+        appBar: AppBar(backgroundColor: Colors.brown.shade800, title: Text(widget.tituloActividad)),
+        body: const Center(
+          child: Text('No hay suficientes elementos con imagen disponibles para jugar.'),
+        ),
+      );
+    }
+
     return Scaffold(
       backgroundColor: Colors.transparent,
       appBar: AppBar(
@@ -266,7 +282,7 @@ class _ActividadMemoramaState extends State<ActividadMemorama> {
                             child: carta.estaVolteada || carta.estaEncontrada
                                 ? Padding(
                                     padding: const EdgeInsets.all(2.0),
-                                    child: carta.pathImagen != null && carta.pathImagen!.isNotEmpty
+                                    child: carta.pathImagen != null && carta.pathImagen!.trim().isNotEmpty
                                         ? Image.asset(
                                             carta.pathImagen!,
                                             fit: BoxFit.contain,

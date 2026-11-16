@@ -2,8 +2,13 @@
 import 'package:flutter/material.dart';
 import '../../../core/base/base_mapa_screen.dart';
 
-// Importa aquí las pantallas de tus actividades del Módulo 2:
-// import './actividades/actividad_1_screen.dart';
+// Importación de las actividades del Módulo 2 por categoría
+import 'actividades/actividad_entorno_imagen_audio_screen.dart'; // Actividad 1
+import 'actividades/actividad_casa_seleccion_imagen_screen.dart'; // Actividad 2
+import 'actividades/actividad_adjetivos_audio_screen.dart';     // Actividad 3
+import 'actividades/actividad_memorama_screen.dart';            // Actividad 4
+import 'actividades/actividad_pronombres_relacionar_screen.dart'; // Actividad 5
+import 'actividades/actividad_preguntas_relacionar_screen.dart'; // Actividad 6
 
 class MapaModulo2Screen extends StatelessWidget {
   const MapaModulo2Screen({super.key});
@@ -17,7 +22,7 @@ class MapaModulo2Screen extends StatelessWidget {
       // 1. Fondo correspondiente a este mapa
       backgroundAsset: 'elements/mapa2.webp',
 
-      // 2. Obstáculos y colisiones específicas del Módulo 2 (extraídas del XML)
+      // 2. Obstáculos y colisiones específicas del Módulo 2
       obstacles: const [
         Rect.fromLTWH(4, 2.66667, 124, 280),
         Rect.fromLTWH(742, 3.33333, 53.3333, 186),
@@ -37,7 +42,7 @@ class MapaModulo2Screen extends StatelessWidget {
         Rect.fromLTWH(130.334, 117.5, 56.333, 170),
         Rect.fromLTWH(189.167, 117.667, 64.333, 42.6667),
         Rect.fromLTWH(320.834, 245, 191.333, 44),
-        Rect.fromLTWH(417.334, 279, 127.333, 44), // Corregido sin prefijos extra
+        Rect.fromLTWH(417.334, 279, 127.333, 44),
         Rect.fromLTWH(419.334, 309, 153.333, 140.333),
         Rect.fromLTWH(515.333, 342, 150.666, 107.333),
         Rect.fromLTWH(419.333, 471, 90.333, 41),
@@ -47,12 +52,12 @@ class MapaModulo2Screen extends StatelessWidget {
 
       // 3. Coordenadas de las casas / sensores de actividad (6 puntos del XML)
       casasRects: const [
-        Rect.fromLTWH(137.333, 81.3333, 30.0, 30.0),  // ID 28
-        Rect.fromLTWH(664, 100, 30.0, 30.0),          // ID 29
-        Rect.fromLTWH(886.667, 101.333, 30.0, 30.0),  // ID 30
-        Rect.fromLTWH(541.333, 457.333, 30.0, 30.0),  // ID 31
-        Rect.fromLTWH(88, 288, 30.0, 30.0),           // ID 32
-        Rect.fromLTWH(150.667, 565.333, 30.0, 30.0),  // ID 33
+        Rect.fromLTWH(137.333, 81.3333, 30.0, 30.0),  // ID 28 (Actividad 1)
+        Rect.fromLTWH(664, 100, 30.0, 30.0),         // ID 29 (Actividad 2)
+        Rect.fromLTWH(886.667, 101.333, 30.0, 30.0), // ID 30 (Actividad 3)
+        Rect.fromLTWH(541.333, 457.333, 30.0, 30.0), // ID 31 (Actividad 4)
+        Rect.fromLTWH(88, 288, 30.0, 30.0),          // ID 32 (Actividad 5)
+        Rect.fromLTWH(150.667, 565.333, 30.0, 30.0), // ID 33 (Actividad 6)
       ],
 
       // 4. Títulos de las casas que aparecerán en la ventana flotante
@@ -69,7 +74,17 @@ class MapaModulo2Screen extends StatelessWidget {
       onNavigateToActivity: (activityName) {
         switch (activityName) {
           case 'Actividad 1':
-            // return const Actividad1Screen();
+            return const ActividadEntornoImagenAudioScreen();
+          case 'Actividad 2':
+            return const ActividadCasaSeleccionImagenScreen();
+          case 'Actividad 3':
+            return const ActividadAdjetivosAudioScreen();
+          case 'Actividad 4':
+            return const ActividadMemoramaScreen();
+          case 'Actividad 5':
+            return const ActividadPronombresRelacionarScreen();
+          case 'Actividad 6':
+            return const ActividadPreguntasRelacionarScreen();
           default:
             return Scaffold(
               appBar: AppBar(title: Text(activityName)),

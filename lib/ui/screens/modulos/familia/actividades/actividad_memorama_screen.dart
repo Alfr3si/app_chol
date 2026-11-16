@@ -27,7 +27,6 @@ class _ActividadMemoramaScreenState extends State<ActividadMemoramaScreen> {
       final String jsonString = await rootBundle.loadString('assets/data/module_1_familia.json');
       final Map<String, dynamic> jsonData = json.decode(jsonString);
 
-      // Combinamos muestras léxicas y sintácticas para el memorama
       final List<dynamic> muestrasLexicas = jsonData['muestras_lexicas'] ?? [];
       final List<dynamic> muestrasSintacticas = jsonData['muestras_sintacticas'] ?? [];
       final List<dynamic> todasLasMuestras = [...muestrasLexicas, ...muestrasSintacticas];
@@ -35,10 +34,13 @@ class _ActividadMemoramaScreenState extends State<ActividadMemoramaScreen> {
       setState(() {
         _listaItems = todasLasMuestras
             .map((item) => ItemVocabulario.fromJson(item))
+            // Filtro estricto: texto en Ch'ol + imagen obligatoria + audio obligatorio
             .where((item) =>
-                item.chol.isNotEmpty &&
+                item.chol.trim().isNotEmpty &&
                 item.pathImagen != null &&
-                item.pathImagen!.isNotEmpty)
+                item.pathImagen!.trim().isNotEmpty &&
+                item.pathAudio != null &&
+                item.pathAudio!.trim().isNotEmpty)
             .toList();
 
         _isLoading = false;
@@ -63,7 +65,7 @@ class _ActividadMemoramaScreenState extends State<ActividadMemoramaScreen> {
       return Scaffold(
         appBar: AppBar(backgroundColor: Colors.brown.shade800, title: const Text('Memorama')),
         body: const Center(
-          child: Text('No hay suficientes elementos con imagen para el memorama.'),
+          child: Text('No hay suficientes elementos con imagen y audio para el memorama.'),
         ),
       );
     }

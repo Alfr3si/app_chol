@@ -32,13 +32,17 @@ class _ActividadVisualFamiliaScreenState extends State<ActividadVisualFamiliaScr
       setState(() {
         _listaItems = muestras
             .map((item) => ItemVocabulario.fromJson(item))
-            // Filtro flexible por categoría y campos esenciales en Ch'ol y Español
-            .where((item) => 
-                item.categoria == 'familia' && 
+            // Filtro estricto: categoría 'familia' + texto válido + imagen y audio existentes en JSON
+            .where((item) =>
+                item.categoria == 'familia' &&
                 item.chol.isNotEmpty &&
-                item.espanol.isNotEmpty)
+                item.espanol.isNotEmpty &&
+                item.pathImagen != null &&
+                item.pathImagen!.trim().isNotEmpty &&
+                item.pathAudio != null &&
+                item.pathAudio!.trim().isNotEmpty)
             .toList();
-        
+
         _isLoading = false;
       });
     } catch (e) {
@@ -60,7 +64,7 @@ class _ActividadVisualFamiliaScreenState extends State<ActividadVisualFamiliaScr
     if (_listaItems.isEmpty) {
       return Scaffold(
         appBar: AppBar(title: const Text('Aviso')),
-        body: const Center(child: Text('No hay suficientes elementos de vocabulario en esta categoría.')),
+        body: const Center(child: Text('No hay suficientes elementos con imagen y audio en esta categoría.')),
       );
     }
 
