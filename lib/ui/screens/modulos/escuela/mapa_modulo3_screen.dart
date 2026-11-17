@@ -2,8 +2,12 @@
 import 'package:flutter/material.dart';
 import '../../../core/base/base_mapa_screen.dart';
 
-// Importa aquí las pantallas de tus actividades del Módulo 3:
-// import './actividades/actividad_1_screen.dart';
+// Importación de las 5 actividades del Módulo 3 por categoría
+import 'actividades/actividad_oficios_imagen_audio_screen.dart';     // Actividad 1
+import 'actividades/actividad_utiles_seleccion_imagen_screen.dart';  // Actividad 2
+import 'actividades/actividad_numeros_audio_screen.dart';            // Actividad 3
+import 'actividades/actividad_memorama_screen.dart';                 // Actividad 4
+import 'actividades/actividad_acciones_relacionar_screen.dart';       // Actividad 5
 
 class MapaModulo3Screen extends StatelessWidget {
   const MapaModulo3Screen({super.key});
@@ -17,7 +21,7 @@ class MapaModulo3Screen extends StatelessWidget {
       // 1. Fondo correspondiente a este mapa
       backgroundAsset: 'elements/mapa3.webp',
 
-      // 2. Obstáculos y colisiones específicas del Módulo 3 (extraídas del XML)
+      // 2. Obstáculos y colisiones específicas del Módulo 3
       obstacles: const [
         Rect.fromLTWH(2.25312, 2.25312, 953.072, 29.2906),
         Rect.fromLTWH(2.25312, 33.7969, 57.4547, 603.837),
@@ -40,11 +44,11 @@ class MapaModulo3Screen extends StatelessWidget {
 
       // 3. Coordenadas de las casas / sensores de actividad (5 puntos del XML)
       casasRects: const [
-        Rect.fromLTWH(95.7578, 95.7578, 30.0, 30.0),   // ID 25
-        Rect.fromLTWH(853.934, 128.428, 30.0, 30.0),  // ID 26
-        Rect.fromLTWH(478.789, 321.07, 30.0, 30.0),   // ID 27
-        Rect.fromLTWH(128.428, 417.955, 30.0, 30.0),  // ID 28
-        Rect.fromLTWH(844.922, 385.284, 30.0, 30.0),  // ID 29
+        Rect.fromLTWH(95.7578, 95.7578, 30.0, 30.0),   // ID 25 (Actividad 1)
+        Rect.fromLTWH(853.934, 128.428, 30.0, 30.0),  // ID 26 (Actividad 2)
+        Rect.fromLTWH(478.789, 321.07, 30.0, 30.0),   // ID 27 (Actividad 3)
+        Rect.fromLTWH(128.428, 417.955, 30.0, 30.0),  // ID 28 (Actividad 4)
+        Rect.fromLTWH(844.922, 385.284, 30.0, 30.0),  // ID 29 (Actividad 5)
       ],
 
       // 4. Títulos de las casas que aparecerán en la ventana flotante
@@ -60,7 +64,15 @@ class MapaModulo3Screen extends StatelessWidget {
       onNavigateToActivity: (activityName) {
         switch (activityName) {
           case 'Actividad 1':
-            // return const Actividad1Screen();
+            return const ActividadOficiosImagenAudioScreen();
+          case 'Actividad 2':
+            return const ActividadUtilesSeleccionImagenScreen();
+          case 'Actividad 3':
+            return const ActividadNumerosAudioScreen();
+          case 'Actividad 4':
+            return const ActividadMemoramaScreen();
+          case 'Actividad 5':
+            return const ActividadAccionesRelacionarScreen();
           default:
             return Scaffold(
               appBar: AppBar(title: Text(activityName)),
