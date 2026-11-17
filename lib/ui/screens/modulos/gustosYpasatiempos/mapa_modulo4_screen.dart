@@ -2,8 +2,12 @@
 import 'package:flutter/material.dart';
 import '../../../core/base/base_mapa_screen.dart';
 
-// Importa aquí las pantallas de tus actividades del Módulo 4:
-// import './actividades/actividad_1_screen.dart';
+// Importaciones completas y correctas de las 5 actividades del Módulo 4
+import 'actividades/actividad_pasatiempos_imagen_audio_screen.dart';
+import 'actividades/actividad_numeros_audio_screen.dart';
+import 'actividades/actividad_pasatiempos_audio_screen.dart';
+import 'actividades/actividad_memorama_screen.dart';
+import 'actividades/actividad_alimentos_relacionar_screen.dart';
 
 class MapaModulo4Screen extends StatelessWidget {
   const MapaModulo4Screen({super.key});
@@ -64,7 +68,15 @@ class MapaModulo4Screen extends StatelessWidget {
       onNavigateToActivity: (activityName) {
         switch (activityName) {
           case 'Actividad 1':
-            // return const Actividad1Screen();
+            return const ActividadPasatiemposImagenAudioScreen();
+          case 'Actividad 2':
+            return const ActividadNumerosAudioScreen();
+          case 'Actividad 3':
+            return const ActividadPasatiemposAudioScreen();
+          case 'Actividad 4':
+            return const ActividadMemoramaScreen();
+          case 'Actividad 5':
+            return const ActividadAlimentosRelacionarScreen();
           default:
             return Scaffold(
               appBar: AppBar(title: Text(activityName)),
