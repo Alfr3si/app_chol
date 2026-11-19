@@ -1,30 +1,33 @@
 import 'package:app_chol/core/audio_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart'; // 1. Importa dotenv
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'ui/screens/splash_screen.dart';
 import './core/app_brightness_overlay.dart';
 
 Future<void> main() async {
-  // 2. Vuelve la función main asíncrona
   WidgetsFlutterBinding.ensureInitialized();
 
-  // 3. Carga el archivo .env antes de iniciar la app y configurar la pantalla
   await dotenv.load(fileName: ".env");
 
-  // monitoreo de bloqueo de pantalla para el audio
+  // Monitoreo de bloqueo de pantalla para el audio
   AudioManager.instance.init();
 
-  // Orientacion de la pantalla
-  SystemChrome.setPreferredOrientations([
+  // Orientación de la pantalla
+  await SystemChrome.setPreferredOrientations([
     DeviceOrientation.landscapeLeft,
     DeviceOrientation.landscapeRight,
   ]);
 
-  SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+  await SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
 
-  runApp(const AppChol());
+  runApp(
+    const ProviderScope(
+      child: AppChol(),
+    ),
+  );
 }
 
 class AppChol extends StatelessWidget {
@@ -40,7 +43,6 @@ class AppChol extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.orangeAccent),
       ),
       home: const SplashScreen(),
-
       builder: (context, child) => AppBrightnessOverlay(child: child!),
     );
   }

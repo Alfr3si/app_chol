@@ -47,6 +47,7 @@ dependencies:
   drift: ^2.18.0
   sqlite3_flutter_libs: ^0.5.2
   flutter_riverpod: ^2.6.1
+  uuid: ^4.6.0
 
   # para la importacion de el .env
   flutter_dotenv: ^5.2.1
