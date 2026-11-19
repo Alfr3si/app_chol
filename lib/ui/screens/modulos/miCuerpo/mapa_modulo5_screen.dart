@@ -2,8 +2,12 @@
 import 'package:flutter/material.dart';
 import '../../../core/base/base_mapa_screen.dart';
 
-// Importa aquí las pantallas de tus actividades del Módulo 5:
-// import './actividades/actividad_1_screen.dart';
+// Importaciones de las 5 actividades del Módulo 5
+import 'actividades/actividad_cuerpo_imagen_audio_screen.dart';
+import 'actividades/actividad_emociones_imagen_audio_screen.dart';
+import 'actividades/actividad_salud_audio_screen.dart';
+import 'actividades/actividad_memorama_screen.dart';
+import 'actividades/actividad_ropa_audio_screen.dart';
 
 class MapaModulo5Screen extends StatelessWidget {
   const MapaModulo5Screen({super.key});
@@ -13,7 +17,7 @@ class MapaModulo5Screen extends StatelessWidget {
     return BaseMapaScreen(
       moduloId: 5,
       tituloModulo: 'Mi Cuerpo',
-      
+
       // 1. Fondo correspondiente a este mapa
       backgroundAsset: 'elements/mapa5.webp',
 
@@ -40,11 +44,11 @@ class MapaModulo5Screen extends StatelessWidget {
 
       // 3. Coordenadas de las casas / sensores de actividad (5 puntos del XML)
       casasRects: const [
-        Rect.fromLTWH(119.416, 129.555, 30.0, 30.0),  // ID 18
-        Rect.fromLTWH(831.403, 129.555, 30.0, 30.0),  // ID 19
-        Rect.fromLTWH(855.061, 319.944, 30.0, 30.0),  // ID 20
-        Rect.fromLTWH(481.042, 319.944, 30.0, 30.0),  // ID 21
-        Rect.fromLTWH(95.7578, 479.916, 30.0, 30.0),  // ID 22
+        Rect.fromLTWH(119.416, 129.555, 30.0, 30.0), // ID 18
+        Rect.fromLTWH(831.403, 129.555, 30.0, 30.0), // ID 19
+        Rect.fromLTWH(855.061, 319.944, 30.0, 30.0), // ID 20
+        Rect.fromLTWH(481.042, 319.944, 30.0, 30.0), // ID 21
+        Rect.fromLTWH(95.7578, 479.916, 30.0, 30.0), // ID 22
       ],
 
       // 4. Títulos de las casas que aparecerán en la ventana flotante
@@ -60,11 +64,21 @@ class MapaModulo5Screen extends StatelessWidget {
       onNavigateToActivity: (activityName) {
         switch (activityName) {
           case 'Actividad 1':
-            // return const Actividad1Screen();
+            return const ActividadCuerpoImagenAudioScreen();
+          case 'Actividad 2':
+            return const ActividadEmocionesImagenAudioScreen();
+          case 'Actividad 3':
+            return const ActividadSaludAudioScreen();
+          case 'Actividad 4':
+            return const ActividadMemoramaScreen();
+          case 'Actividad 5':
+            return const ActividadRopaAudioScreen();
           default:
             return Scaffold(
               appBar: AppBar(title: Text(activityName)),
-              body: Center(child: Text('Pantalla de $activityName en construcción')),
+              body: Center(
+                child: Text('Pantalla de $activityName en construcción'),
+              ),
             );
         }
       },

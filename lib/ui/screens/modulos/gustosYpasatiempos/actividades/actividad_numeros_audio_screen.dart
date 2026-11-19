@@ -8,6 +8,7 @@ import '../../components/actividad_audio.dart';
 
 class ActividadNumerosAudioScreen extends StatefulWidget {
   final String categoriaFiltro;
+
   const ActividadNumerosAudioScreen({
     super.key,
     this.categoriaFiltro = 'numeros',
@@ -32,19 +33,21 @@ class _ActividadNumerosAudioScreenState
   Future<void> _cargarDatosDesdeJson() async {
     try {
       final String jsonString = await rootBundle.loadString(
-        'assets/data/module_4_gustos.json',
+        'assets/data/module_4_gustosYpasatiempos.json',
       );
       final Map<String, dynamic> jsonData = json.decode(jsonString);
 
       final List<dynamic> muestras = jsonData['muestras_lexicas'] ?? [];
+      final String filtroNormalizado =
+          widget.categoriaFiltro.trim().toLowerCase();
 
-      // Filtro estricto: categoría 'numeros' + texto válido en Ch'ol y Español + audio existente obligatorio
+      // Filtro estricto: categoría solicitada + texto válido en Ch'ol y Español + audio obligatorio
       final filtrados = muestras
           .map((item) => ItemVocabulario.fromJson(item))
           .where(
             (item) =>
                 (item.categoria ?? '').trim().toLowerCase() ==
-                    widget.categoriaFiltro.trim().toLowerCase() &&
+                    filtroNormalizado &&
                 item.chol.trim().isNotEmpty &&
                 item.chol.trim().toLowerCase() != 'no tiene traducción' &&
                 item.espanol.trim().isNotEmpty &&
@@ -54,16 +57,18 @@ class _ActividadNumerosAudioScreenState
 
       // Evitamos duplicados de la misma expresión en Ch'ol
       final Map<String, ItemVocabulario> unicosPorChol = {};
-      for (var item in filtrados) {
+      for (final item in filtrados) {
         unicosPorChol.putIfAbsent(item.chol.trim().toLowerCase(), () => item);
       }
 
+      if (!mounted) return;
       setState(() {
         _listaItems = unicosPorChol.values.toList();
         _isLoading = false;
       });
     } catch (e) {
       debugPrint('Error al cargar el JSON de audio para números: $e');
+      if (!mounted) return;
       setState(() => _isLoading = false);
     }
   }
@@ -89,13 +94,28 @@ class _ActividadNumerosAudioScreenState
 
     if (_listaItems.isEmpty) {
       return Scaffold(
+        backgroundColor: const Color(0xFFFAF3E0),
         appBar: AppBar(
           backgroundColor: Colors.brown.shade800,
-          title: const Text('Aviso', style: TextStyle(color: Colors.white)),
+          title: const Text(
+            'Actividad 2: Números y Audio',
+            style: TextStyle(color: Colors.white),
+          ),
           iconTheme: const IconThemeData(color: Colors.white),
         ),
         body: const Center(
-          child: Text('No hay elementos con audio disponible en esta actividad.'),
+          child: Padding(
+            padding: EdgeInsets.all(20.0),
+            child: Text(
+              'No hay elementos de números con audio disponible en esta actividad.',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.bold,
+                color: Colors.brown,
+              ),
+            ),
+          ),
         ),
       );
     }

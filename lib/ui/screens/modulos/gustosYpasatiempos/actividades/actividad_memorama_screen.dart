@@ -24,39 +24,48 @@ class _ActividadMemoramaScreenState extends State<ActividadMemoramaScreen> {
 
   Future<void> _cargarDatosDesdeJson() async {
     try {
-      final String jsonString = await rootBundle.loadString('assets/data/module_4_gustos.json');
+      final String jsonString =
+          await rootBundle.loadString('assets/data/module_4_gustosYpasatiempos.json');
       final Map<String, dynamic> jsonData = json.decode(jsonString);
 
       final List<dynamic> muestrasLexicas = jsonData['muestras_lexicas'] ?? [];
-      final List<dynamic> muestrasSintacticas = jsonData['muestras_sintacticas'] ?? [];
-      final List<dynamic> todasLasMuestras = [...muestrasLexicas, ...muestrasSintacticas];
+      final List<dynamic> muestrasSintacticas =
+          jsonData['muestras_sintacticas'] ?? [];
+      final List<dynamic> todasLasMuestras = [
+        ...muestrasLexicas,
+        ...muestrasSintacticas,
+      ];
 
-      // Filtro estricto: categoría alimentos o frutas + texto válido + imagen obligatoria + audio obligatorio
+      // Filtro: categorías 'alimentos' o 'frutas' + texto válido en Ch'ol/Español + imagen obligatoria
       final filtrados = todasLasMuestras
           .map((item) => ItemVocabulario.fromJson(item))
-          .where((item) =>
-              (item.categoria?.trim().toLowerCase() == 'alimentos' ||
-               item.categoria?.trim().toLowerCase() == 'frutas') &&
-              item.chol.trim().isNotEmpty &&
-              item.chol.trim().toLowerCase() != 'no tiene traducción' &&
-              item.espanol.trim().isNotEmpty &&
-              item.pathImagen != null &&
-              item.pathImagen!.trim().isNotEmpty &&
-              item.pathAudio != null &&
-              item.pathAudio!.trim().isNotEmpty);
+          .where((item) {
+            final categoria = (item.categoria ?? '').trim().toLowerCase();
+            final esCategoriaValida =
+                categoria == 'alimentos' || categoria == 'frutas';
+            final tieneTextoValido = item.chol.trim().isNotEmpty &&
+                item.chol.trim().toLowerCase() != 'no tiene traducción' &&
+                item.espanol.trim().isNotEmpty;
+            final tieneImagen = item.pathImagen != null &&
+                item.pathImagen!.trim().isNotEmpty;
 
-      // Deduplicamos por palabra en Ch'ol para evitar duplicados en el tablero
+            return esCategoriaValida && tieneTextoValido && tieneImagen;
+          });
+
+      // Deduplicamos por expresión en Ch'ol para evitar pares repetidos
       final Map<String, ItemVocabulario> unicosPorChol = {};
-      for (var item in filtrados) {
+      for (final item in filtrados) {
         unicosPorChol.putIfAbsent(item.chol.trim().toLowerCase(), () => item);
       }
 
+      if (!mounted) return;
       setState(() {
         _listaItems = unicosPorChol.values.toList();
         _isLoading = false;
       });
     } catch (e) {
       debugPrint('Error al cargar datos del memorama del módulo 4: $e');
+      if (!mounted) return;
       setState(() => _isLoading = false);
     }
   }
@@ -68,27 +77,40 @@ class _ActividadMemoramaScreenState extends State<ActividadMemoramaScreen> {
         backgroundColor: const Color(0xFFFAF3E0),
         appBar: AppBar(
           backgroundColor: Colors.brown.shade800,
-          title: const Text('Cargando memorama...', style: TextStyle(color: Colors.white)),
+          title: const Text(
+            'Cargando memorama...',
+            style: TextStyle(color: Colors.white),
+          ),
           iconTheme: const IconThemeData(color: Colors.white),
         ),
-        body: const Center(child: CircularProgressIndicator(color: Colors.orange)),
+        body: const Center(
+          child: CircularProgressIndicator(color: Colors.orange),
+        ),
       );
     }
 
     if (_listaItems.isEmpty) {
       return Scaffold(
+        backgroundColor: const Color(0xFFFAF3E0),
         appBar: AppBar(
           backgroundColor: Colors.brown.shade800,
-          title: const Text('Memorama', style: TextStyle(color: Colors.white)),
+          title: const Text(
+            'Actividad 4: Memorama',
+            style: TextStyle(color: Colors.white),
+          ),
           iconTheme: const IconThemeData(color: Colors.white),
         ),
         body: const Center(
           child: Padding(
             padding: EdgeInsets.all(20.0),
             child: Text(
-              'No hay suficientes elementos de alimentos y frutas con imagen y audio para el memorama.',
+              'No hay suficientes elementos de alimentos y frutas con imagen para el memorama.',
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Colors.brown),
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.bold,
+                color: Colors.brown,
+              ),
             ),
           ),
         ),
