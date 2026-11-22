@@ -51,26 +51,31 @@ class MapaModulo5Screen extends StatelessWidget {
         Rect.fromLTWH(95.7578, 479.916, 30.0, 30.0), // ID 22
       ],
 
-      // 4. Títulos de las casas que aparecerán en la ventana flotante
+      // 4. Títulos coherentes para la ventana flotante
       houseNames: const [
-        'Actividad 1',
-        'Actividad 2',
-        'Actividad 3',
-        'Actividad 4',
-        'Actividad 5',
+        'Conoce el cuerpo',
+        'Conoce emociones',
+        'Escucha salud',
+        'Juega memorama',
+        'Escucha la ropa',
       ],
 
       // 5. Enrutamiento hacia las pantallas de actividades de este módulo
       onNavigateToActivity: (activityName) {
         switch (activityName) {
+          case 'Conoce el cuerpo':
           case 'Actividad 1':
             return const ActividadCuerpoImagenAudioScreen();
+          case 'Conoce emociones':
           case 'Actividad 2':
             return const ActividadEmocionesImagenAudioScreen();
+          case 'Escucha salud':
           case 'Actividad 3':
             return const ActividadSaludAudioScreen();
+          case 'Juega memorama':
           case 'Actividad 4':
             return const ActividadMemoramaScreen();
+          case 'Escucha la ropa':
           case 'Actividad 5':
             return const ActividadRopaAudioScreen();
           default:

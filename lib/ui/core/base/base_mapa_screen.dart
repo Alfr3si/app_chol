@@ -104,7 +104,7 @@ class _BaseMapaScreenState extends State<BaseMapaScreen> {
                     ),
                     const SizedBox(height: 10),
                     const Text(
-                      '¡Has llegado a una casa!',
+                      '¡Actividad!',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 18,

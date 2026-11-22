@@ -17,7 +17,7 @@ class MapaModulo4Screen extends StatelessWidget {
     return BaseMapaScreen(
       moduloId: 4,
       tituloModulo: 'Gustos y Pasatiempos',
-      
+
       // 1. Fondo correspondiente a este mapa
       backgroundAsset: 'elements/mapa4.webp',
 
@@ -48,39 +48,46 @@ class MapaModulo4Screen extends StatelessWidget {
 
       // 3. Coordenadas de las casas / sensores de actividad (5 puntos del XML)
       casasRects: const [
-        Rect.fromLTWH(121.669, 95.7578, 30.0, 30.0),   // ID 30
-        Rect.fromLTWH(503.573, 96.8844, 30.0, 30.0),  // ID 31
-        Rect.fromLTWH(832.529, 129.555, 30.0, 30.0),  // ID 32
-        Rect.fromLTWH(857.314, 350.361, 30.0, 30.0),  // ID 33
-        Rect.fromLTWH(670.305, 350.361, 30.0, 30.0),  // ID 34
+        Rect.fromLTWH(121.669, 95.7578, 30.0, 30.0), // ID 30
+        Rect.fromLTWH(503.573, 96.8844, 30.0, 30.0), // ID 31
+        Rect.fromLTWH(832.529, 129.555, 30.0, 30.0), // ID 32
+        Rect.fromLTWH(857.314, 350.361, 30.0, 30.0), // ID 33
+        Rect.fromLTWH(670.305, 350.361, 30.0, 30.0), // ID 34
       ],
 
-      // 4. Títulos de las casas que aparecerán en la ventana flotante
+      // 4. Títulos coherentes para la ventana flotante
       houseNames: const [
-        'Actividad 1',
-        'Actividad 2',
-        'Actividad 3',
-        'Actividad 4',
-        'Actividad 5',
+        'Conoce pasatiempos',
+        'Escucha números',
+        'Escucha pasatiempos',
+        'Juega memorama',
+        'Une alimentos',
       ],
 
       // 5. Enrutamiento hacia las pantallas de actividades de este módulo
       onNavigateToActivity: (activityName) {
         switch (activityName) {
+          case 'Conoce pasatiempos':
           case 'Actividad 1':
             return const ActividadPasatiemposImagenAudioScreen();
+          case 'Escucha números':
           case 'Actividad 2':
             return const ActividadNumerosAudioScreen();
+          case 'Escucha pasatiempos':
           case 'Actividad 3':
             return const ActividadPasatiemposAudioScreen();
+          case 'Juega memorama':
           case 'Actividad 4':
             return const ActividadMemoramaScreen();
+          case 'Une alimentos':
           case 'Actividad 5':
             return const ActividadAlimentosRelacionarScreen();
           default:
             return Scaffold(
               appBar: AppBar(title: Text(activityName)),
-              body: Center(child: Text('Pantalla de $activityName en construcción')),
+              body: Center(
+                child: Text('Pantalla de $activityName en construcción'),
+              ),
             );
         }
       },

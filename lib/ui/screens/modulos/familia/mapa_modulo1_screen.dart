@@ -54,56 +54,79 @@ class MapaModulo1Screen extends StatelessWidget {
         Rect.fromLTWH(120, 322.667, 30.0, 30.0), // ID 40
       ],
 
-      // 4. Títulos de las casas que aparecerán en la ventana flotante
+      // 4. Títulos coherentes y consistentes para la ventana flotante
       houseNames: const [
-        'Actividad 1',
-        'Actividad 2',
-        'Actividad 3',
-        'Actividad 4',
-        'Actividad 5',
-        'Actividad 6',
-        'Actividad 7',
-        'Actividad 8',
+        'Escucha y saluda',
+        'Une la familia',
+        'Conoce la familia',
+        'Elige la imagen',
+        'Juega memorama',
+        'Une presentaciones',
+        'Elige el tiempo',
+        'Muy pronto',
       ],
 
       // 5. Enrutamiento hacia las pantallas de actividades de este módulo
       onNavigateToActivity: (activityName) {
         switch (activityName) {
-          case 'Actividad 1':
+          case 'Escucha y saluda':
           case 'Saludos':
+          case 'Actividad 1':
             return const ActividadSaludosAudioScreen();
 
+          case 'Une la familia':
+          case 'Une familia':
           case 'Actividad 2':
           case 'Mi Familia':
             return const ActividadFamiliaRelacionarScreen();
 
+          case 'Conoce la familia':
+          case 'Visual: Familia':
           case 'Actividad 3':
             return const ActividadVisualFamiliaScreen();
 
+          case 'Elige la imagen':
+          case 'Elegir imagen: Familia':
           case 'Actividad 4':
             return const ActividadFamiliaSeleccionImagenScreen();
 
+          case 'Juega memorama':
+          case 'Memorama':
           case 'Actividad 5':
             return const ActividadMemoramaScreen();
 
+          case 'Une presentaciones':
+          case 'Une presentación':
+          case 'Une Presentación':
           case 'Actividad 6':
             return const ActividadPresentacionRelacionarScreen();
 
+          case 'Elige el tiempo':
+          case 'Tiempo y familia':
           case 'Actividad 7':
             return const ActividadTiempoSeleccionImagenScreen();
 
+          case 'Muy pronto':
+          case 'Próxima actividad':
           case 'Actividad 8':
           default:
             return Scaffold(
               appBar: AppBar(
                 backgroundColor: Colors.brown.shade800,
-                title: Text(activityName, style: const TextStyle(color: Colors.white)),
+                title: Text(
+                  activityName,
+                  style: const TextStyle(color: Colors.white),
+                ),
                 iconTheme: const IconThemeData(color: Colors.white),
               ),
               body: Center(
                 child: Text(
-                  'Pantalla de $activityName en construcción',
-                  style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Colors.brown),
+                  'Pantalla de "$activityName" en construcción',
+                  style: const TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.brown,
+                  ),
                 ),
               ),
             );

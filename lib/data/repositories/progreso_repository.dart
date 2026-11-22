@@ -54,15 +54,16 @@ class ProgresoRepository {
 
   Stream<int> watchPuntajeTotal() async* {
     final perfil = await _db.obtenerOCrearPerfilInvitado();
+    final countExp = _db.progresoActividades.id.count();
     final query = _db.selectOnly(_db.progresoActividades)
-      ..addColumns([_db.progresoActividades.id.count()])
+      ..addColumns([countExp])
       ..where(
         _db.progresoActividades.usuarioLocalUuid.equals(perfil.localUuid) &
             _db.progresoActividades.completada.equals(true),
       );
 
     yield* query.watchSingle().map(
-          (row) => row.read(_db.progresoActividades.id.count()) ?? 0,
+          (row) => row.read(countExp) ?? 0,
         );
   }
 
