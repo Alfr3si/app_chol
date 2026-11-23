@@ -1,7 +1,9 @@
+// lib/data/local/app_database.dart
 import 'dart:io';
 
 import 'package:drift/drift.dart';
 import 'package:drift/native.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:uuid/uuid.dart';
 
 part 'app_database.g.dart';
@@ -34,19 +36,32 @@ class ProgresoActividades extends Table {
 
   @override
   List<Set<Column<Object>>> get uniqueKeys => [
-    {usuarioLocalUuid, moduloId, actividadNumero},
-  ];
+        {usuarioLocalUuid, moduloId, actividadNumero},
+      ];
 }
 
 @DriftDatabase(tables: [PerfilUsuario, ProgresoActividades])
 class AppDatabase extends _$AppDatabase {
   AppDatabase() : super(_openConnection());
 
+  Future<PerfilUsuarioData>? _perfilEnCurso;
+
   @override
   int get schemaVersion => 1;
 
-  /// Obtiene el perfil local activo o crea uno en modo invitado si es la primera vez.
-  Future<PerfilUsuarioData> obtenerOCrearPerfilInvitado() async {
+  /// Obtiene el perfil local activo o crea uno en modo invitado de forma segura ante llamadas concurrentes.
+  Future<PerfilUsuarioData> obtenerOCrearPerfilInvitado() {
+    final enCurso = _perfilEnCurso;
+    if (enCurso != null) return enCurso;
+
+    final future = _obtenerOCrearPerfilInvitadoInterno().whenComplete(() {
+      _perfilEnCurso = null;
+    });
+    _perfilEnCurso = future;
+    return future;
+  }
+
+  Future<PerfilUsuarioData> _obtenerOCrearPerfilInvitadoInterno() async {
     final existentes = await (select(perfilUsuario)..limit(1)).get();
     if (existentes.isNotEmpty) {
       return existentes.first;
@@ -61,11 +76,10 @@ class AppDatabase extends _$AppDatabase {
       creadoEn: ahora,
     );
 
-    await into(perfilUsuario).insert(companion);
-    final creado = await (select(
-      perfilUsuario,
-    )..where((tbl) => tbl.localUuid.equals(nuevoUuid))).getSingle();
-    return creado;
+    await into(perfilUsuario).insert(companion, mode: InsertMode.insertOrIgnore);
+
+    final lista = await (select(perfilUsuario)..limit(1)).get();
+    return lista.first;
   }
 
   /// Registra o actualiza una actividad completada (1 punto por actividad completada).
@@ -77,14 +91,14 @@ class AppDatabase extends _$AppDatabase {
     final ahora = DateTime.now().toUtc();
     final clave = 'mod${moduloId}_act$actividadNumero';
 
-    final existente =
-        await (select(progresoActividades)..where(
-              (tbl) =>
-                  tbl.usuarioLocalUuid.equals(usuarioLocalUuid) &
-                  tbl.moduloId.equals(moduloId) &
-                  tbl.actividadNumero.equals(actividadNumero),
-            ))
-            .getSingleOrNull();
+    final existente = await (select(progresoActividades)
+          ..where(
+            (tbl) =>
+                tbl.usuarioLocalUuid.equals(usuarioLocalUuid) &
+                tbl.moduloId.equals(moduloId) &
+                tbl.actividadNumero.equals(actividadNumero),
+          ))
+        .getSingleOrNull();
 
     if (existente == null) {
       await into(progresoActividades).insert(
@@ -101,9 +115,9 @@ class AppDatabase extends _$AppDatabase {
         ),
       );
     } else {
-      await (update(
-        progresoActividades,
-      )..where((tbl) => tbl.id.equals(existente.id))).write(
+      await (update(progresoActividades)
+            ..where((tbl) => tbl.id.equals(existente.id)))
+          .write(
         ProgresoActividadesCompanion(
           completada: const Value(true),
           intentos: Value(existente.intentos + 1),
@@ -149,22 +163,46 @@ class AppDatabase extends _$AppDatabase {
     return query.watchSingle().map((row) => row.read(countExp) ?? 0);
   }
 
+  /// Stream reactivo con los números de actividad completados (1..5) de un módulo.
+  Stream<Set<int>> watchActividadesCompletadasNumeros({
+    required String usuarioLocalUuid,
+    required int moduloId,
+  }) {
+    final query = select(progresoActividades)
+      ..where(
+        (tbl) =>
+            tbl.usuarioLocalUuid.equals(usuarioLocalUuid) &
+            tbl.moduloId.equals(moduloId) &
+            tbl.completada.equals(true),
+      );
+
+    return query.watch().map(
+          (filas) => filas.map((f) => f.actividadNumero).toSet(),
+        );
+  }
+
   /// Registros locales pendientes de subir a la nube.
   Future<List<ProgresoActividade>> obtenerPendientesSincronizacion(
     String usuarioLocalUuid,
   ) {
-    return (select(progresoActividades)..where(
-          (tbl) =>
-              tbl.usuarioLocalUuid.equals(usuarioLocalUuid) &
-              tbl.sincronizado.equals(false),
-        ))
+    return (select(progresoActividades)
+          ..where(
+            (tbl) =>
+                tbl.usuarioLocalUuid.equals(usuarioLocalUuid) &
+                tbl.sincronizado.equals(false),
+          ))
         .get();
   }
 }
 
 LazyDatabase _openConnection() {
   return LazyDatabase(() async {
-    final dbFolder = Directory.systemTemp;
+    Directory dbFolder;
+    try {
+      dbFolder = await getApplicationDocumentsDirectory();
+    } catch (_) {
+      dbFolder = Directory.systemTemp;
+    }
     final file = File('${dbFolder.path}/app_chol_progreso.sqlite');
     return NativeDatabase.createInBackground(file);
   });

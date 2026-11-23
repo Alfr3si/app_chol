@@ -1,36 +1,44 @@
 // lib/modules/modulo1/components/actividad_relacionar.dart
-import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../domain/models/item_vocabulario.dart';
+import '../../../../data/providers/progreso_providers.dart'; // Ajusta ruta si difiere
 
-class ActividadRelacionar extends StatefulWidget {
+class ActividadRelacionar extends ConsumerStatefulWidget {
   final String tituloActividad;
   final List<ItemVocabulario> listaItems;
   final String backgroundImage;
+  final int? moduloId;
+  final int? actividadNumero;
+  final VoidCallback? onCompletada;
 
   const ActividadRelacionar({
     super.key,
     required this.tituloActividad,
     required this.listaItems,
     required this.backgroundImage,
+    this.moduloId,
+    this.actividadNumero,
+    this.onCompletada,
   });
 
   @override
-  State<ActividadRelacionar> createState() => _ActividadRelacionarState();
+  ConsumerState<ActividadRelacionar> createState() => _ActividadRelacionarState();
 }
 
-class _ActividadRelacionarState extends State<ActividadRelacionar> {
+class _ActividadRelacionarState extends ConsumerState<ActividadRelacionar> {
   late List<ItemVocabulario> _poolItems;
   List<ItemVocabulario> _currentPairItems = []; // 4 items por ronda
-  
+
   String? _selectedEspanol;
   String? _selectedChol;
-  
+
   bool? _isLastAttemptCorrect;
-  
+
   final Set<String> _matchedChol = {};
   int _currentIndex = 0;
   bool _isLoading = true;
+  bool _progresoRegistradoEnSesion = false;
 
   List<String> _columnEspanol = [];
   List<String> _columnChol = [];
@@ -43,13 +51,25 @@ class _ActividadRelacionarState extends State<ActividadRelacionar> {
     _prepararRonda();
   }
 
+  @override
+  void didUpdateWidget(covariant ActividadRelacionar oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.moduloId != widget.moduloId ||
+        oldWidget.actividadNumero != widget.actividadNumero ||
+        oldWidget.tituloActividad != widget.tituloActividad) {
+      _progresoRegistradoEnSesion = false;
+    }
+  }
+
   void _prepararRonda() {
     if (_poolItems.isEmpty) {
       setState(() => _isLoading = false);
       return;
     }
 
-    int endIndex = (_currentIndex + 4 < _poolItems.length) ? _currentIndex + 4 : _poolItems.length;
+    int endIndex = (_currentIndex + 4 < _poolItems.length)
+        ? _currentIndex + 4
+        : _poolItems.length;
     _currentPairItems = _poolItems.sublist(_currentIndex, endIndex);
     _matchedChol.clear();
     _selectedEspanol = null;
@@ -62,6 +82,24 @@ class _ActividadRelacionarState extends State<ActividadRelacionar> {
     setState(() {
       _isLoading = false;
     });
+  }
+
+  Future<void> _registrarCompletado() async {
+    if (_progresoRegistradoEnSesion) return;
+    _progresoRegistradoEnSesion = true;
+
+    widget.onCompletada?.call();
+
+    if (widget.moduloId != null && widget.actividadNumero != null) {
+      try {
+        await ref.read(progresoRepositoryProvider).completarActividad(
+              moduloId: widget.moduloId!,
+              actividadNumero: widget.actividadNumero!,
+            );
+      } catch (e) {
+        debugPrint('Error al registrar progreso de relacionar: $e');
+      }
+    }
   }
 
   void _verificarSeleccion() {
@@ -93,6 +131,7 @@ class _ActividadRelacionarState extends State<ActividadRelacionar> {
                     _prepararRonda();
                   });
                 } else {
+                  _registrarCompletado();
                   _mostrarDialogoVictoria();
                 }
               });
@@ -123,7 +162,8 @@ class _ActividadRelacionarState extends State<ActividadRelacionar> {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
         title: const Text(
           '🎉 ¡Actividad Completada!',
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16),
+          style: TextStyle(
+              color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16),
         ),
         content: const Text(
           '¡Has relacionado exitosamente todo el vocabulario!',
@@ -139,7 +179,8 @@ class _ActividadRelacionarState extends State<ActividadRelacionar> {
               Navigator.pop(context);
               Navigator.pop(context);
             },
-            child: const Text('Continuar', style: TextStyle(color: Colors.white, fontSize: 12)),
+            child: const Text('Continuar',
+                style: TextStyle(color: Colors.white, fontSize: 12)),
           ),
         ],
       ),
@@ -151,8 +192,11 @@ class _ActividadRelacionarState extends State<ActividadRelacionar> {
     if (_isLoading || _currentPairItems.isEmpty) {
       return Scaffold(
         backgroundColor: const Color(0xFFFAF3E0),
-        appBar: AppBar(backgroundColor: Colors.brown.shade800, title: const Text('Cargando actividad...')),
-        body: const Center(child: CircularProgressIndicator(color: Colors.orange)),
+        appBar: AppBar(
+            backgroundColor: Colors.brown.shade800,
+            title: const Text('Cargando actividad...')),
+        body: const Center(
+            child: CircularProgressIndicator(color: Colors.orange)),
       );
     }
 
@@ -180,7 +224,8 @@ class _ActividadRelacionarState extends State<ActividadRelacionar> {
             child: Column(
               children: [
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                   decoration: BoxDecoration(
                     color: Colors.black.withOpacity(0.6),
                     borderRadius: BorderRadius.circular(8),
@@ -188,7 +233,10 @@ class _ActividadRelacionarState extends State<ActividadRelacionar> {
                   child: const Text(
                     '🔗 Relaciona la palabra en Español con su significado en Ch\'ol',
                     textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.white),
+                    style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white),
                   ),
                 ),
                 const SizedBox(height: 20),
@@ -200,7 +248,9 @@ class _ActividadRelacionarState extends State<ActividadRelacionar> {
                         child: ListView(
                           children: _columnEspanol.map((espanol) {
                             final bool isMatched = _currentPairItems.any(
-                              (item) => item.espanol == espanol && _matchedChol.contains(item.chol),
+                              (item) =>
+                                  item.espanol == espanol &&
+                                  _matchedChol.contains(item.chol),
                             );
                             final bool isSelected = _selectedEspanol == espanol;
 
@@ -232,13 +282,16 @@ class _ActividadRelacionarState extends State<ActividadRelacionar> {
                                   disabledBackgroundColor: colorFondo,
                                   disabledForegroundColor: Colors.white,
                                   elevation: 3,
-                                  padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 8),
+                                  padding: const EdgeInsets.symmetric(
+                                      vertical: 14, horizontal: 8),
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(12),
-                                    side: BorderSide(color: colorBorde, width: 1.8),
+                                    side:
+                                        BorderSide(color: colorBorde, width: 1.8),
                                   ),
                                 ),
-                                onPressed: (isMatched || _isLastAttemptCorrect != null)
+                                onPressed: (isMatched ||
+                                        _isLastAttemptCorrect != null)
                                     ? () {}
                                     : () {
                                         setState(() {
@@ -249,7 +302,10 @@ class _ActividadRelacionarState extends State<ActividadRelacionar> {
                                 child: Text(
                                   espanol,
                                   textAlign: TextAlign.center,
-                                  style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.white),
+                                  style: const TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white),
                                 ),
                               ),
                             );
@@ -292,13 +348,16 @@ class _ActividadRelacionarState extends State<ActividadRelacionar> {
                                   disabledBackgroundColor: colorFondo,
                                   disabledForegroundColor: Colors.white,
                                   elevation: 3,
-                                  padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 8),
+                                  padding: const EdgeInsets.symmetric(
+                                      vertical: 14, horizontal: 8),
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(12),
-                                    side: BorderSide(color: colorBorde, width: 1.8),
+                                    side:
+                                        BorderSide(color: colorBorde, width: 1.8),
                                   ),
                                 ),
-                                onPressed: (isMatched || _isLastAttemptCorrect != null)
+                                onPressed: (isMatched ||
+                                        _isLastAttemptCorrect != null)
                                     ? () {}
                                     : () {
                                         setState(() {
@@ -309,7 +368,10 @@ class _ActividadRelacionarState extends State<ActividadRelacionar> {
                                 child: Text(
                                   chol,
                                   textAlign: TextAlign.center,
-                                  style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.white),
+                                  style: const TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white),
                                 ),
                               ),
                             );

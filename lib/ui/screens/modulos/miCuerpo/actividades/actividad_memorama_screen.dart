@@ -51,16 +51,16 @@ class _ActividadMemoramaScreenState extends State<ActividadMemoramaScreen> {
       final filtrados = todasLasMuestras
           .map((item) => ItemVocabulario.fromJson(item))
           .where((item) {
-            final categoria = (item.categoria ?? '').trim().toLowerCase();
-            final esCategoriaValida = categoriasValidas.contains(categoria);
-            final tieneTextoValido = item.chol.trim().isNotEmpty &&
-                item.chol.trim().toLowerCase() != 'no tiene traducción' &&
-                item.espanol.trim().isNotEmpty;
-            final tieneImagen = item.pathImagen != null &&
-                item.pathImagen!.trim().isNotEmpty;
+        final categoria = (item.categoria ?? '').trim().toLowerCase();
+        final esCategoriaValida = categoriasValidas.contains(categoria);
+        final tieneTextoValido = item.chol.trim().isNotEmpty &&
+            item.chol.trim().toLowerCase() != 'no tiene traducción' &&
+            item.espanol.trim().isNotEmpty;
+        final tieneImagen =
+            item.pathImagen != null && item.pathImagen!.trim().isNotEmpty;
 
-            return esCategoriaValida && tieneTextoValido && tieneImagen;
-          });
+        return esCategoriaValida && tieneTextoValido && tieneImagen;
+      });
 
       // Deduplicamos por expresión en Ch'ol para evitar pares repetidos
       final Map<String, ItemVocabulario> unicosPorChol = {};
@@ -105,7 +105,7 @@ class _ActividadMemoramaScreenState extends State<ActividadMemoramaScreen> {
         appBar: AppBar(
           backgroundColor: Colors.brown.shade800,
           title: const Text(
-            'Actividad 4: Memorama',
+            'Juega memorama',
             style: TextStyle(color: Colors.white),
           ),
           iconTheme: const IconThemeData(color: Colors.white),
@@ -128,9 +128,11 @@ class _ActividadMemoramaScreenState extends State<ActividadMemoramaScreen> {
     }
 
     return ActividadMemorama(
-      tituloActividad: 'Actividad 4: Memorama',
+      tituloActividad: 'Juega memorama',
       backgroundImage: 'assets/image/learning/bg_casa_06.webp',
       listaItems: _listaItems,
+      moduloId: 5,
+      actividadNumero: 4,
     );
   }
 }

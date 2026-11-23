@@ -1,32 +1,41 @@
 // lib/modules/modulo1/components/actividad_audio.dart
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flame_audio/flame_audio.dart';
 import '../../../../domain/models/item_vocabulario.dart';
+import '../../../../data/providers/progreso_providers.dart'; // Ajusta ruta si difiere
 
-class ActividadAudio extends StatefulWidget {
+class ActividadAudio extends ConsumerStatefulWidget {
   final String tituloActividad;
   final List<ItemVocabulario> listaItems;
   final String backgroundImage;
+  final int? moduloId;
+  final int? actividadNumero;
+  final VoidCallback? onCompletada;
 
   const ActividadAudio({
     super.key,
     required this.tituloActividad,
     required this.listaItems,
     required this.backgroundImage,
+    this.moduloId,
+    this.actividadNumero,
+    this.onCompletada,
   });
 
   @override
-  State<ActividadAudio> createState() => _ActividadAudioState();
+  ConsumerState<ActividadAudio> createState() => _ActividadAudioState();
 }
 
-class _ActividadAudioState extends State<ActividadAudio>
+class _ActividadAudioState extends ConsumerState<ActividadAudio>
     with SingleTickerProviderStateMixin {
   late List<ItemVocabulario> _activeQueue;
   final List<ItemVocabulario> _failedQueue = [];
 
   int _currentIndex = 0;
   bool _isReviewRound = false;
+  bool _progresoRegistradoEnSesion = false;
 
   List<String> _opcionesActuales = [];
   String? _selectedAnswer;
@@ -39,7 +48,6 @@ class _ActividadAudioState extends State<ActividadAudio>
   @override
   void initState() {
     super.initState();
-    // Filtro flexible: acepta elementos que tengan texto válido en Ch'ol y Español
     _activeQueue = List.from(
       widget.listaItems.where((item) =>
           item.chol.isNotEmpty &&
@@ -61,6 +69,16 @@ class _ActividadAudioState extends State<ActividadAudio>
     );
 
     _prepararPregunta();
+  }
+
+  @override
+  void didUpdateWidget(covariant ActividadAudio oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.moduloId != widget.moduloId ||
+        oldWidget.actividadNumero != widget.actividadNumero ||
+        oldWidget.tituloActividad != widget.tituloActividad) {
+      _progresoRegistradoEnSesion = false;
+    }
   }
 
   @override
@@ -148,7 +166,26 @@ class _ActividadAudioState extends State<ActividadAudio>
           ),
         );
       } else {
+        _registrarCompletado();
         _mostrarDialogoVictoria();
+      }
+    }
+  }
+
+  Future<void> _registrarCompletado() async {
+    if (_progresoRegistradoEnSesion) return;
+    _progresoRegistradoEnSesion = true;
+
+    widget.onCompletada?.call();
+
+    if (widget.moduloId != null && widget.actividadNumero != null) {
+      try {
+        await ref.read(progresoRepositoryProvider).completarActividad(
+              moduloId: widget.moduloId!,
+              actividadNumero: widget.actividadNumero!,
+            );
+      } catch (e) {
+        debugPrint('Error al registrar progreso de actividad: $e');
       }
     }
   }

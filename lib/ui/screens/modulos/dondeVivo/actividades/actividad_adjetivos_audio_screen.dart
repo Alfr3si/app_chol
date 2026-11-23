@@ -10,10 +10,12 @@ class ActividadAdjetivosAudioScreen extends StatefulWidget {
   const ActividadAdjetivosAudioScreen({super.key});
 
   @override
-  State<ActividadAdjetivosAudioScreen> createState() => _ActividadAdjetivosAudioScreenState();
+  State<ActividadAdjetivosAudioScreen> createState() =>
+      _ActividadAdjetivosAudioScreenState();
 }
 
-class _ActividadAdjetivosAudioScreenState extends State<ActividadAdjetivosAudioScreen> {
+class _ActividadAdjetivosAudioScreenState
+    extends State<ActividadAdjetivosAudioScreen> {
   List<ItemVocabulario> _listaItems = [];
   bool _isLoading = true;
 
@@ -87,15 +89,18 @@ class _ActividadAdjetivosAudioScreenState extends State<ActividadAdjetivosAudioS
           iconTheme: const IconThemeData(color: Colors.white),
         ),
         body: const Center(
-          child: Text('No hay elementos con audio disponible en esta actividad.'),
+          child: Text(
+              'No hay elementos con audio disponible en esta actividad.'),
         ),
       );
     }
 
     return ActividadAudio(
-      tituloActividad: 'Actividad 3: Audio y Vocabulario',
+      tituloActividad: 'Escucha adjetivos',
       backgroundImage: 'assets/image/learning/bg_casa_06.webp',
       listaItems: _listaItems,
+      moduloId: 2,
+      actividadNumero: 3,
     );
   }
 }

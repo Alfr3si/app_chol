@@ -104,7 +104,7 @@ class _ActividadRopaAudioScreenState extends State<ActividadRopaAudioScreen> {
         appBar: AppBar(
           backgroundColor: Colors.brown.shade800,
           title: const Text(
-            'Actividad 3: Ropa',
+            'Escucha la ropa',
             style: TextStyle(color: Colors.white),
           ),
           iconTheme: const IconThemeData(color: Colors.white),
@@ -127,9 +127,11 @@ class _ActividadRopaAudioScreenState extends State<ActividadRopaAudioScreen> {
     }
 
     return ActividadAudio(
-      tituloActividad: 'Actividad 3: Ropa',
+      tituloActividad: 'Escucha la ropa',
       backgroundImage: 'assets/image/learning/bg_casa_06.webp',
       listaItems: _listaItems,
+      moduloId: 5,
+      actividadNumero: 5,
     );
   }
 }

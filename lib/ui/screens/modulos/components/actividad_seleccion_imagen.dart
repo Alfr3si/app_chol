@@ -1,26 +1,35 @@
 // lib/modules/modulo1/components/actividad_seleccion_imagen.dart
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flame_audio/flame_audio.dart';
 import '../../../../domain/models/item_vocabulario.dart';
+import '../../../../data/providers/progreso_providers.dart'; // Ajusta ruta si difiere
 
-class ActividadSeleccionImagen extends StatefulWidget {
+class ActividadSeleccionImagen extends ConsumerStatefulWidget {
   final String tituloActividad;
   final List<ItemVocabulario> listaItems;
   final String backgroundImage;
+  final int? moduloId;
+  final int? actividadNumero;
+  final VoidCallback? onCompletada;
 
   const ActividadSeleccionImagen({
     super.key,
     required this.tituloActividad,
     required this.listaItems,
     required this.backgroundImage,
+    this.moduloId,
+    this.actividadNumero,
+    this.onCompletada,
   });
 
   @override
-  State<ActividadSeleccionImagen> createState() => _ActividadSeleccionImagenState();
+  ConsumerState<ActividadSeleccionImagen> createState() =>
+      _ActividadSeleccionImagenState();
 }
 
-class _ActividadSeleccionImagenState extends State<ActividadSeleccionImagen>
+class _ActividadSeleccionImagenState extends ConsumerState<ActividadSeleccionImagen>
     with SingleTickerProviderStateMixin {
   late List<ItemVocabulario> _itemsValidos;
   late List<ItemVocabulario> _activeQueue;
@@ -28,6 +37,7 @@ class _ActividadSeleccionImagenState extends State<ActividadSeleccionImagen>
 
   int _currentIndex = 0;
   bool _isReviewRound = false;
+  bool _progresoRegistradoEnSesion = false;
 
   List<ItemVocabulario> _opcionesImagenes = [];
   ItemVocabulario? _selectedItem;
@@ -44,13 +54,15 @@ class _ActividadSeleccionImagenState extends State<ActividadSeleccionImagen>
   void initState() {
     super.initState();
     // Filtro estricto: solo items que tengan tanto audio como imagen existentes en el JSON
-    _itemsValidos = widget.listaItems.where((item) =>
-        item.chol.isNotEmpty &&
-        item.espanol.isNotEmpty &&
-        item.pathImagen != null &&
-        item.pathImagen!.trim().isNotEmpty &&
-        item.pathAudio != null &&
-        item.pathAudio!.trim().isNotEmpty).toList();
+    _itemsValidos = widget.listaItems
+        .where((item) =>
+            item.chol.isNotEmpty &&
+            item.espanol.isNotEmpty &&
+            item.pathImagen != null &&
+            item.pathImagen!.trim().isNotEmpty &&
+            item.pathAudio != null &&
+            item.pathAudio!.trim().isNotEmpty)
+        .toList();
 
     _activeQueue = List.from(_itemsValidos)..shuffle();
 
@@ -59,12 +71,23 @@ class _ActividadSeleccionImagenState extends State<ActividadSeleccionImagen>
       duration: const Duration(milliseconds: 300),
     );
 
-    _fadeAnimation = CurvedAnimation(parent: _animationController, curve: Curves.easeIn);
+    _fadeAnimation =
+        CurvedAnimation(parent: _animationController, curve: Curves.easeIn);
     _scaleAnimation = Tween<double>(begin: 0.9, end: 1.0).animate(
       CurvedAnimation(parent: _animationController, curve: Curves.easeOutBack),
     );
 
     _prepararPregunta();
+  }
+
+  @override
+  void didUpdateWidget(covariant ActividadSeleccionImagen oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.moduloId != widget.moduloId ||
+        oldWidget.actividadNumero != widget.actividadNumero ||
+        oldWidget.tituloActividad != widget.tituloActividad) {
+      _progresoRegistradoEnSesion = false;
+    }
   }
 
   @override
@@ -178,7 +201,26 @@ class _ActividadSeleccionImagenState extends State<ActividadSeleccionImagen>
           ),
         );
       } else {
+        _registrarCompletado();
         _mostrarDialogoVictoria();
+      }
+    }
+  }
+
+  Future<void> _registrarCompletado() async {
+    if (_progresoRegistradoEnSesion) return;
+    _progresoRegistradoEnSesion = true;
+
+    widget.onCompletada?.call();
+
+    if (widget.moduloId != null && widget.actividadNumero != null) {
+      try {
+        await ref.read(progresoRepositoryProvider).completarActividad(
+              moduloId: widget.moduloId!,
+              actividadNumero: widget.actividadNumero!,
+            );
+      } catch (e) {
+        debugPrint('Error al registrar progreso de selección de imagen: $e');
       }
     }
   }
@@ -192,7 +234,8 @@ class _ActividadSeleccionImagenState extends State<ActividadSeleccionImagen>
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
         title: const Text(
           '🎉 ¡Actividad Superada!',
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16),
+          style: TextStyle(
+              color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16),
         ),
         content: const Text(
           '¡Has completado con éxito este desafío de escucha e identificación visual!',
@@ -208,7 +251,8 @@ class _ActividadSeleccionImagenState extends State<ActividadSeleccionImagen>
               Navigator.pop(context);
               Navigator.pop(context);
             },
-            child: const Text('Continuar', style: TextStyle(color: Colors.white, fontSize: 12)),
+            child: const Text('Continuar',
+                style: TextStyle(color: Colors.white, fontSize: 12)),
           ),
         ],
       ),
@@ -220,9 +264,12 @@ class _ActividadSeleccionImagenState extends State<ActividadSeleccionImagen>
     if (_activeQueue.isEmpty) {
       return Scaffold(
         backgroundColor: const Color(0xFFFAF3E0),
-        appBar: AppBar(backgroundColor: Colors.brown.shade800, title: const Text('Aviso')),
+        appBar: AppBar(
+            backgroundColor: Colors.brown.shade800,
+            title: const Text('Aviso')),
         body: const Center(
-          child: Text('No hay elementos con imagen y audio disponibles para esta actividad.'),
+          child: Text(
+              'No hay elementos con imagen y audio disponibles para esta actividad.'),
         ),
       );
     }
@@ -236,7 +283,9 @@ class _ActividadSeleccionImagenState extends State<ActividadSeleccionImagen>
         backgroundColor: Colors.brown.shade800,
         toolbarHeight: 40,
         title: Text(
-          _isReviewRound ? 'Repaso: ${widget.tituloActividad}' : widget.tituloActividad,
+          _isReviewRound
+              ? 'Repaso: ${widget.tituloActividad}'
+              : widget.tituloActividad,
           style: const TextStyle(color: Colors.white, fontSize: 15),
         ),
         iconTheme: const IconThemeData(color: Colors.white),
@@ -262,7 +311,8 @@ class _ActividadSeleccionImagenState extends State<ActividadSeleccionImagen>
             child: Column(
               children: [
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                   decoration: BoxDecoration(
                     color: Colors.black.withOpacity(0.6),
                     borderRadius: BorderRadius.circular(8),
@@ -270,7 +320,10 @@ class _ActividadSeleccionImagenState extends State<ActividadSeleccionImagen>
                   child: Text(
                     'Ronda ${_currentIndex + 1} de ${_activeQueue.length}: Escucha y selecciona la imagen. (Intentos: $_intentosRestantes)',
                     textAlign: TextAlign.center,
-                    style: const TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: Colors.white),
+                    style: const TextStyle(
+                        fontSize: 11,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white),
                   ),
                 ),
                 const SizedBox(height: 16),
@@ -300,15 +353,19 @@ class _ActividadSeleccionImagenState extends State<ActividadSeleccionImagen>
 
                           return Expanded(
                             child: Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 6.0),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 6.0),
                               child: GestureDetector(
-                                onTap: _isAnswerCorrect == true ? null : () => _verificarRespuesta(item),
+                                onTap: _isAnswerCorrect == true
+                                    ? null
+                                    : () => _verificarRespuesta(item),
                                 child: Container(
                                   height: 140,
                                   decoration: BoxDecoration(
                                     color: colorFondo,
                                     borderRadius: BorderRadius.circular(16),
-                                    border: Border.all(color: colorBorde, width: 2.5),
+                                    border: Border.all(
+                                        color: colorBorde, width: 2.5),
                                     boxShadow: [
                                       BoxShadow(
                                         color: Colors.black.withOpacity(0.3),
@@ -324,8 +381,12 @@ class _ActividadSeleccionImagenState extends State<ActividadSeleccionImagen>
                                       child: Image.asset(
                                         item.pathImagen!,
                                         fit: BoxFit.contain,
-                                        errorBuilder: (context, error, stackTrace) =>
-                                            const Icon(Icons.image_not_supported, size: 32, color: Colors.grey),
+                                        errorBuilder:
+                                            (context, error, stackTrace) =>
+                                                const Icon(
+                                                    Icons.image_not_supported,
+                                                    size: 32,
+                                                    color: Colors.grey),
                                       ),
                                     ),
                                   ),
@@ -347,13 +408,17 @@ class _ActividadSeleccionImagenState extends State<ActividadSeleccionImagen>
                       curve: Curves.easeInOut,
                       width: _mostrarTraduccion ? 250 : 0,
                       height: 50,
-                      margin: EdgeInsets.only(right: _mostrarTraduccion ? 8.0 : 0.0),
-                      padding: EdgeInsets.symmetric(horizontal: _mostrarTraduccion ? 10.0 : 0.0),
+                      margin: EdgeInsets.only(
+                          right: _mostrarTraduccion ? 8.0 : 0.0),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: _mostrarTraduccion ? 10.0 : 0.0),
                       decoration: BoxDecoration(
                         color: Colors.amber.shade100,
                         borderRadius: BorderRadius.circular(16),
                         border: Border.all(
-                          color: _mostrarTraduccion ? Colors.orange : Colors.transparent,
+                          color: _mostrarTraduccion
+                              ? Colors.orange
+                              : Colors.transparent,
                           width: _mostrarTraduccion ? 1.5 : 0,
                         ),
                       ),
@@ -396,12 +461,16 @@ class _ActividadSeleccionImagenState extends State<ActividadSeleccionImagen>
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.orange.shade700,
                         foregroundColor: Colors.white,
-                        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 14, vertical: 10),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(16)),
                       ),
                       onPressed: () => _reproducirAudio(current.pathAudio),
                       icon: const Icon(Icons.volume_up, size: 18),
-                      label: const Text('Reproducir Audio', style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
+                      label: const Text('Reproducir Audio',
+                          style: TextStyle(
+                              fontSize: 12, fontWeight: FontWeight.bold)),
                     ),
                   ],
                 ),

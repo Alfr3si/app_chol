@@ -98,7 +98,7 @@ class _ActividadCuerpoImagenAudioScreenState
         appBar: AppBar(
           backgroundColor: Colors.brown.shade800,
           title: const Text(
-            'Actividad 1: Mi Cuerpo',
+            'Conoce el cuerpo',
             style: TextStyle(color: Colors.white),
           ),
           iconTheme: const IconThemeData(color: Colors.white),
@@ -121,9 +121,11 @@ class _ActividadCuerpoImagenAudioScreenState
     }
 
     return ActividadImagenAudio(
-      tituloActividad: 'Actividad 1: Mi Cuerpo',
+      tituloActividad: 'Conoce el cuerpo',
       backgroundImage: 'assets/image/learning/bg_casa_06.webp',
       listaItems: _listaItems,
+      moduloId: 5,
+      actividadNumero: 1,
     );
   }
 }

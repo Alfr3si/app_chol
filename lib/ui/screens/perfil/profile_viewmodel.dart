@@ -1,46 +1,104 @@
+//lib\ui\screens\perfil\profile_viewmodel.dart
 import 'package:flutter/foundation.dart';
-import '../../../domain/entities/user_profile_entity.dart'; // Ajusta tu ruta de importación
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class ProfileViewModel extends ChangeNotifier {
-  // Estado inicial simulado (mientras conectamos la base de datos)
-  UserProfileEntity _profile = const UserProfileEntity(
-    alias: 'Luis',
-    ageRange: '8-10 años',
-    avatarPath: 'assets/image/learning/grupo.webp',
-    rankTitle: 'Aprendiz',
-    completedThemes: 0,
-    unlockedInsignias: ['Familia'],
-  );
+import '../../../data/providers/progreso_providers.dart';
+import '../../../domain/entities/user_profile_entity.dart';
 
-  UserProfileEntity get profile => _profile;
+class ProfileState {
+  final UserProfileEntity profile;
+  final bool isLoading;
 
-  bool _isLoading = false;
-  bool get isLoading => _isLoading;
+  const ProfileState({
+    required this.profile,
+    this.isLoading = false,
+  });
 
-  // Método para actualizar datos locales temporalmente
-  void updateProfile({String? alias, String? ageRange}) {
-    _profile = _profile.copyWith(
-      alias: alias,
-      ageRange: ageRange,
+  ProfileState copyWith({
+    UserProfileEntity? profile,
+    bool? isLoading,
+  }) {
+    return ProfileState(
+      profile: profile ?? this.profile,
+      isLoading: isLoading ?? this.isLoading,
     );
-    notifyListeners();
-  }
-
-  // Simulación de guardado (aquí después meteremos la llamada a la DB)
-  Future<void> saveChanges() async {
-    _isLoading = true;
-    notifyListeners();
-
-    await Future.delayed(const Duration(milliseconds: 600)); // Simula red/DB
-
-    _isLoading = false;
-    notifyListeners();
-    debugPrint('Perfil guardado exitosamente en el ViewModel.');
-  }
-
-  // Método para reiniciar progreso
-  void resetProgress() {
-    _profile = _profile.copyWith(completedThemes: 0, unlockedInsignias: ['Familia']);
-    notifyListeners();
   }
 }
+
+class ProfileNotifier extends Notifier<ProfileState> {
+  @override
+  ProfileState build() {
+    _cargarPerfilDesdeDb();
+
+    return const ProfileState(
+      profile: UserProfileEntity(
+        alias: 'Luis',
+        ageRange: '8-10 años',
+        avatarPath: 'assets/image/learning/grupo.webp',
+        rankTitle: 'Aprendiz',
+        completedThemes: 0,
+        unlockedInsignias: ['Familia'],
+      ),
+    );
+  }
+
+  Future<void> _cargarPerfilDesdeDb() async {
+    try {
+      final repo = ref.read(progresoRepositoryProvider);
+      final perfilDb = await repo.obtenerPerfilActivo();
+      final nombreGuardado = perfilDb.nombre.trim();
+
+      if (nombreGuardado.isNotEmpty && nombreGuardado != 'Invitado') {
+        state = state.copyWith(
+          profile: state.profile.copyWith(alias: nombreGuardado),
+        );
+      }
+    } catch (e) {
+      debugPrint('Error cargando perfil desde Drift: $e');
+    }
+  }
+
+  /// Actualiza datos locales en memoria antes de guardar en Drift
+  void updateProfile({
+    String? alias,
+    String? ageRange,
+    String? avatarPath,
+  }) {
+    state = state.copyWith(
+      profile: state.profile.copyWith(
+        alias: alias,
+        ageRange: ageRange,
+        avatarPath: avatarPath,
+      ),
+    );
+  }
+
+  /// Persiste el alias/nombre en la tabla PerfilUsuario de Drift
+  Future<void> saveChanges() async {
+    state = state.copyWith(isLoading: true);
+    try {
+      final repo = ref.read(progresoRepositoryProvider);
+      final nombreLimpio = state.profile.alias.trim();
+      if (nombreLimpio.isNotEmpty) {
+        await repo.actualizarNombrePerfil(nombre: nombreLimpio);
+      }
+    } catch (e) {
+      debugPrint('Error guardando perfil en Drift: $e');
+    } finally {
+      state = state.copyWith(isLoading: false);
+    }
+  }
+
+  /// Reinicia el progreso visual del perfil
+  void resetProgress() {
+    state = state.copyWith(
+      profile: state.profile.copyWith(
+        completedThemes: 0,
+        unlockedInsignias: const ['Familia'],
+      ),
+    );
+  }
+}
+
+final profileProvider =
+    NotifierProvider<ProfileNotifier, ProfileState>(ProfileNotifier.new);

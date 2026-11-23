@@ -7,13 +7,18 @@ import '../../components/actividad_seleccion_imagen.dart';
 
 class ActividadTiempoSeleccionImagenScreen extends StatefulWidget {
   final String categoriaFiltro;
-  const ActividadTiempoSeleccionImagenScreen({super.key, this.categoriaFiltro = 'tiempo'});
+  const ActividadTiempoSeleccionImagenScreen({
+    super.key,
+    this.categoriaFiltro = 'tiempo',
+  });
 
   @override
-  State<ActividadTiempoSeleccionImagenScreen> createState() => _ActividadTiempoSeleccionImagenScreenState();
+  State<ActividadTiempoSeleccionImagenScreen> createState() =>
+      _ActividadTiempoSeleccionImagenScreenState();
 }
 
-class _ActividadTiempoSeleccionImagenScreenState extends State<ActividadTiempoSeleccionImagenScreen> {
+class _ActividadTiempoSeleccionImagenScreenState
+    extends State<ActividadTiempoSeleccionImagenScreen> {
   List<ItemVocabulario> _listaItems = [];
   bool _isLoading = true;
 
@@ -25,7 +30,8 @@ class _ActividadTiempoSeleccionImagenScreenState extends State<ActividadTiempoSe
 
   Future<void> _cargarDatosDesdeJson() async {
     try {
-      final String jsonString = await rootBundle.loadString('assets/data/module_1_familia.json');
+      final String jsonString =
+          await rootBundle.loadString('assets/data/module_1_familia.json');
       final Map<String, dynamic> jsonData = json.decode(jsonString);
 
       final List<dynamic> muestras = jsonData['muestras_lexicas'] ?? [];
@@ -34,7 +40,8 @@ class _ActividadTiempoSeleccionImagenScreenState extends State<ActividadTiempoSe
       final filtrados = muestras
           .map((item) => ItemVocabulario.fromJson(item))
           .where((item) =>
-              (item.categoria ?? '').trim().toLowerCase() == widget.categoriaFiltro.trim().toLowerCase() &&
+              (item.categoria ?? '').trim().toLowerCase() ==
+                  widget.categoriaFiltro.trim().toLowerCase() &&
               item.chol.trim().isNotEmpty &&
               item.espanol.trim().isNotEmpty &&
               item.pathImagen != null &&
@@ -63,8 +70,11 @@ class _ActividadTiempoSeleccionImagenScreenState extends State<ActividadTiempoSe
     if (_isLoading) {
       return Scaffold(
         backgroundColor: const Color(0xFFFAF3E0),
-        appBar: AppBar(backgroundColor: Colors.brown.shade800, title: const Text('Cargando tiempo...')),
-        body: const Center(child: CircularProgressIndicator(color: Colors.orange)),
+        appBar: AppBar(
+            backgroundColor: Colors.brown.shade800,
+            title: const Text('Cargando tiempo...')),
+        body: const Center(
+            child: CircularProgressIndicator(color: Colors.orange)),
       );
     }
 
@@ -81,7 +91,10 @@ class _ActividadTiempoSeleccionImagenScreenState extends State<ActividadTiempoSe
             child: Text(
               'No hay elementos de tiempo con imagen y audio disponibles.',
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Colors.brown),
+              style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.brown),
             ),
           ),
         ),
@@ -89,9 +102,11 @@ class _ActividadTiempoSeleccionImagenScreenState extends State<ActividadTiempoSe
     }
 
     return ActividadSeleccionImagen(
-      tituloActividad: 'Actividad 7: Tiempo',
+      tituloActividad: 'Elige el tiempo',
       backgroundImage: 'assets/image/learning/bg_casa_06.webp',
       listaItems: _listaItems,
+      moduloId: 1,
+      actividadNumero: 7,
     );
   }
 }

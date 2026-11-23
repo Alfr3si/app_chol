@@ -98,7 +98,7 @@ class _ActividadNumerosAudioScreenState
         appBar: AppBar(
           backgroundColor: Colors.brown.shade800,
           title: const Text(
-            'Actividad 2: Números y Audio',
+            'Escucha números',
             style: TextStyle(color: Colors.white),
           ),
           iconTheme: const IconThemeData(color: Colors.white),
@@ -121,9 +121,11 @@ class _ActividadNumerosAudioScreenState
     }
 
     return ActividadAudio(
-      tituloActividad: 'Actividad 2: Números y Audio',
+      tituloActividad: 'Escucha números',
       backgroundImage: 'assets/image/learning/bg_casa_06.webp',
       listaItems: _listaItems,
+      moduloId: 4,
+      actividadNumero: 2,
     );
   }
 }

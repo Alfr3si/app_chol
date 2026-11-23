@@ -25,12 +25,17 @@ class _ActividadMemoramaScreenState extends State<ActividadMemoramaScreen> {
   Future<void> _cargarDatosDesdeJson() async {
     try {
       // Verifica que el nombre del JSON coincida con tu asset en pubspec.yaml
-      final String jsonString = await rootBundle.loadString('assets/data/module_3_escuela.json');
+      final String jsonString =
+          await rootBundle.loadString('assets/data/module_3_escuela.json');
       final Map<String, dynamic> jsonData = json.decode(jsonString);
 
       final List<dynamic> muestrasLexicas = jsonData['muestras_lexicas'] ?? [];
-      final List<dynamic> muestrasSintacticas = jsonData['muestras_sintacticas'] ?? [];
-      final List<dynamic> todasLasMuestras = [...muestrasLexicas, ...muestrasSintacticas];
+      final List<dynamic> muestrasSintacticas =
+          jsonData['muestras_sintacticas'] ?? [];
+      final List<dynamic> todasLasMuestras = [
+        ...muestrasLexicas,
+        ...muestrasSintacticas
+      ];
 
       // Filtro estricto: texto válido en Ch'ol + imagen obligatoria + audio obligatorio
       final filtrados = todasLasMuestras
@@ -67,10 +72,12 @@ class _ActividadMemoramaScreenState extends State<ActividadMemoramaScreen> {
         backgroundColor: const Color(0xFFFAF3E0),
         appBar: AppBar(
           backgroundColor: Colors.brown.shade800,
-          title: const Text('Cargando memorama...', style: TextStyle(color: Colors.white)),
+          title: const Text('Cargando memorama...',
+              style: TextStyle(color: Colors.white)),
           iconTheme: const IconThemeData(color: Colors.white),
         ),
-        body: const Center(child: CircularProgressIndicator(color: Colors.orange)),
+        body: const Center(
+            child: CircularProgressIndicator(color: Colors.orange)),
       );
     }
 
@@ -87,7 +94,10 @@ class _ActividadMemoramaScreenState extends State<ActividadMemoramaScreen> {
             child: Text(
               'No hay suficientes elementos con imagen y audio para el memorama.',
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Colors.brown),
+              style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.brown),
             ),
           ),
         ),
@@ -95,9 +105,11 @@ class _ActividadMemoramaScreenState extends State<ActividadMemoramaScreen> {
     }
 
     return ActividadMemorama(
-      tituloActividad: 'Actividad 4: Memorama',
+      tituloActividad: 'Juega memorama',
       backgroundImage: 'assets/image/learning/bg_casa_06.webp',
       listaItems: _listaItems,
+      moduloId: 3,
+      actividadNumero: 4,
     );
   }
 }

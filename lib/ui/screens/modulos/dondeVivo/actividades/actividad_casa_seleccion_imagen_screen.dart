@@ -7,13 +7,18 @@ import '../../components/actividad_seleccion_imagen.dart';
 
 class ActividadCasaSeleccionImagenScreen extends StatefulWidget {
   final String categoriaFiltro;
-  const ActividadCasaSeleccionImagenScreen({super.key, this.categoriaFiltro = 'casa'});
+  const ActividadCasaSeleccionImagenScreen({
+    super.key,
+    this.categoriaFiltro = 'casa',
+  });
 
   @override
-  State<ActividadCasaSeleccionImagenScreen> createState() => _ActividadCasaSeleccionImagenScreenState();
+  State<ActividadCasaSeleccionImagenScreen> createState() =>
+      _ActividadCasaSeleccionImagenScreenState();
 }
 
-class _ActividadCasaSeleccionImagenScreenState extends State<ActividadCasaSeleccionImagenScreen> {
+class _ActividadCasaSeleccionImagenScreenState
+    extends State<ActividadCasaSeleccionImagenScreen> {
   List<ItemVocabulario> _listaItems = [];
   bool _isLoading = true;
 
@@ -25,7 +30,8 @@ class _ActividadCasaSeleccionImagenScreenState extends State<ActividadCasaSelecc
 
   Future<void> _cargarDatosDesdeJson() async {
     try {
-      final String jsonString = await rootBundle.loadString('assets/data/module_2_dondeVivo.json');
+      final String jsonString =
+          await rootBundle.loadString('assets/data/module_2_dondeVivo.json');
       final Map<String, dynamic> jsonData = json.decode(jsonString);
 
       final List<dynamic> muestras = jsonData['muestras_lexicas'] ?? [];
@@ -34,7 +40,8 @@ class _ActividadCasaSeleccionImagenScreenState extends State<ActividadCasaSelecc
       final filtrados = muestras
           .map((item) => ItemVocabulario.fromJson(item))
           .where((item) =>
-              (item.categoria ?? '').trim().toLowerCase() == widget.categoriaFiltro.trim().toLowerCase() &&
+              (item.categoria ?? '').trim().toLowerCase() ==
+                  widget.categoriaFiltro.trim().toLowerCase() &&
               item.chol.trim().isNotEmpty &&
               item.chol.trim().toLowerCase() != 'no tiene traducción' &&
               item.espanol.trim().isNotEmpty &&
@@ -54,7 +61,8 @@ class _ActividadCasaSeleccionImagenScreenState extends State<ActividadCasaSelecc
         _isLoading = false;
       });
     } catch (e) {
-      debugPrint('Error al cargar datos de selección de imagen para la casa: $e');
+      debugPrint(
+          'Error al cargar datos de selección de imagen para la casa: $e');
       setState(() => _isLoading = false);
     }
   }
@@ -66,10 +74,12 @@ class _ActividadCasaSeleccionImagenScreenState extends State<ActividadCasaSelecc
         backgroundColor: const Color(0xFFFAF3E0),
         appBar: AppBar(
           backgroundColor: Colors.brown.shade800,
-          title: const Text('Cargando Casa...', style: TextStyle(color: Colors.white)),
+          title: const Text('Cargando Casa...',
+              style: TextStyle(color: Colors.white)),
           iconTheme: const IconThemeData(color: Colors.white),
         ),
-        body: const Center(child: CircularProgressIndicator(color: Colors.orange)),
+        body: const Center(
+            child: CircularProgressIndicator(color: Colors.orange)),
       );
     }
 
@@ -86,7 +96,10 @@ class _ActividadCasaSeleccionImagenScreenState extends State<ActividadCasaSelecc
             child: Text(
               'No hay suficientes elementos con imagen, traducción y audio disponibles en esta categoría.',
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Colors.brown),
+              style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.brown),
             ),
           ),
         ),
@@ -94,9 +107,11 @@ class _ActividadCasaSeleccionImagenScreenState extends State<ActividadCasaSelecc
     }
 
     return ActividadSeleccionImagen(
-      tituloActividad: 'Actividad 2: Casa',
+      tituloActividad: 'Elige en casa',
       backgroundImage: 'assets/image/learning/bg_casa_06.webp',
       listaItems: _listaItems,
+      moduloId: 2,
+      actividadNumero: 2,
     );
   }
 }

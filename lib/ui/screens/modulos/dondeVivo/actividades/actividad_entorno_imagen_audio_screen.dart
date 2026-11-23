@@ -74,7 +74,8 @@ class _ActividadEntornoImagenAudioScreenState
           ),
           iconTheme: const IconThemeData(color: Colors.white),
         ),
-        body: const Center(child: CircularProgressIndicator(color: Colors.orange)),
+        body: const Center(
+            child: CircularProgressIndicator(color: Colors.orange)),
       );
     }
 
@@ -103,9 +104,11 @@ class _ActividadEntornoImagenAudioScreenState
     }
 
     return ActividadImagenAudio(
-      tituloActividad: 'Actividad 1: Entorno',
+      tituloActividad: 'Conoce el entorno',
       backgroundImage: 'assets/image/learning/bg_casa_06.webp',
       listaItems: _listaItems,
+      moduloId: 2,
+      actividadNumero: 1,
     );
   }
 }

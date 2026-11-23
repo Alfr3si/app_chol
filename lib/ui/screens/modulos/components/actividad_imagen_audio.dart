@@ -1,32 +1,42 @@
-// lib/modules/modulo1/components/actividad_imagen_audio.dart
+// lib\ui\screens\modulos\components\actividad_imagen_audio.dart
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flame_audio/flame_audio.dart';
 import '../../../../domain/models/item_vocabulario.dart';
+import '../../../../data/providers/progreso_providers.dart'; // Ajusta ruta si difiere
 
-class ActividadImagenAudio extends StatefulWidget {
+class ActividadImagenAudio extends ConsumerStatefulWidget {
   final String tituloActividad;
   final List<ItemVocabulario> listaItems;
   final String backgroundImage;
+  final int? moduloId;
+  final int? actividadNumero;
+  final VoidCallback? onCompletada;
 
   const ActividadImagenAudio({
     super.key,
     required this.tituloActividad,
     required this.listaItems,
     required this.backgroundImage,
+    this.moduloId,
+    this.actividadNumero,
+    this.onCompletada,
   });
 
   @override
-  State<ActividadImagenAudio> createState() => _ActividadImagenAudioState();
+  ConsumerState<ActividadImagenAudio> createState() =>
+      _ActividadImagenAudioState();
 }
 
-class _ActividadImagenAudioState extends State<ActividadImagenAudio>
+class _ActividadImagenAudioState extends ConsumerState<ActividadImagenAudio>
     with SingleTickerProviderStateMixin {
   late List<ItemVocabulario> _activeQueue;
   final List<ItemVocabulario> _failedQueue = [];
 
   int _currentIndex = 0;
   bool _isReviewRound = false;
+  bool _progresoRegistradoEnSesion = false;
 
   List<String> _opcionesActuales = [];
   String? _selectedAnswer;
@@ -56,12 +66,23 @@ class _ActividadImagenAudioState extends State<ActividadImagenAudio>
       duration: const Duration(milliseconds: 300),
     );
 
-    _fadeAnimation = CurvedAnimation(parent: _animationController, curve: Curves.easeIn);
+    _fadeAnimation =
+        CurvedAnimation(parent: _animationController, curve: Curves.easeIn);
     _scaleAnimation = Tween<double>(begin: 0.9, end: 1.0).animate(
       CurvedAnimation(parent: _animationController, curve: Curves.easeOutBack),
     );
 
     _prepararPregunta();
+  }
+
+  @override
+  void didUpdateWidget(covariant ActividadImagenAudio oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.moduloId != widget.moduloId ||
+        oldWidget.actividadNumero != widget.actividadNumero ||
+        oldWidget.tituloActividad != widget.tituloActividad) {
+      _progresoRegistradoEnSesion = false;
+    }
   }
 
   @override
@@ -172,7 +193,26 @@ class _ActividadImagenAudioState extends State<ActividadImagenAudio>
           ),
         );
       } else {
+        _registrarCompletado();
         _mostrarDialogoVictoria();
+      }
+    }
+  }
+
+  Future<void> _registrarCompletado() async {
+    if (_progresoRegistradoEnSesion) return;
+    _progresoRegistradoEnSesion = true;
+
+    widget.onCompletada?.call();
+
+    if (widget.moduloId != null && widget.actividadNumero != null) {
+      try {
+        await ref.read(progresoRepositoryProvider).completarActividad(
+              moduloId: widget.moduloId!,
+              actividadNumero: widget.actividadNumero!,
+            );
+      } catch (e) {
+        debugPrint('Error al registrar progreso de actividad: $e');
       }
     }
   }
@@ -186,7 +226,8 @@ class _ActividadImagenAudioState extends State<ActividadImagenAudio>
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
         title: const Text(
           '🎉 ¡Actividad Superada!',
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16),
+          style: TextStyle(
+              color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16),
         ),
         content: const Text(
           '¡Has completado con éxito este desafío visual y auditivo!',
@@ -202,7 +243,8 @@ class _ActividadImagenAudioState extends State<ActividadImagenAudio>
               Navigator.pop(context);
               Navigator.pop(context);
             },
-            child: const Text('Continuar', style: TextStyle(color: Colors.white, fontSize: 12)),
+            child: const Text('Continuar',
+                style: TextStyle(color: Colors.white, fontSize: 12)),
           ),
         ],
       ),
@@ -214,9 +256,12 @@ class _ActividadImagenAudioState extends State<ActividadImagenAudio>
     if (_activeQueue.isEmpty) {
       return Scaffold(
         backgroundColor: const Color(0xFFFAF3E0),
-        appBar: AppBar(backgroundColor: Colors.brown.shade800, title: const Text('Aviso')),
+        appBar: AppBar(
+            backgroundColor: Colors.brown.shade800,
+            title: const Text('Aviso')),
         body: const Center(
-          child: Text('No hay elementos con imagen y audio disponibles para esta actividad.'),
+          child: Text(
+              'No hay elementos con imagen y audio disponibles para esta actividad.'),
         ),
       );
     }
@@ -230,7 +275,9 @@ class _ActividadImagenAudioState extends State<ActividadImagenAudio>
         backgroundColor: Colors.brown.shade800,
         toolbarHeight: 40,
         title: Text(
-          _isReviewRound ? 'Repaso: ${widget.tituloActividad}' : widget.tituloActividad,
+          _isReviewRound
+              ? 'Repaso: ${widget.tituloActividad}'
+              : widget.tituloActividad,
           style: const TextStyle(color: Colors.white, fontSize: 15),
         ),
         iconTheme: const IconThemeData(color: Colors.white),
@@ -256,7 +303,8 @@ class _ActividadImagenAudioState extends State<ActividadImagenAudio>
             child: Column(
               children: [
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                   decoration: BoxDecoration(
                     color: Colors.black.withOpacity(0.6),
                     borderRadius: BorderRadius.circular(8),
@@ -264,7 +312,10 @@ class _ActividadImagenAudioState extends State<ActividadImagenAudio>
                   child: Text(
                     'Ronda ${_currentIndex + 1} de ${_activeQueue.length} (Intentos: $_intentosRestantes)',
                     textAlign: TextAlign.center,
-                    style: const TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: Colors.white),
+                    style: const TextStyle(
+                        fontSize: 11,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white),
                   ),
                 ),
                 const SizedBox(height: 10),
@@ -287,7 +338,8 @@ class _ActividadImagenAudioState extends State<ActividadImagenAudio>
                                   decoration: BoxDecoration(
                                     color: Colors.white,
                                     borderRadius: BorderRadius.circular(16),
-                                    border: Border.all(color: Colors.orangeAccent, width: 2.5),
+                                    border: Border.all(
+                                        color: Colors.orangeAccent, width: 2.5),
                                     boxShadow: [
                                       BoxShadow(
                                         color: Colors.black.withOpacity(0.4),
@@ -301,8 +353,12 @@ class _ActividadImagenAudioState extends State<ActividadImagenAudio>
                                     child: Image.asset(
                                       current.pathImagen!,
                                       fit: BoxFit.contain,
-                                      errorBuilder: (context, error, stackTrace) =>
-                                          const Icon(Icons.image_not_supported, size: 40, color: Colors.grey),
+                                      errorBuilder:
+                                          (context, error, stackTrace) =>
+                                              const Icon(
+                                                  Icons.image_not_supported,
+                                                  size: 40,
+                                                  color: Colors.grey),
                                     ),
                                   ),
                                 ),
@@ -310,18 +366,23 @@ class _ActividadImagenAudioState extends State<ActividadImagenAudio>
                             ),
                             const SizedBox(height: 10),
                             Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 8, vertical: 6),
                               decoration: BoxDecoration(
                                 color: Colors.amber.shade100,
                                 borderRadius: BorderRadius.circular(12),
-                                border: Border.all(color: Colors.orange, width: 1.2),
+                                border:
+                                    Border.all(color: Colors.orange, width: 1.2),
                               ),
                               child: Column(
                                 children: [
                                   Text(
                                     current.espanol,
                                     textAlign: TextAlign.center,
-                                    style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: Colors.brown.shade900),
+                                    style: TextStyle(
+                                        fontSize: 11,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.brown.shade900),
                                     overflow: TextOverflow.ellipsis,
                                   ),
                                   const SizedBox(height: 4),
@@ -331,12 +392,18 @@ class _ActividadImagenAudioState extends State<ActividadImagenAudio>
                                       style: ElevatedButton.styleFrom(
                                         backgroundColor: Colors.orange.shade700,
                                         foregroundColor: Colors.white,
-                                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-                                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 8, vertical: 2),
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(8)),
                                       ),
-                                      onPressed: () => _reproducirAudio(current.pathAudio),
-                                      icon: const Icon(Icons.volume_up, size: 14),
-                                      label: const Text('Escuchar', style: TextStyle(fontSize: 10)),
+                                      onPressed: () =>
+                                          _reproducirAudio(current.pathAudio),
+                                      icon:
+                                          const Icon(Icons.volume_up, size: 14),
+                                      label: const Text('Escuchar',
+                                          style: TextStyle(fontSize: 10)),
                                     ),
                                   ),
                                 ],
@@ -380,10 +447,12 @@ class _ActividadImagenAudioState extends State<ActividadImagenAudio>
                                     disabledBackgroundColor: colorFondo,
                                     disabledForegroundColor: Colors.white,
                                     elevation: 2,
-                                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 8),
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(10),
-                                      side: BorderSide(color: colorBorde, width: 1.5),
+                                      side: BorderSide(
+                                          color: colorBorde, width: 1.5),
                                     ),
                                   ),
                                   onPressed: _isAnswerCorrect == true
@@ -394,7 +463,10 @@ class _ActividadImagenAudioState extends State<ActividadImagenAudio>
                                     textAlign: TextAlign.center,
                                     maxLines: 2,
                                     overflow: TextOverflow.ellipsis,
-                                    style: const TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: Colors.white),
+                                    style: const TextStyle(
+                                        fontSize: 11,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white),
                                   ),
                                 ),
                               ),

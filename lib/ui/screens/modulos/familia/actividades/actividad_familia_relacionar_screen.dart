@@ -9,10 +9,12 @@ class ActividadFamiliaRelacionarScreen extends StatefulWidget {
   const ActividadFamiliaRelacionarScreen({super.key});
 
   @override
-  State<ActividadFamiliaRelacionarScreen> createState() => _ActividadFamiliaRelacionarScreenState();
+  State<ActividadFamiliaRelacionarScreen> createState() =>
+      _ActividadFamiliaRelacionarScreenState();
 }
 
-class _ActividadFamiliaRelacionarScreenState extends State<ActividadFamiliaRelacionarScreen> {
+class _ActividadFamiliaRelacionarScreenState
+    extends State<ActividadFamiliaRelacionarScreen> {
   List<ItemVocabulario> _listaFamilia = [];
   bool _isLoading = true;
 
@@ -24,7 +26,8 @@ class _ActividadFamiliaRelacionarScreenState extends State<ActividadFamiliaRelac
 
   Future<void> _cargarDatosDesdeJson() async {
     try {
-      final String jsonString = await rootBundle.loadString('assets/data/module_1_familia.json');
+      final String jsonString =
+          await rootBundle.loadString('assets/data/module_1_familia.json');
       final Map<String, dynamic> jsonData = json.decode(jsonString);
 
       final List<dynamic> muestras = jsonData['muestras_lexicas'] ?? [];
@@ -33,12 +36,12 @@ class _ActividadFamiliaRelacionarScreenState extends State<ActividadFamiliaRelac
         _listaFamilia = muestras
             .map((item) => ItemVocabulario.fromJson(item))
             // Filtro flexible para la categoría 'familia' asegurando texto válido
-            .where((item) => 
-                item.categoria == 'familia' && 
-                item.chol.isNotEmpty && 
+            .where((item) =>
+                item.categoria == 'familia' &&
+                item.chol.isNotEmpty &&
                 item.espanol.isNotEmpty)
             .toList();
-        
+
         _isLoading = false;
       });
     } catch (e) {
@@ -54,7 +57,8 @@ class _ActividadFamiliaRelacionarScreenState extends State<ActividadFamiliaRelac
         backgroundColor: const Color(0xFFFAF3E0),
         appBar: AppBar(
           backgroundColor: Colors.brown.shade800,
-          title: const Text('Cargando Familia...', style: TextStyle(color: Colors.white)),
+          title: const Text('Cargando Familia...',
+              style: TextStyle(color: Colors.white)),
           iconTheme: const IconThemeData(color: Colors.white),
         ),
         body: const Center(
@@ -66,14 +70,17 @@ class _ActividadFamiliaRelacionarScreenState extends State<ActividadFamiliaRelac
     if (_listaFamilia.isEmpty) {
       return Scaffold(
         appBar: AppBar(title: const Text('Error')),
-        body: const Center(child: Text('No se pudieron cargar los datos de la familia.')),
+        body: const Center(
+            child: Text('No se pudieron cargar los datos de la familia.')),
       );
     }
 
     return ActividadRelacionar(
-      tituloActividad: 'Actividad 2: Mi Familia',
+      tituloActividad: 'Une la familia',
       backgroundImage: 'assets/image/learning/bg_casa_06.webp',
       listaItems: _listaFamilia,
+      moduloId: 1,
+      actividadNumero: 2,
     );
   }
 }

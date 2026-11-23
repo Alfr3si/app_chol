@@ -110,9 +110,11 @@ class _ActividadAccionesRelacionarScreenState
     }
 
     return ActividadRelacionar(
-      tituloActividad: 'Actividad 5: Acciones',
+      tituloActividad: 'Une acciones',
       backgroundImage: 'assets/image/learning/bg_casa_06.webp',
       listaItems: _listaItems,
+      moduloId: 3,
+      actividadNumero: 5,
     );
   }
 }

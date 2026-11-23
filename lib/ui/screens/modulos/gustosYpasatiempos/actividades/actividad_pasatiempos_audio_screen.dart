@@ -98,7 +98,7 @@ class _ActividadPasatiemposAudioScreenState
         appBar: AppBar(
           backgroundColor: Colors.brown.shade800,
           title: const Text(
-            'Actividad 3: Pasatiempos',
+            'Escucha pasatiempos',
             style: TextStyle(color: Colors.white),
           ),
           iconTheme: const IconThemeData(color: Colors.white),
@@ -121,9 +121,11 @@ class _ActividadPasatiemposAudioScreenState
     }
 
     return ActividadAudio(
-      tituloActividad: 'Actividad 3: Pasatiempos',
+      tituloActividad: 'Escucha pasatiempos',
       backgroundImage: 'assets/image/learning/bg_casa_06.webp',
       listaItems: _listaItems,
+      moduloId: 4,
+      actividadNumero: 3,
     );
   }
 }

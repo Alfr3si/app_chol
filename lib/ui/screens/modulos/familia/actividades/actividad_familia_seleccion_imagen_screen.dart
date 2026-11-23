@@ -9,10 +9,12 @@ class ActividadFamiliaSeleccionImagenScreen extends StatefulWidget {
   const ActividadFamiliaSeleccionImagenScreen({super.key});
 
   @override
-  State<ActividadFamiliaSeleccionImagenScreen> createState() => _ActividadFamiliaSeleccionImagenScreenState();
+  State<ActividadFamiliaSeleccionImagenScreen> createState() =>
+      _ActividadFamiliaSeleccionImagenScreenState();
 }
 
-class _ActividadFamiliaSeleccionImagenScreenState extends State<ActividadFamiliaSeleccionImagenScreen> {
+class _ActividadFamiliaSeleccionImagenScreenState
+    extends State<ActividadFamiliaSeleccionImagenScreen> {
   List<ItemVocabulario> _listaItems = [];
   bool _isLoading = true;
 
@@ -24,7 +26,8 @@ class _ActividadFamiliaSeleccionImagenScreenState extends State<ActividadFamilia
 
   Future<void> _cargarDatosDesdeJson() async {
     try {
-      final String jsonString = await rootBundle.loadString('assets/data/module_1_familia.json');
+      final String jsonString =
+          await rootBundle.loadString('assets/data/module_1_familia.json');
       final Map<String, dynamic> jsonData = json.decode(jsonString);
 
       final List<dynamic> muestras = jsonData['muestras_lexicas'] ?? [];
@@ -55,22 +58,29 @@ class _ActividadFamiliaSeleccionImagenScreenState extends State<ActividadFamilia
     if (_isLoading) {
       return Scaffold(
         backgroundColor: const Color(0xFFFAF3E0),
-        appBar: AppBar(backgroundColor: Colors.brown.shade800, title: const Text('Cargando...')),
-        body: const Center(child: CircularProgressIndicator(color: Colors.orange)),
+        appBar: AppBar(
+            backgroundColor: Colors.brown.shade800,
+            title: const Text('Cargando...')),
+        body: const Center(
+            child: CircularProgressIndicator(color: Colors.orange)),
       );
     }
 
     if (_listaItems.isEmpty) {
       return Scaffold(
         appBar: AppBar(title: const Text('Aviso')),
-        body: const Center(child: Text('No hay suficientes elementos con imagen y audio en esta categoría.')),
+        body: const Center(
+            child: Text(
+                'No hay suficientes elementos con imagen y audio en esta categoría.')),
       );
     }
 
     return ActividadSeleccionImagen(
-      tituloActividad: 'Escucha y Selecciona la Imagen',
+      tituloActividad: 'Elige la imagen',
       backgroundImage: 'assets/image/learning/bg_casa_06.webp',
       listaItems: _listaItems,
+      moduloId: 1,
+      actividadNumero: 4,
     );
   }
 }

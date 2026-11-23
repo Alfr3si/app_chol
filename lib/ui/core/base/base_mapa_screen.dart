@@ -1,9 +1,12 @@
-// lib/screens/base_mapa_screen.dart (o la ruta donde organices tus pantallas)
+// lib/ui/core/base/base_mapa_screen.dart
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
-import '../../game_canvas/base_mapa_world.dart'; // Crearemos este world genérico en el Paso 2
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class BaseMapaScreen extends StatefulWidget {
+import '../../../data/providers/progreso_providers.dart';
+import '../../game_canvas/base_mapa_world.dart';
+
+class BaseMapaScreen extends ConsumerStatefulWidget {
   final int moduloId;
   final String tituloModulo;
   final String backgroundAsset;
@@ -24,13 +27,14 @@ class BaseMapaScreen extends StatefulWidget {
   });
 
   @override
-  State<BaseMapaScreen> createState() => _BaseMapaScreenState();
+  ConsumerState<BaseMapaScreen> createState() => _BaseMapaScreenState();
 }
 
-class _BaseMapaScreenState extends State<BaseMapaScreen> {
+class _BaseMapaScreenState extends ConsumerState<BaseMapaScreen> {
   late final BaseMapaWorld gameInstance;
   bool _showActivityPrompt = false;
   String _currentHouseTitle = '';
+  int? _currentActivityNumber;
 
   @override
   void initState() {
@@ -41,21 +45,49 @@ class _BaseMapaScreenState extends State<BaseMapaScreen> {
       houseNames: widget.houseNames,
       obstacles: widget.obstacles,
       onHouseEntered: (houseName) {
+        if (!mounted) return;
+        final idx = widget.houseNames.indexOf(houseName);
         setState(() {
           _currentHouseTitle = houseName;
+          _currentActivityNumber = idx >= 0 ? idx + 1 : null;
           _showActivityPrompt = true;
         });
       },
       onHouseExited: () {
+        if (!mounted) return;
         setState(() {
           _showActivityPrompt = false;
+          _currentActivityNumber = null;
         });
       },
     );
   }
 
+  Future<void> _abrirActividad() async {
+    final destino = widget.onNavigateToActivity(_currentHouseTitle);
+    gameInstance.player.move('idle');
+    setState(() {
+      _showActivityPrompt = false;
+    });
+
+    await Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => destino),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    final resumenAsync = ref.watch(resumenModuloProvider(widget.moduloId));
+    final completadasSet =
+        ref.watch(actividadesCompletadasProvider(widget.moduloId)).maybeWhen(
+              data: (set) => set,
+              orElse: () => const <int>{},
+            );
+
+    final bool actividadActualCompletada = _currentActivityNumber != null &&
+        completadasSet.contains(_currentActivityNumber);
+
     return Scaffold(
       body: Stack(
         children: [
@@ -70,9 +102,62 @@ class _BaseMapaScreenState extends State<BaseMapaScreen> {
                 backgroundColor: Colors.orange.shade800,
                 foregroundColor: Colors.white,
               ),
-              onPressed: () => Navigator.pop(context),
+              onPressed: () {
+                gameInstance.player.move('idle');
+                Navigator.pop(context);
+              },
               icon: const Icon(Icons.arrow_back),
               label: Text('Volver a Módulos (${widget.tituloModulo})'),
+            ),
+          ),
+
+          // Indicador de Avance del Módulo en el Mapa
+          Positioned(
+            top: 40,
+            right: 20,
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+              decoration: BoxDecoration(
+                color: Colors.black.withValues(alpha: 0.75),
+                borderRadius: BorderRadius.circular(20),
+                border: Border.all(color: Colors.orange, width: 1.5),
+              ),
+              child: resumenAsync.when(
+                data: (resumen) => Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Icon(
+                      Icons.check_circle_outline,
+                      color: Colors.orangeAccent,
+                      size: 18,
+                    ),
+                    const SizedBox(width: 6),
+                    Text(
+                      '${resumen.completadas}/${resumen.total} completadas',
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 13,
+                      ),
+                    ),
+                  ],
+                ),
+                loading: () => const SizedBox(
+                  width: 16,
+                  height: 16,
+                  child: CircularProgressIndicator(
+                    strokeWidth: 2,
+                    color: Colors.orangeAccent,
+                  ),
+                ),
+                error: (_, __) => const Text(
+                  '0/5 completadas',
+                  style: TextStyle(
+                    color: Colors.white70,
+                    fontSize: 13,
+                  ),
+                ),
+              ),
             ),
           ),
 
@@ -83,9 +168,14 @@ class _BaseMapaScreenState extends State<BaseMapaScreen> {
                 width: 320,
                 padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
-                  color: Colors.brown.shade900.withOpacity(0.95),
+                  color: Colors.brown.shade900.withValues(alpha: 0.95),
                   borderRadius: BorderRadius.circular(20),
-                  border: Border.all(color: Colors.orange, width: 3),
+                  border: Border.all(
+                    color: actividadActualCompletada
+                        ? Colors.greenAccent
+                        : Colors.orange,
+                    width: 3,
+                  ),
                   boxShadow: const [
                     BoxShadow(
                       color: Colors.black54,
@@ -97,9 +187,13 @@ class _BaseMapaScreenState extends State<BaseMapaScreen> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const Icon(
-                      Icons.home,
-                      color: Colors.orangeAccent,
+                    Icon(
+                      actividadActualCompletada
+                          ? Icons.verified
+                          : Icons.home,
+                      color: actividadActualCompletada
+                          ? Colors.greenAccent
+                          : Colors.orangeAccent,
                       size: 48,
                     ),
                     const SizedBox(height: 10),
@@ -111,6 +205,27 @@ class _BaseMapaScreenState extends State<BaseMapaScreen> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
+                    if (actividadActualCompletada) ...[
+                      const SizedBox(height: 6),
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 10,
+                          vertical: 3,
+                        ),
+                        decoration: BoxDecoration(
+                          color: Colors.green.shade800,
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: const Text(
+                          'Completada',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ],
                     const SizedBox(height: 6),
                     Text(
                       _currentHouseTitle,
@@ -141,18 +256,12 @@ class _BaseMapaScreenState extends State<BaseMapaScreen> {
                             backgroundColor: Colors.green.shade700,
                             foregroundColor: Colors.white,
                           ),
-                          onPressed: () {
-                            setState(() {
-                              _showActivityPrompt = false;
-                            });
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => widget.onNavigateToActivity(_currentHouseTitle),
-                              ),
-                            );
-                          },
-                          child: const Text('Aceptar'),
+                          onPressed: _abrirActividad,
+                          child: Text(
+                            actividadActualCompletada
+                                ? 'Repetir'
+                                : 'Aceptar',
+                          ),
                         ),
                       ],
                     ),

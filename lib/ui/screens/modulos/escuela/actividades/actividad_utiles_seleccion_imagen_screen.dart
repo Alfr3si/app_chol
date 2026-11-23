@@ -7,13 +7,18 @@ import '../../components/actividad_seleccion_imagen.dart';
 
 class ActividadUtilesSeleccionImagenScreen extends StatefulWidget {
   final String categoriaFiltro;
-  const ActividadUtilesSeleccionImagenScreen({super.key, this.categoriaFiltro = 'utiles'});
+  const ActividadUtilesSeleccionImagenScreen({
+    super.key,
+    this.categoriaFiltro = 'utiles',
+  });
 
   @override
-  State<ActividadUtilesSeleccionImagenScreen> createState() => _ActividadUtilesSeleccionImagenScreenState();
+  State<ActividadUtilesSeleccionImagenScreen> createState() =>
+      _ActividadUtilesSeleccionImagenScreenState();
 }
 
-class _ActividadUtilesSeleccionImagenScreenState extends State<ActividadUtilesSeleccionImagenScreen> {
+class _ActividadUtilesSeleccionImagenScreenState
+    extends State<ActividadUtilesSeleccionImagenScreen> {
   List<ItemVocabulario> _listaItems = [];
   bool _isLoading = true;
 
@@ -26,7 +31,8 @@ class _ActividadUtilesSeleccionImagenScreenState extends State<ActividadUtilesSe
   Future<void> _cargarDatosDesdeJson() async {
     try {
       // Verifica que el nombre del archivo JSON coincida exactamente con el de tu carpeta assets/data/
-      final String jsonString = await rootBundle.loadString('assets/data/module_3_escuela.json');
+      final String jsonString =
+          await rootBundle.loadString('assets/data/module_3_escuela.json');
       final Map<String, dynamic> jsonData = json.decode(jsonString);
 
       final List<dynamic> muestras = jsonData['muestras_lexicas'] ?? [];
@@ -35,7 +41,8 @@ class _ActividadUtilesSeleccionImagenScreenState extends State<ActividadUtilesSe
       final filtrados = muestras
           .map((item) => ItemVocabulario.fromJson(item))
           .where((item) =>
-              (item.categoria ?? '').trim().toLowerCase() == widget.categoriaFiltro.trim().toLowerCase() &&
+              (item.categoria ?? '').trim().toLowerCase() ==
+                  widget.categoriaFiltro.trim().toLowerCase() &&
               item.chol.trim().isNotEmpty &&
               item.chol.trim().toLowerCase() != 'no tiene traducción' &&
               item.espanol.trim().isNotEmpty &&
@@ -55,7 +62,8 @@ class _ActividadUtilesSeleccionImagenScreenState extends State<ActividadUtilesSe
         _isLoading = false;
       });
     } catch (e) {
-      debugPrint('Error al cargar datos de selección de imagen para útiles: $e');
+      debugPrint(
+          'Error al cargar datos de selección de imagen para útiles: $e');
       setState(() => _isLoading = false);
     }
   }
@@ -67,10 +75,12 @@ class _ActividadUtilesSeleccionImagenScreenState extends State<ActividadUtilesSe
         backgroundColor: const Color(0xFFFAF3E0),
         appBar: AppBar(
           backgroundColor: Colors.brown.shade800,
-          title: const Text('Cargando Útiles...', style: TextStyle(color: Colors.white)),
+          title: const Text('Cargando Útiles...',
+              style: TextStyle(color: Colors.white)),
           iconTheme: const IconThemeData(color: Colors.white),
         ),
-        body: const Center(child: CircularProgressIndicator(color: Colors.orange)),
+        body: const Center(
+            child: CircularProgressIndicator(color: Colors.orange)),
       );
     }
 
@@ -87,7 +97,10 @@ class _ActividadUtilesSeleccionImagenScreenState extends State<ActividadUtilesSe
             child: Text(
               'No hay suficientes elementos con imagen, traducción y audio disponibles en esta categoría.',
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Colors.brown),
+              style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.brown),
             ),
           ),
         ),
@@ -95,9 +108,11 @@ class _ActividadUtilesSeleccionImagenScreenState extends State<ActividadUtilesSe
     }
 
     return ActividadSeleccionImagen(
-      tituloActividad: 'Actividad 2: Útiles Escolares',
+      tituloActividad: 'Elige útiles',
       backgroundImage: 'assets/image/learning/bg_casa_06.webp',
       listaItems: _listaItems,
+      moduloId: 3,
+      actividadNumero: 2,
     );
   }
 }

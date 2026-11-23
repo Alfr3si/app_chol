@@ -24,12 +24,17 @@ class _ActividadMemoramaScreenState extends State<ActividadMemoramaScreen> {
 
   Future<void> _cargarDatosDesdeJson() async {
     try {
-      final String jsonString = await rootBundle.loadString('assets/data/module_1_familia.json');
+      final String jsonString =
+          await rootBundle.loadString('assets/data/module_1_familia.json');
       final Map<String, dynamic> jsonData = json.decode(jsonString);
 
       final List<dynamic> muestrasLexicas = jsonData['muestras_lexicas'] ?? [];
-      final List<dynamic> muestrasSintacticas = jsonData['muestras_sintacticas'] ?? [];
-      final List<dynamic> todasLasMuestras = [...muestrasLexicas, ...muestrasSintacticas];
+      final List<dynamic> muestrasSintacticas =
+          jsonData['muestras_sintacticas'] ?? [];
+      final List<dynamic> todasLasMuestras = [
+        ...muestrasLexicas,
+        ...muestrasSintacticas
+      ];
 
       setState(() {
         _listaItems = todasLasMuestras
@@ -56,24 +61,32 @@ class _ActividadMemoramaScreenState extends State<ActividadMemoramaScreen> {
     if (_isLoading) {
       return Scaffold(
         backgroundColor: const Color(0xFFFAF3E0),
-        appBar: AppBar(backgroundColor: Colors.brown.shade800, title: const Text('Cargando memorama...')),
-        body: const Center(child: CircularProgressIndicator(color: Colors.orange)),
+        appBar: AppBar(
+            backgroundColor: Colors.brown.shade800,
+            title: const Text('Cargando memorama...')),
+        body: const Center(
+            child: CircularProgressIndicator(color: Colors.orange)),
       );
     }
 
     if (_listaItems.isEmpty) {
       return Scaffold(
-        appBar: AppBar(backgroundColor: Colors.brown.shade800, title: const Text('Memorama')),
+        appBar: AppBar(
+            backgroundColor: Colors.brown.shade800,
+            title: const Text('Memorama')),
         body: const Center(
-          child: Text('No hay suficientes elementos con imagen y audio para el memorama.'),
+          child: Text(
+              'No hay suficientes elementos con imagen y audio para el memorama.'),
         ),
       );
     }
 
     return ActividadMemorama(
-      tituloActividad: 'Memorama: Palabra e Imagen',
+      tituloActividad: 'Juega memorama',
       backgroundImage: 'assets/image/learning/bg_casa_06.webp',
       listaItems: _listaItems,
+      moduloId: 1,
+      actividadNumero: 5,
     );
   }
 }

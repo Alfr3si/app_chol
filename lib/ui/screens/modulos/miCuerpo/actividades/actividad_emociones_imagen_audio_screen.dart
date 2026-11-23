@@ -105,7 +105,7 @@ class _ActividadEmocionesImagenAudioScreenState
         appBar: AppBar(
           backgroundColor: Colors.brown.shade800,
           title: const Text(
-            'Actividad: Emociones',
+            'Conoce emociones',
             style: TextStyle(color: Colors.white),
           ),
           iconTheme: const IconThemeData(color: Colors.white),
@@ -128,9 +128,11 @@ class _ActividadEmocionesImagenAudioScreenState
     }
 
     return ActividadImagenAudio(
-      tituloActividad: 'Actividad: Emociones',
+      tituloActividad: 'Conoce emociones',
       backgroundImage: 'assets/image/learning/bg_casa_06.webp',
       listaItems: _listaItems,
+      moduloId: 5,
+      actividadNumero: 2,
     );
   }
 }

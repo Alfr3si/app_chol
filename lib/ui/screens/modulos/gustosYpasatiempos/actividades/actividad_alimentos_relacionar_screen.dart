@@ -45,14 +45,16 @@ class _ActividadAlimentosRelacionarScreenState
         ...muestrasSintacticas,
       ];
 
-      final String filtroNormalizado = widget.categoriaFiltro.trim().toLowerCase();
+      final String filtroNormalizado =
+          widget.categoriaFiltro.trim().toLowerCase();
 
       // Filtro estricto: categoría solicitada + texto válido en Ch'ol y Español
       final filtrados = todasLasMuestras
           .map((item) => ItemVocabulario.fromJson(item))
           .where(
             (item) =>
-                (item.categoria ?? '').trim().toLowerCase() == filtroNormalizado &&
+                (item.categoria ?? '').trim().toLowerCase() ==
+                    filtroNormalizado &&
                 item.chol.trim().isNotEmpty &&
                 item.chol.trim().toLowerCase() != 'no tiene traducción' &&
                 item.espanol.trim().isNotEmpty,
@@ -101,7 +103,7 @@ class _ActividadAlimentosRelacionarScreenState
         appBar: AppBar(
           backgroundColor: Colors.brown.shade800,
           title: const Text(
-            'Actividad 5: Alimentos',
+            'Une alimentos',
             style: TextStyle(color: Colors.white),
           ),
           iconTheme: const IconThemeData(color: Colors.white),
@@ -124,9 +126,11 @@ class _ActividadAlimentosRelacionarScreenState
     }
 
     return ActividadRelacionar(
-      tituloActividad: 'Actividad 5: Alimentos',
+      tituloActividad: 'Une alimentos',
       backgroundImage: 'assets/image/learning/bg_casa_06.webp',
       listaItems: _listaItems,
+      moduloId: 4,
+      actividadNumero: 5,
     );
   }
 }

@@ -102,9 +102,11 @@ class _ActividadNumerosAudioScreenState
     }
 
     return ActividadAudio(
-      tituloActividad: 'Actividad 3: Números',
+      tituloActividad: 'Escucha números',
       backgroundImage: 'assets/image/learning/bg_casa_06.webp',
       listaItems: _listaItems,
+      moduloId: 3,
+      actividadNumero: 3,
     );
   }
 }

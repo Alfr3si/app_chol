@@ -1,3 +1,4 @@
+//lib/domain/entities/user_profile_entity.dart
 class UserProfileEntity {
   final String alias;
   final String ageRange;

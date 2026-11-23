@@ -7,13 +7,18 @@ import '../../components/actividad_relacionar.dart';
 
 class ActividadPreguntasRelacionarScreen extends StatefulWidget {
   final String categoriaFiltro;
-  const ActividadPreguntasRelacionarScreen({super.key, this.categoriaFiltro = 'preguntas'});
+  const ActividadPreguntasRelacionarScreen({
+    super.key,
+    this.categoriaFiltro = 'preguntas',
+  });
 
   @override
-  State<ActividadPreguntasRelacionarScreen> createState() => _ActividadPreguntasRelacionarScreenState();
+  State<ActividadPreguntasRelacionarScreen> createState() =>
+      _ActividadPreguntasRelacionarScreenState();
 }
 
-class _ActividadPreguntasRelacionarScreenState extends State<ActividadPreguntasRelacionarScreen> {
+class _ActividadPreguntasRelacionarScreenState
+    extends State<ActividadPreguntasRelacionarScreen> {
   List<ItemVocabulario> _listaItems = [];
   bool _isLoading = true;
 
@@ -25,19 +30,25 @@ class _ActividadPreguntasRelacionarScreenState extends State<ActividadPreguntasR
 
   Future<void> _cargarDatosDesdeJson() async {
     try {
-      final String jsonString = await rootBundle.loadString('assets/data/module_2_dondeVivo.json');
+      final String jsonString =
+          await rootBundle.loadString('assets/data/module_2_dondeVivo.json');
       final Map<String, dynamic> jsonData = json.decode(jsonString);
 
       // Combinamos ambas listas para asegurar que se encuentren todas las preguntas del JSON
       final List<dynamic> muestrasLexicas = jsonData['muestras_lexicas'] ?? [];
-      final List<dynamic> muestrasSintacticas = jsonData['muestras_sintacticas'] ?? [];
-      final List<dynamic> todasLasMuestras = [...muestrasLexicas, ...muestrasSintacticas];
+      final List<dynamic> muestrasSintacticas =
+          jsonData['muestras_sintacticas'] ?? [];
+      final List<dynamic> todasLasMuestras = [
+        ...muestrasLexicas,
+        ...muestrasSintacticas
+      ];
 
       // Filtro estricto por categoría 'preguntas', texto válido y manejo seguro de null
       final filtrados = todasLasMuestras
           .map((item) => ItemVocabulario.fromJson(item))
           .where((item) =>
-              (item.categoria ?? '').trim().toLowerCase() == widget.categoriaFiltro.trim().toLowerCase() &&
+              (item.categoria ?? '').trim().toLowerCase() ==
+                  widget.categoriaFiltro.trim().toLowerCase() &&
               item.chol.trim().isNotEmpty &&
               item.chol.trim().toLowerCase() != 'no tiene traducción' &&
               item.espanol.trim().isNotEmpty);
@@ -65,7 +76,8 @@ class _ActividadPreguntasRelacionarScreenState extends State<ActividadPreguntasR
         backgroundColor: const Color(0xFFFAF3E0),
         appBar: AppBar(
           backgroundColor: Colors.brown.shade800,
-          title: const Text('Cargando Preguntas...', style: TextStyle(color: Colors.white)),
+          title: const Text('Cargando Preguntas...',
+              style: TextStyle(color: Colors.white)),
           iconTheme: const IconThemeData(color: Colors.white),
         ),
         body: const Center(
@@ -87,7 +99,10 @@ class _ActividadPreguntasRelacionarScreenState extends State<ActividadPreguntasR
             child: Text(
               'No hay elementos disponibles para relacionar en esta categoría.',
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Colors.brown),
+              style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.brown),
             ),
           ),
         ),
@@ -95,9 +110,11 @@ class _ActividadPreguntasRelacionarScreenState extends State<ActividadPreguntasR
     }
 
     return ActividadRelacionar(
-      tituloActividad: 'Relacionar: Preguntas',
+      tituloActividad: 'Une preguntas',
       backgroundImage: 'assets/image/learning/bg_casa_06.webp',
       listaItems: _listaItems,
+      moduloId: 2,
+      actividadNumero: 6,
     );
   }
 }

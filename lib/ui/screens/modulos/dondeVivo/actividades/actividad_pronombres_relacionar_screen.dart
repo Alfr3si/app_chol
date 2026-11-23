@@ -7,13 +7,18 @@ import '../../components/actividad_relacionar.dart';
 
 class ActividadPronombresRelacionarScreen extends StatefulWidget {
   final String categoriaFiltro;
-  const ActividadPronombresRelacionarScreen({super.key, this.categoriaFiltro = 'pronombres'});
+  const ActividadPronombresRelacionarScreen({
+    super.key,
+    this.categoriaFiltro = 'pronombres',
+  });
 
   @override
-  State<ActividadPronombresRelacionarScreen> createState() => _ActividadPronombresRelacionarScreenState();
+  State<ActividadPronombresRelacionarScreen> createState() =>
+      _ActividadPronombresRelacionarScreenState();
 }
 
-class _ActividadPronombresRelacionarScreenState extends State<ActividadPronombresRelacionarScreen> {
+class _ActividadPronombresRelacionarScreenState
+    extends State<ActividadPronombresRelacionarScreen> {
   List<ItemVocabulario> _listaItems = [];
   bool _isLoading = true;
 
@@ -25,7 +30,8 @@ class _ActividadPronombresRelacionarScreenState extends State<ActividadPronombre
 
   Future<void> _cargarDatosDesdeJson() async {
     try {
-      final String jsonString = await rootBundle.loadString('assets/data/module_2_dondeVivo.json');
+      final String jsonString =
+          await rootBundle.loadString('assets/data/module_2_dondeVivo.json');
       final Map<String, dynamic> jsonData = json.decode(jsonString);
 
       final List<dynamic> muestras = jsonData['muestras_lexicas'] ?? [];
@@ -34,7 +40,8 @@ class _ActividadPronombresRelacionarScreenState extends State<ActividadPronombre
       final filtrados = muestras
           .map((item) => ItemVocabulario.fromJson(item))
           .where((item) =>
-              (item.categoria ?? '').trim().toLowerCase() == widget.categoriaFiltro.trim().toLowerCase() &&
+              (item.categoria ?? '').trim().toLowerCase() ==
+                  widget.categoriaFiltro.trim().toLowerCase() &&
               item.chol.trim().isNotEmpty &&
               item.chol.trim().toLowerCase() != 'no tiene traducción' &&
               item.espanol.trim().isNotEmpty);
@@ -62,7 +69,8 @@ class _ActividadPronombresRelacionarScreenState extends State<ActividadPronombre
         backgroundColor: const Color(0xFFFAF3E0),
         appBar: AppBar(
           backgroundColor: Colors.brown.shade800,
-          title: const Text('Cargando Relacionar...', style: TextStyle(color: Colors.white)),
+          title: const Text('Cargando Relacionar...',
+              style: TextStyle(color: Colors.white)),
           iconTheme: const IconThemeData(color: Colors.white),
         ),
         body: const Center(
@@ -79,15 +87,18 @@ class _ActividadPronombresRelacionarScreenState extends State<ActividadPronombre
           iconTheme: const IconThemeData(color: Colors.white),
         ),
         body: const Center(
-          child: Text('No hay elementos disponibles para relacionar en esta categoría.'),
+          child: Text(
+              'No hay elementos disponibles para relacionar en esta categoría.'),
         ),
       );
     }
 
     return ActividadRelacionar(
-      tituloActividad: 'Relacionar: Pronombres',
+      tituloActividad: 'Une pronombres',
       backgroundImage: 'assets/image/learning/bg_casa_06.webp',
       listaItems: _listaItems,
+      moduloId: 2,
+      actividadNumero: 5,
     );
   }
 }

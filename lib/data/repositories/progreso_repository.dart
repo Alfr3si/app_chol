@@ -1,4 +1,6 @@
+// lib/data/repositories/progreso_repository.dart
 import 'package:drift/drift.dart';
+import 'package:flutter/foundation.dart';
 import '../local/app_database.dart';
 
 class ResumenModulo {
@@ -24,6 +26,17 @@ class ProgresoRepository {
     return _db.obtenerOCrearPerfilInvitado();
   }
 
+  Future<void> actualizarNombrePerfil({required String nombre}) async {
+    final perfil = await _db.obtenerOCrearPerfilInvitado();
+    await (_db.update(_db.perfilUsuario)
+          ..where((tbl) => tbl.localUuid.equals(perfil.localUuid)))
+        .write(
+      PerfilUsuarioCompanion(
+        nombre: Value(nombre),
+      ),
+    );
+  }
+
   Future<void> completarActividad({
     required int moduloId,
     required int actividadNumero,
@@ -33,6 +46,13 @@ class ProgresoRepository {
       usuarioLocalUuid: perfil.localUuid,
       moduloId: moduloId,
       actividadNumero: actividadNumero,
+    );
+    final totalModulo = await _db.contarCompletadasPorModulo(
+      usuarioLocalUuid: perfil.localUuid,
+      moduloId: moduloId,
+    );
+    debugPrint(
+      '[Cho\'lApp] Completada mod=$moduloId act=$actividadNumero (uuid=${perfil.localUuid}) -> total módulo: $totalModulo',
     );
   }
 
@@ -50,6 +70,14 @@ class ProgresoRepository {
             total: 5,
           ),
         );
+  }
+
+  Stream<Set<int>> watchActividadesCompletadasNumeros(int moduloId) async* {
+    final perfil = await _db.obtenerOCrearPerfilInvitado();
+    yield* _db.watchActividadesCompletadasNumeros(
+      usuarioLocalUuid: perfil.localUuid,
+      moduloId: moduloId,
+    );
   }
 
   Stream<int> watchPuntajeTotal() async* {

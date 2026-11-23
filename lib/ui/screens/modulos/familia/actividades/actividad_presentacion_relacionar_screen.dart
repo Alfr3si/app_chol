@@ -9,10 +9,12 @@ class ActividadPresentacionRelacionarScreen extends StatefulWidget {
   const ActividadPresentacionRelacionarScreen({super.key});
 
   @override
-  State<ActividadPresentacionRelacionarScreen> createState() => _ActividadPresentacionRelacionarScreenState();
+  State<ActividadPresentacionRelacionarScreen> createState() =>
+      _ActividadPresentacionRelacionarScreenState();
 }
 
-class _ActividadPresentacionRelacionarScreenState extends State<ActividadPresentacionRelacionarScreen> {
+class _ActividadPresentacionRelacionarScreenState
+    extends State<ActividadPresentacionRelacionarScreen> {
   List<ItemVocabulario> _listaItemsPresentacion = [];
   bool _isLoading = true;
 
@@ -24,19 +26,21 @@ class _ActividadPresentacionRelacionarScreenState extends State<ActividadPresent
 
   Future<void> _cargarDatosPresentacion() async {
     try {
-      final String jsonString = await rootBundle.loadString('assets/data/module_1_familia.json');
+      final String jsonString =
+          await rootBundle.loadString('assets/data/module_1_familia.json');
       final Map<String, dynamic> jsonData = json.decode(jsonString);
 
       // Combinamos tanto muestras léxicas como sintácticas del JSON
       final List<dynamic> lexicas = jsonData['muestras_lexicas'] ?? [];
-      final List<dynamic> sintacticas = jsonData['muestras_sintacticas'] ?? [];
+      final List<dynamic> sintacticas =
+          jsonData['muestras_sintacticas'] ?? [];
       final List<dynamic> todas = [...lexicas, ...sintacticas];
 
       setState(() {
         _listaItemsPresentacion = todas
             .map((item) => ItemVocabulario.fromJson(item))
             // Filtramos la categoría y nos aseguramos de que tengan texto válido en ambos lados
-            .where((item) => 
+            .where((item) =>
                 (item.categoria ?? '').toLowerCase() == 'presentacion' &&
                 item.espanol.isNotEmpty &&
                 item.chol.isNotEmpty)
@@ -57,7 +61,8 @@ class _ActividadPresentacionRelacionarScreenState extends State<ActividadPresent
         backgroundColor: const Color(0xFFFAF3E0),
         appBar: AppBar(
           backgroundColor: Colors.brown.shade800,
-          title: const Text('Cargando Presentación...', style: TextStyle(color: Colors.white)),
+          title: const Text('Cargando Presentación...',
+              style: TextStyle(color: Colors.white)),
           iconTheme: const IconThemeData(color: Colors.white),
         ),
         body: const Center(
@@ -77,16 +82,19 @@ class _ActividadPresentacionRelacionarScreenState extends State<ActividadPresent
         body: const Center(
           child: Text(
             'No se pudieron cargar los datos de presentación.',
-            style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Colors.brown),
+            style: TextStyle(
+                fontSize: 14, fontWeight: FontWeight.bold, color: Colors.brown),
           ),
         ),
       );
     }
 
     return ActividadRelacionar(
-      tituloActividad: 'Relacionar: Presentación',
+      tituloActividad: 'Une presentaciones',
       backgroundImage: 'assets/image/learning/bg_casa_06.webp',
       listaItems: _listaItemsPresentacion,
+      moduloId: 1,
+      actividadNumero: 6,
     );
   }
 }

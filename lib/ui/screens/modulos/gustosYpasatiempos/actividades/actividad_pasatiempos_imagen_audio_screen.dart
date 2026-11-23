@@ -98,7 +98,7 @@ class _ActividadPasatiemposImagenAudioScreenState
         appBar: AppBar(
           backgroundColor: Colors.brown.shade800,
           title: const Text(
-            'Actividad 1: Pasatiempos',
+            'Conoce pasatiempos',
             style: TextStyle(color: Colors.white),
           ),
           iconTheme: const IconThemeData(color: Colors.white),
@@ -121,9 +121,11 @@ class _ActividadPasatiemposImagenAudioScreenState
     }
 
     return ActividadImagenAudio(
-      tituloActividad: 'Actividad 1: Pasatiempos',
+      tituloActividad: 'Conoce pasatiempos',
       backgroundImage: 'assets/image/learning/bg_casa_06.webp',
       listaItems: _listaItems,
+      moduloId: 4,
+      actividadNumero: 1,
     );
   }
 }

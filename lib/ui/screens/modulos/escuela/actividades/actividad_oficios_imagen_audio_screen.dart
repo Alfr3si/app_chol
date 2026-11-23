@@ -75,7 +75,8 @@ class _ActividadOficiosImagenAudioScreenState
           ),
           iconTheme: const IconThemeData(color: Colors.white),
         ),
-        body: const Center(child: CircularProgressIndicator(color: Colors.orange)),
+        body: const Center(
+            child: CircularProgressIndicator(color: Colors.orange)),
       );
     }
 
@@ -104,9 +105,11 @@ class _ActividadOficiosImagenAudioScreenState
     }
 
     return ActividadImagenAudio(
-      tituloActividad: 'Actividad 1: Oficios',
+      tituloActividad: 'Conoce oficios',
       backgroundImage: 'assets/image/learning/bg_casa_06.webp',
       listaItems: _listaItems,
+      moduloId: 3,
+      actividadNumero: 1,
     );
   }
 }

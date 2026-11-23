@@ -1,8 +1,10 @@
 // lib/modules/modulo1/components/actividad_memorama.dart
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flame_audio/flame_audio.dart';
 import '../../../../domain/models/item_vocabulario.dart';
+import '../../../../data/providers/progreso_providers.dart'; // Ajusta ruta si difiere
 
 class CartaMemorama {
   final String idUnico;
@@ -22,34 +24,51 @@ class CartaMemorama {
   });
 }
 
-class ActividadMemorama extends StatefulWidget {
+class ActividadMemorama extends ConsumerStatefulWidget {
   final String tituloActividad;
   final List<ItemVocabulario> listaItems;
   final String backgroundImage;
+  final int? moduloId;
+  final int? actividadNumero;
+  final VoidCallback? onCompletada;
 
   const ActividadMemorama({
     super.key,
     required this.tituloActividad,
     required this.listaItems,
     required this.backgroundImage,
+    this.moduloId,
+    this.actividadNumero,
+    this.onCompletada,
   });
 
   @override
-  State<ActividadMemorama> createState() => _ActividadMemoramaState();
+  ConsumerState<ActividadMemorama> createState() => _ActividadMemoramaState();
 }
 
-class _ActividadMemoramaState extends State<ActividadMemorama> {
+class _ActividadMemoramaState extends ConsumerState<ActividadMemorama> {
   List<CartaMemorama> _cartas = [];
   bool _isLoading = true;
   CartaMemorama? _primeraCartaSeleccionada;
   bool _esperandoValidacion = false;
   int _paresEncontrados = 0;
   int _totalPares = 4;
+  bool _progresoRegistradoEnSesion = false;
 
   @override
   void initState() {
     super.initState();
     _iniciarMemorama();
+  }
+
+  @override
+  void didUpdateWidget(covariant ActividadMemorama oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.moduloId != widget.moduloId ||
+        oldWidget.actividadNumero != widget.actividadNumero ||
+        oldWidget.tituloActividad != widget.tituloActividad) {
+      _progresoRegistradoEnSesion = false;
+    }
   }
 
   Future<void> _reproducirAudio(String? path) async {
@@ -112,6 +131,24 @@ class _ActividadMemoramaState extends State<ActividadMemorama> {
     });
   }
 
+  Future<void> _registrarCompletado() async {
+    if (_progresoRegistradoEnSesion) return;
+    _progresoRegistradoEnSesion = true;
+
+    widget.onCompletada?.call();
+
+    if (widget.moduloId != null && widget.actividadNumero != null) {
+      try {
+        await ref.read(progresoRepositoryProvider).completarActividad(
+              moduloId: widget.moduloId!,
+              actividadNumero: widget.actividadNumero!,
+            );
+      } catch (e) {
+        debugPrint('Error al registrar progreso de memorama: $e');
+      }
+    }
+  }
+
   void _voltearCarta(int index) {
     if (_esperandoValidacion) return;
     if (_cartas[index].estaVolteada || _cartas[index].estaEncontrada) return;
@@ -137,6 +174,7 @@ class _ActividadMemoramaState extends State<ActividadMemorama> {
         _esperandoValidacion = false;
 
         if (_paresEncontrados == _totalPares) {
+          _registrarCompletado();
           Future.delayed(const Duration(milliseconds: 600), () {
             if (!mounted) return;
             _mostrarDialogoVictoria();
@@ -193,17 +231,23 @@ class _ActividadMemoramaState extends State<ActividadMemorama> {
     if (_isLoading) {
       return Scaffold(
         backgroundColor: const Color(0xFFFAF3E0),
-        appBar: AppBar(backgroundColor: Colors.brown.shade800, title: const Text('Cargando memorama...')),
-        body: const Center(child: CircularProgressIndicator(color: Colors.orange)),
+        appBar: AppBar(
+            backgroundColor: Colors.brown.shade800,
+            title: const Text('Cargando memorama...')),
+        body: const Center(
+            child: CircularProgressIndicator(color: Colors.orange)),
       );
     }
 
     if (_cartas.isEmpty) {
       return Scaffold(
         backgroundColor: const Color(0xFFFAF3E0),
-        appBar: AppBar(backgroundColor: Colors.brown.shade800, title: Text(widget.tituloActividad)),
+        appBar: AppBar(
+            backgroundColor: Colors.brown.shade800,
+            title: Text(widget.tituloActividad)),
         body: const Center(
-          child: Text('No hay suficientes elementos con imagen disponibles para jugar.'),
+          child: Text(
+              'No hay suficientes elementos con imagen disponibles para jugar.'),
         ),
       );
     }
@@ -232,7 +276,8 @@ class _ActividadMemoramaState extends State<ActividadMemorama> {
             child: Column(
               children: [
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                   decoration: BoxDecoration(
                     color: Colors.black.withOpacity(0.6),
                     borderRadius: BorderRadius.circular(6),
@@ -240,14 +285,18 @@ class _ActividadMemoramaState extends State<ActividadMemorama> {
                   child: Text(
                     '🧠 Encuentra las parejas ($_paresEncontrados / $_totalPares pares)',
                     textAlign: TextAlign.center,
-                    style: const TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: Colors.white),
+                    style: const TextStyle(
+                        fontSize: 10,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white),
                   ),
                 ),
                 const SizedBox(height: 6),
                 Expanded(
                   child: GridView.builder(
                     physics: const NeverScrollableScrollPhysics(),
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 4,
                       crossAxisSpacing: 4,
                       mainAxisSpacing: 4,
@@ -263,11 +312,15 @@ class _ActividadMemoramaState extends State<ActividadMemorama> {
                           duration: const Duration(milliseconds: 300),
                           decoration: BoxDecoration(
                             color: carta.estaVolteada || carta.estaEncontrada
-                                ? (carta.estaEncontrada ? Colors.green.shade800 : Colors.white)
+                                ? (carta.estaEncontrada
+                                    ? Colors.green.shade800
+                                    : Colors.white)
                                 : Colors.brown.shade800,
                             borderRadius: BorderRadius.circular(10),
                             border: Border.all(
-                              color: carta.estaEncontrada ? Colors.greenAccent : Colors.orangeAccent,
+                              color: carta.estaEncontrada
+                                  ? Colors.greenAccent
+                                  : Colors.orangeAccent,
                               width: 1.5,
                             ),
                             boxShadow: [
@@ -282,12 +335,16 @@ class _ActividadMemoramaState extends State<ActividadMemorama> {
                             child: carta.estaVolteada || carta.estaEncontrada
                                 ? Padding(
                                     padding: const EdgeInsets.all(2.0),
-                                    child: carta.pathImagen != null && carta.pathImagen!.trim().isNotEmpty
+                                    child: carta.pathImagen != null &&
+                                            carta.pathImagen!.trim().isNotEmpty
                                         ? Image.asset(
                                             carta.pathImagen!,
                                             fit: BoxFit.contain,
-                                            errorBuilder: (context, error, stackTrace) =>
-                                                const Icon(Icons.image, size: 20, color: Colors.grey),
+                                            errorBuilder: (context, error,
+                                                    stackTrace) =>
+                                                const Icon(Icons.image,
+                                                    size: 20,
+                                                    color: Colors.grey),
                                           )
                                         : Text(
                                             carta.textoMostrado,
@@ -295,7 +352,9 @@ class _ActividadMemoramaState extends State<ActividadMemorama> {
                                             style: TextStyle(
                                               fontSize: 9,
                                               fontWeight: FontWeight.bold,
-                                              color: carta.estaEncontrada ? Colors.white : Colors.brown.shade900,
+                                              color: carta.estaEncontrada
+                                                  ? Colors.white
+                                                  : Colors.brown.shade900,
                                             ),
                                           ),
                                   )

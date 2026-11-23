@@ -11,10 +11,12 @@ class ActividadSaludosAudioScreen extends StatefulWidget {
   const ActividadSaludosAudioScreen({super.key});
 
   @override
-  State<ActividadSaludosAudioScreen> createState() => _ActividadSaludosAudioScreenState();
+  State<ActividadSaludosAudioScreen> createState() =>
+      _ActividadSaludosAudioScreenState();
 }
 
-class _ActividadSaludosAudioScreenState extends State<ActividadSaludosAudioScreen> {
+class _ActividadSaludosAudioScreenState
+    extends State<ActividadSaludosAudioScreen> {
   List<ItemVocabulario> _listaSaludos = [];
   bool _isLoading = true;
 
@@ -94,9 +96,11 @@ class _ActividadSaludosAudioScreenState extends State<ActividadSaludosAudioScree
     }
 
     return ActividadAudio(
-      tituloActividad: 'Actividad 1: Saludos',
+      tituloActividad: 'Escucha y saluda',
       backgroundImage: 'assets/image/learning/bg_casa_06.webp',
       listaItems: _listaSaludos,
+      moduloId: 1,
+      actividadNumero: 1,
     );
   }
 }

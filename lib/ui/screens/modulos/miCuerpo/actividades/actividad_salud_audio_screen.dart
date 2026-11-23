@@ -104,7 +104,7 @@ class _ActividadSaludAudioScreenState extends State<ActividadSaludAudioScreen> {
         appBar: AppBar(
           backgroundColor: Colors.brown.shade800,
           title: const Text(
-            'Actividad 2: Salud y Audio',
+            'Escucha salud',
             style: TextStyle(color: Colors.white),
           ),
           iconTheme: const IconThemeData(color: Colors.white),
@@ -127,9 +127,11 @@ class _ActividadSaludAudioScreenState extends State<ActividadSaludAudioScreen> {
     }
 
     return ActividadAudio(
-      tituloActividad: 'Actividad 2: Salud y Audio',
+      tituloActividad: 'Escucha salud',
       backgroundImage: 'assets/image/learning/bg_casa_06.webp',
       listaItems: _listaItems,
+      moduloId: 5,
+      actividadNumero: 3,
     );
   }
 }

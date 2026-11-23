@@ -1,3 +1,4 @@
+//lib\data\providers\progreso_providers.dart 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../local/app_database.dart';
 import '../repositories/progreso_repository.dart';
@@ -22,4 +23,10 @@ final resumenModuloProvider =
 final puntajeTotalProvider = StreamProvider<int>((ref) {
   final repo = ref.watch(progresoRepositoryProvider);
   return repo.watchPuntajeTotal();
+});
+
+final actividadesCompletadasProvider =
+    StreamProvider.family<Set<int>, int>((ref, moduloId) {
+  final repo = ref.watch(progresoRepositoryProvider);
+  return repo.watchActividadesCompletadasNumeros(moduloId);
 });
