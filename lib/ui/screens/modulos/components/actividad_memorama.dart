@@ -1,4 +1,4 @@
-// lib/modules/modulo1/components/actividad_memorama.dart
+// lib\ui\screens\modulos\components\actividad_memorama.dart
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

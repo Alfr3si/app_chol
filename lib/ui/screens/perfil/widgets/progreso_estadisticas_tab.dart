@@ -31,8 +31,8 @@ class _ProgresoEstadisticasTabState
   final ScrollController _scrollController = ScrollController();
 
   static const List<(int id, String titulo, int actividades)> _modulos = [
-    (1, 'Mi familia y yo', 5),
-    (2, 'El lugar donde vivo', 5),
+    (1, 'Mi familia y yo', 7),
+    (2, 'El lugar donde vivo', 6),
     (3, 'Mi escuela', 5),
     (4, 'Gustos y Pasatiempos', 5),
     (5, 'Mi cuerpo', 5),

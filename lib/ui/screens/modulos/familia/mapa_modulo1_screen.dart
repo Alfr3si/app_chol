@@ -1,4 +1,4 @@
-// lib/modules/modulo1/mapa_modulo1_screen.dart
+// lib\ui\screens\modulos\familia\mapa_modulo1_screen.dart
 import 'package:flutter/material.dart';
 
 import '../../../core/base/base_mapa_screen.dart';

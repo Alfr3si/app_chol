@@ -22,6 +22,17 @@ class ProgresoRepository {
 
   ProgresoRepository(this._db);
 
+  static int totalActividadesPorModulo(int moduloId) {
+    switch (moduloId) {
+      case 1:
+        return 7;
+      case 2:
+        return 6;
+      default:
+        return 5;
+    }
+  }
+
   Future<PerfilUsuarioData> obtenerPerfilActivo() {
     return _db.obtenerOCrearPerfilInvitado();
   }
@@ -58,6 +69,8 @@ class ProgresoRepository {
 
   Stream<ResumenModulo> watchResumenModulo(int moduloId) async* {
     final perfil = await _db.obtenerOCrearPerfilInvitado();
+    final total = totalActividadesPorModulo(moduloId);
+
     yield* _db
         .watchCompletadasPorModulo(
           usuarioLocalUuid: perfil.localUuid,
@@ -67,7 +80,7 @@ class ProgresoRepository {
           (completadas) => ResumenModulo(
             moduloId: moduloId,
             completadas: completadas,
-            total: 5,
+            total: total,
           ),
         );
   }
