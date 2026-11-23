@@ -11,7 +11,12 @@ part 'app_database.g.dart';
 class PerfilUsuario extends Table {
   TextColumn get localUuid => text()();
   TextColumn get remoteUserId => text().nullable()();
+  TextColumn get email => text().nullable()();
   TextColumn get nombre => text().withDefault(const Constant('Invitado'))();
+  TextColumn get rangoEdad =>
+      text().withDefault(const Constant('8-10 años'))();
+  TextColumn get avatarPath =>
+      text().withDefault(const Constant('assets/image/learning/grupo.webp'))();
   BoolColumn get estaVinculado =>
       boolean().withDefault(const Constant(false))();
   DateTimeColumn get creadoEn => dateTime()();
@@ -47,7 +52,23 @@ class AppDatabase extends _$AppDatabase {
   Future<PerfilUsuarioData>? _perfilEnCurso;
 
   @override
-  int get schemaVersion => 1;
+  int get schemaVersion => 3;
+
+  @override
+  MigrationStrategy get migration => MigrationStrategy(
+        onCreate: (Migrator m) async {
+          await m.createAll();
+        },
+        onUpgrade: (Migrator m, int from, int to) async {
+          if (from < 2) {
+            await m.addColumn(perfilUsuario, perfilUsuario.email);
+            await m.addColumn(perfilUsuario, perfilUsuario.rangoEdad);
+          }
+          if (from < 3) {
+            await m.addColumn(perfilUsuario, perfilUsuario.avatarPath);
+          }
+        },
+      );
 
   /// Obtiene el perfil local activo o crea uno en modo invitado de forma segura ante llamadas concurrentes.
   Future<PerfilUsuarioData> obtenerOCrearPerfilInvitado() {
@@ -72,6 +93,8 @@ class AppDatabase extends _$AppDatabase {
     final companion = PerfilUsuarioCompanion.insert(
       localUuid: nuevoUuid,
       nombre: const Value('Invitado'),
+      rangoEdad: const Value('8-10 años'),
+      avatarPath: const Value('assets/image/learning/grupo.webp'),
       estaVinculado: const Value(false),
       creadoEn: ahora,
     );
@@ -128,7 +151,7 @@ class AppDatabase extends _$AppDatabase {
     }
   }
 
-  /// Conteo de actividades completadas (0 a 5) para un módulo específico.
+  /// Conteo de actividades completadas para un módulo específico.
   Future<int> contarCompletadasPorModulo({
     required String usuarioLocalUuid,
     required int moduloId,
@@ -146,7 +169,7 @@ class AppDatabase extends _$AppDatabase {
     return row.read(countExp) ?? 0;
   }
 
-  /// Stream reactivo del conteo de actividades completadas por módulo (0 a 5).
+  /// Stream reactivo del conteo de actividades completadas por módulo.
   Stream<int> watchCompletadasPorModulo({
     required String usuarioLocalUuid,
     required int moduloId,
@@ -163,7 +186,7 @@ class AppDatabase extends _$AppDatabase {
     return query.watchSingle().map((row) => row.read(countExp) ?? 0);
   }
 
-  /// Stream reactivo con los números de actividad completados (1..5) de un módulo.
+  /// Stream reactivo con los números de actividad completados de un módulo.
   Stream<Set<int>> watchActividadesCompletadasNumeros({
     required String usuarioLocalUuid,
     required int moduloId,

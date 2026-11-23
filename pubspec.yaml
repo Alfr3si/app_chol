@@ -48,6 +48,7 @@ dependencies:
   sqlite3_flutter_libs: ^0.5.2
   flutter_riverpod: ^2.6.1
   uuid: ^4.6.0
+  image_picker: ^1.2.4
 
   # para la importacion de el .env
   flutter_dotenv: ^5.2.1
@@ -102,6 +103,7 @@ flutter:
      - assets/image/learning/
      - assets/image/explora/
      - assets/image/palabras/
+     - assets/image/avatars/
      - assets/audio/
      - assets/audio/palabras/
      - assets/font/

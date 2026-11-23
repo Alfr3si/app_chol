@@ -48,6 +48,21 @@ class ProgresoRepository {
     );
   }
 
+  Future<void> actualizarPerfilLocal({
+    required String nombre,
+    required String rangoEdad,
+  }) async {
+    final perfil = await _db.obtenerOCrearPerfilInvitado();
+    await (_db.update(_db.perfilUsuario)
+          ..where((tbl) => tbl.localUuid.equals(perfil.localUuid)))
+        .write(
+      PerfilUsuarioCompanion(
+        nombre: Value(nombre),
+        rangoEdad: Value(rangoEdad),
+      ),
+    );
+  }
+
   Future<void> completarActividad({
     required int moduloId,
     required int actividadNumero,
@@ -113,13 +128,17 @@ class ProgresoRepository {
     return _db.obtenerPendientesSincronizacion(perfil.localUuid);
   }
 
-  Future<void> vincularCuentaRemota({required String remoteUserId}) async {
+  Future<void> vincularCuentaRemota({
+    required String remoteUserId,
+    String? email,
+  }) async {
     final perfil = await _db.obtenerOCrearPerfilInvitado();
     await (_db.update(_db.perfilUsuario)
           ..where((tbl) => tbl.localUuid.equals(perfil.localUuid)))
         .write(
       PerfilUsuarioCompanion(
         remoteUserId: Value(remoteUserId),
+        email: Value(email),
         estaVinculado: const Value(true),
       ),
     );

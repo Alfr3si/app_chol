@@ -1,4 +1,4 @@
-//lib\ui\screens\perfil\profile_viewmodel.dart
+// lib/ui/screens/perfil/profile_viewmodel.dart
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -32,7 +32,7 @@ class ProfileNotifier extends Notifier<ProfileState> {
 
     return const ProfileState(
       profile: UserProfileEntity(
-        alias: 'Luis',
+        alias: 'Invitado',
         ageRange: '8-10 años',
         avatarPath: 'assets/image/learning/grupo.webp',
         rankTitle: 'Aprendiz',
@@ -47,12 +47,14 @@ class ProfileNotifier extends Notifier<ProfileState> {
       final repo = ref.read(progresoRepositoryProvider);
       final perfilDb = await repo.obtenerPerfilActivo();
       final nombreGuardado = perfilDb.nombre.trim();
+      final rangoGuardado = perfilDb.rangoEdad.trim();
 
-      if (nombreGuardado.isNotEmpty && nombreGuardado != 'Invitado') {
-        state = state.copyWith(
-          profile: state.profile.copyWith(alias: nombreGuardado),
-        );
-      }
+      state = state.copyWith(
+        profile: state.profile.copyWith(
+          alias: nombreGuardado.isNotEmpty ? nombreGuardado : 'Invitado',
+          ageRange: rangoGuardado.isNotEmpty ? rangoGuardado : '8-10 años',
+        ),
+      );
     } catch (e) {
       debugPrint('Error cargando perfil desde Drift: $e');
     }
@@ -73,14 +75,17 @@ class ProfileNotifier extends Notifier<ProfileState> {
     );
   }
 
-  /// Persiste el alias/nombre en la tabla PerfilUsuario de Drift
+  /// Persiste el alias/nombre y el rango de edad en la tabla PerfilUsuario de Drift
   Future<void> saveChanges() async {
     state = state.copyWith(isLoading: true);
     try {
       final repo = ref.read(progresoRepositoryProvider);
       final nombreLimpio = state.profile.alias.trim();
       if (nombreLimpio.isNotEmpty) {
-        await repo.actualizarNombrePerfil(nombre: nombreLimpio);
+        await repo.actualizarPerfilLocal(
+          nombre: nombreLimpio,
+          rangoEdad: state.profile.ageRange,
+        );
       }
     } catch (e) {
       debugPrint('Error guardando perfil en Drift: $e');

@@ -1,6 +1,11 @@
-//lib\ui\screens\perfil\widgets\perfil_general_tab.dart 
+// lib/ui/screens/perfil/widgets/perfil_general_tab.dart
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:path/path.dart' as p;
+import 'package:path_provider/path_provider.dart';
 
 import '../../../../data/providers/progreso_providers.dart';
 import '../profile_viewmodel.dart';
@@ -24,6 +29,14 @@ class PerfilGeneralTab extends ConsumerWidget {
     '8-10 años',
     '11-12 años',
     '13+ años',
+  ];
+
+  // Avatares predefinidos (asegúrate de declarar assets/image/avatars/ en pubspec.yaml)
+  static const List<String> _avataresPredefinidos = [
+    'assets/image/learning/grupo.webp',
+    'assets/image/avatars/invitado.webp',
+    'assets/image/avatars/chol_1.webp',
+    'assets/image/avatars/chol_2.webp',
   ];
 
   @override
@@ -54,13 +67,10 @@ class PerfilGeneralTab extends ConsumerWidget {
                   radius: 36,
                   backgroundColor: accentColor,
                   child: ClipOval(
-                    child: Image.asset(
-                      profile.avatarPath,
+                    child: SizedBox(
                       width: 68,
                       height: 68,
-                      fit: BoxFit.cover,
-                      errorBuilder: (_, __, ___) =>
-                          Icon(Icons.person, size: 40, color: textPrimary),
+                      child: _buildAvatarImage(profile.avatarPath),
                     ),
                   ),
                 ),
@@ -269,6 +279,181 @@ class PerfilGeneralTab extends ConsumerWidget {
     );
   }
 
+  Widget _buildAvatarImage(String rutaRaw) {
+    final ruta = rutaRaw.trim();
+    Widget fallback() => Icon(Icons.person, size: 40, color: textPrimary);
+
+    if (ruta.startsWith('assets/')) {
+      return Image.asset(
+        ruta,
+        fit: BoxFit.cover,
+        errorBuilder: (_, __, ___) => fallback(),
+      );
+    }
+
+    if (ruta.startsWith('http://') || ruta.startsWith('https://')) {
+      return Image.network(
+        ruta,
+        fit: BoxFit.cover,
+        errorBuilder: (_, __, ___) => fallback(),
+      );
+    }
+
+    if (ruta.isNotEmpty && File(ruta).existsSync()) {
+      return Image.file(
+        File(ruta),
+        fit: BoxFit.cover,
+        errorBuilder: (_, __, ___) => fallback(),
+      );
+    }
+
+    return fallback();
+  }
+
+  /// Copia una imagen elegida de galería al directorio privado `.../avatars/` de la app.
+  Future<String?> _guardarImagenEnAvataresLocales(String origenPath) async {
+    try {
+      final origen = File(origenPath);
+      if (!await origen.exists()) return null;
+
+      final docsDir = await getApplicationDocumentsDirectory();
+      final avatarsDir = Directory(p.join(docsDir.path, 'avatars'));
+      if (!await avatarsDir.exists()) {
+        await avatarsDir.create(recursive: true);
+      }
+
+      final ext = p.extension(origenPath).isNotEmpty
+          ? p.extension(origenPath)
+          : '.jpg';
+      final destino = File(
+        p.join(
+          avatarsDir.path,
+          'avatar_${DateTime.now().millisecondsSinceEpoch}$ext',
+        ),
+      );
+      await origen.copy(destino.path);
+      return destino.path;
+    } catch (_) {
+      return null;
+    }
+  }
+
+  Future<void> _mostrarOpcionesAvatar(
+    BuildContext parentContext,
+    void Function(void Function()) setDialogState,
+    String avatarActual,
+    void Function(String nuevaRuta) onAvatarSeleccionado,
+  ) async {
+    await showModalBottomSheet<void>(
+      context: parentContext,
+      isScrollControlled: true,
+      backgroundColor: cardColor,
+      shape: RoundedRectangleBorder(
+        borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
+        side: BorderSide(color: accentColor.withValues(alpha: 0.4)),
+      ),
+      builder: (sheetContext) {
+        final bottomInset = MediaQuery.of(sheetContext).viewInsets.bottom;
+        return SafeArea(
+          child: SingleChildScrollView(
+            padding: EdgeInsets.fromLTRB(16, 14, 16, 16 + bottomInset),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Elegir foto de perfil',
+                  style: TextStyle(
+                    color: textPrimary,
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 8),
+                ListTile(
+                  dense: true,
+                  contentPadding: EdgeInsets.zero,
+                  leading: Icon(Icons.photo_library_outlined, color: accentColor),
+                  title: Text(
+                    'Subir desde galería',
+                    style: TextStyle(color: textPrimary, fontSize: 14),
+                  ),
+                  subtitle: Text(
+                    'Se guarda en tu almacenamiento local',
+                    style: TextStyle(color: textSecondary, fontSize: 12),
+                  ),
+                  onTap: () async {
+                    Navigator.of(sheetContext).pop();
+                    final picker = ImagePicker();
+                    final picked = await picker.pickImage(
+                      source: ImageSource.gallery,
+                      maxWidth: 512,
+                      maxHeight: 512,
+                      imageQuality: 80,
+                    );
+                    if (picked == null || !parentContext.mounted) return;
+
+                    final rutaLocal =
+                        await _guardarImagenEnAvataresLocales(picked.path);
+                    if (rutaLocal != null && parentContext.mounted) {
+                      setDialogState(() => onAvatarSeleccionado(rutaLocal));
+                    }
+                  },
+                ),
+                const Divider(height: 12),
+                Text(
+                  'Avatares de la app',
+                  style: TextStyle(
+                    color: textSecondary,
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Wrap(
+                  spacing: 10,
+                  runSpacing: 10,
+                  children: _avataresPredefinidos.map((assetPath) {
+                    final seleccionado = avatarActual == assetPath;
+                    return GestureDetector(
+                      onTap: () {
+                        setDialogState(() => onAvatarSeleccionado(assetPath));
+                        Navigator.of(sheetContext).pop();
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.all(2.5),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: Border.all(
+                            color: seleccionado
+                                ? accentColor
+                                : Colors.transparent,
+                            width: 2.5,
+                          ),
+                        ),
+                        child: CircleAvatar(
+                          radius: 24,
+                          backgroundColor: accentColor.withValues(alpha: 0.2),
+                          child: ClipOval(
+                            child: SizedBox(
+                              width: 44,
+                              height: 44,
+                              child: _buildAvatarImage(assetPath),
+                            ),
+                          ),
+                        ),
+                      ),
+                    );
+                  }).toList(),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
   Future<void> _mostrarDialogoEdicion(
     BuildContext context,
     WidgetRef ref,
@@ -278,12 +463,14 @@ class PerfilGeneralTab extends ConsumerWidget {
     String edadSeleccionada = _rangosEdad.contains(profile.ageRange)
         ? profile.ageRange
         : _rangosEdad[1];
+    String avatarSeleccionado = profile.avatarPath;
 
     await showDialog<void>(
       context: context,
       builder: (dialogContext) {
         return StatefulBuilder(
           builder: (context, setDialogState) {
+            final bottomInset = MediaQuery.of(context).viewInsets.bottom;
             return AlertDialog(
               backgroundColor: cardColor,
               shape: RoundedRectangleBorder(
@@ -297,57 +484,102 @@ class PerfilGeneralTab extends ConsumerWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              content: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  TextField(
-                    controller: aliasController,
-                    style: TextStyle(color: textPrimary),
-                    decoration: InputDecoration(
-                      labelText: 'Alias o Nombre',
-                      labelStyle: TextStyle(color: textSecondary),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: textSecondary.withValues(alpha: 0.4),
-                        ),
+              content: SingleChildScrollView(
+                padding: EdgeInsets.only(bottom: bottomInset),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    GestureDetector(
+                      onTap: () => _mostrarOpcionesAvatar(
+                        context,
+                        setDialogState,
+                        avatarSeleccionado,
+                        (nuevaRuta) => avatarSeleccionado = nuevaRuta,
                       ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: accentColor),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                  DropdownButtonFormField<String>(
-                    value: edadSeleccionada,
-                    dropdownColor: cardColor,
-                    style: TextStyle(color: textPrimary),
-                    decoration: InputDecoration(
-                      labelText: 'Rango de edad',
-                      labelStyle: TextStyle(color: textSecondary),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: textSecondary.withValues(alpha: 0.4),
-                        ),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: accentColor),
-                      ),
-                    ),
-                    items: _rangosEdad
-                        .map(
-                          (rango) => DropdownMenuItem(
-                            value: rango,
-                            child: Text(rango),
+                      child: Stack(
+                        alignment: Alignment.bottomRight,
+                        children: [
+                          CircleAvatar(
+                            radius: 38,
+                            backgroundColor: accentColor,
+                            child: ClipOval(
+                              child: SizedBox(
+                                width: 72,
+                                height: 72,
+                                child: _buildAvatarImage(avatarSeleccionado),
+                              ),
+                            ),
                           ),
-                        )
-                        .toList(),
-                    onChanged: (nuevoValor) {
-                      if (nuevoValor != null) {
-                        setDialogState(() => edadSeleccionada = nuevoValor);
-                      }
-                    },
-                  ),
-                ],
+                          Container(
+                            padding: const EdgeInsets.all(6),
+                            decoration: BoxDecoration(
+                              color: accentColor,
+                              shape: BoxShape.circle,
+                            ),
+                            child: Icon(
+                              Icons.camera_alt,
+                              size: 16,
+                              color: textPrimary,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 6),
+                    Text(
+                      'Toca para cambiar foto',
+                      style: TextStyle(color: textSecondary, fontSize: 12),
+                    ),
+                    const SizedBox(height: 14),
+                    TextField(
+                      controller: aliasController,
+                      style: TextStyle(color: textPrimary),
+                      decoration: InputDecoration(
+                        labelText: 'Alias o Nombre',
+                        labelStyle: TextStyle(color: textSecondary),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: textSecondary.withValues(alpha: 0.4),
+                          ),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: accentColor),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 14),
+                    DropdownButtonFormField<String>(
+                      initialValue: edadSeleccionada,
+                      dropdownColor: cardColor,
+                      style: TextStyle(color: textPrimary),
+                      decoration: InputDecoration(
+                        labelText: 'Rango de edad',
+                        labelStyle: TextStyle(color: textSecondary),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: textSecondary.withValues(alpha: 0.4),
+                          ),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: accentColor),
+                        ),
+                      ),
+                      items: _rangosEdad
+                          .map(
+                            (rango) => DropdownMenuItem(
+                              value: rango,
+                              child: Text(rango),
+                            ),
+                          )
+                          .toList(),
+                      onChanged: (nuevoValor) {
+                        if (nuevoValor != null) {
+                          setDialogState(() => edadSeleccionada = nuevoValor);
+                        }
+                      },
+                    ),
+                  ],
+                ),
               ),
               actions: [
                 TextButton(
@@ -370,6 +602,7 @@ class PerfilGeneralTab extends ConsumerWidget {
                     notifier.updateProfile(
                       alias: nuevoAlias,
                       ageRange: edadSeleccionada,
+                      avatarPath: avatarSeleccionado,
                     );
                     Navigator.of(dialogContext).pop();
                     await notifier.saveChanges();
