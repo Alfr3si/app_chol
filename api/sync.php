@@ -1,3 +1,4 @@
+<!-- api\sync.php -->
 <?php
 declare(strict_types=1);
 
@@ -36,7 +37,7 @@ $googleSub = trim((string)($usuario['google_sub'] ?? ''));
 $email     = trim((string)($usuario['email'] ?? ''));
 $nombre    = trim((string)($usuario['nombre'] ?? 'Invitado'));
 $rangoEdad = trim((string)($usuario['rango_edad'] ?? '8-10 años'));
-$avatar    = trim((string)($usuario['avatar_path'] ?? 'assets/image/learning/grupo.webp'));
+$avatar    = trim((string)($usuario['avatar_path'] ?? 'assets/image/avatars/grupo.webp'));
 
 if ($googleSub === '' || $email === '') {
     http_response_code(422);

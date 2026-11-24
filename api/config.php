@@ -1,13 +1,14 @@
+<!-- api\config.php -->
 <?php
 declare(strict_types=1);
 
 function getDbConnection(): PDO
 {
-    $host = getenv('CHOLAPP_DB_HOST') ?: '127.0.0.1';
+    $host = getenv('CHOLAPP_DB_HOST') ?: 'localhost';
     $port = getenv('CHOLAPP_DB_PORT') ?: '3306';
-    $name = getenv('CHOLAPP_DB_NAME') ?: 'cholapp_db';
-    $user = getenv('CHOLAPP_DB_USER') ?: 'root';
-    $pass = getenv('CHOLAPP_DB_PASS') ?: 'chol_passwd';
+    $name = getenv('CHOLAPP_DB_NAME') ?: 'nuestr71_cholapp_db';
+    $user = getenv('CHOLAPP_DB_USER') ?: 'TU_USUARIO_MYSQL_COMPLETO';
+    $pass = getenv('CHOLAPP_DB_PASS') ?: 'TU_CONTRASEÑA_MYSQL';
 
     $dsn = sprintf(
         'mysql:host=%s;port=%s;dbname=%s;charset=utf8mb4',
